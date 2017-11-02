@@ -1,9 +1,2 @@
-﻿  Main.cpp
-  正在生成代码...
-c:\users\minstreams\documents\github\gameobjectforopengl\gameobjectforopengl\gameobject.h(260): warning C4717: “Scene::Start”: 如递归所有控件路径，函数将导致运行时堆栈溢出
-c:\users\minstreams\documents\github\gameobjectforopengl\gameobjectforopengl\gameobject.h(251): warning C4717: “Scene::Awake”: 如递归所有控件路径，函数将导致运行时堆栈溢出
-c:\users\minstreams\documents\github\gameobjectforopengl\gameobjectforopengl\gameobject.h(280): warning C4717: “Scene::RenderGameObjects”: 如递归所有控件路径，函数将导致运行时堆栈溢出
-  正在跳过...(未检测到相关更改)
-  GameObject.cpp
-  GameObjectForOpengl.vcxproj -> C:\Users\Minstreams\Documents\GitHub\GameObjectForOpengl\Debug\GameObjectForOpengl.exe
-  GameObjectForOpengl.vcxproj -> C:\Users\Minstreams\Documents\GitHub\GameObjectForOpengl\Debug\GameObjectForOpengl.pdb (Partial PDB)
+﻿  Input.cpp
+  GameObjectForOpengl.vcxproj -> C:\Users\47465\Documents\GitHub\GameObjectForOpengl\Debug\GameObjectForOpengl.exe

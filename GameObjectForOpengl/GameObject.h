@@ -1,118 +1,69 @@
 #pragma once
-
-int vectorNum;
-
+extern int vectorNum;
+class Vector3;
+class Transform;
+class MonoBehavour;
+class GameObject;
+class Scene;
+//三位数组
 class Vector3 {
 public:
 	float x, y, z;
-	Vector3(float x, float y, float z) :x(x), y(y), z(z) {
-		//测试垃圾回收结果
-		vectorNum++;
-	}
-	Vector3() :x(0), y(0), z(0) {
-		//测试垃圾回收结果
-		vectorNum--;
-	}
-	Vector3& operator=(Vector3& rhs) {
-		this->x = rhs.x;
-		this->y = rhs.y;
-		this->z = rhs.z;
-		return *this;
-	}
-	Vector3& operator=(Vector3* rhs) {
-		this->x = rhs->x;
-		this->y = rhs->y;
-		this->z = rhs->z;
-		delete rhs;
-		return *this;
-	}
-	Vector3& operator+=(Vector3& rhs) {
-		*this = *this + rhs;
-		return *this;
-	}
-	Vector3& operator+=(Vector3* rhs) {
-		*this = *this + rhs;
-		return *this;
-	}
-	Vector3 operator+ (Vector3& rhs) {
-		Vector3 tmp = *this;
-		tmp.x += rhs.x;
-		tmp.y += rhs.y;
-		tmp.z += rhs.z;;
-		return tmp;
-	}
-	Vector3 operator+ (Vector3* rhs) {
-		Vector3 tmp = *this;
-		tmp.x += rhs->x;
-		tmp.y += rhs->y;
-		tmp.z += rhs->z;
-		delete rhs;
-		return tmp;
-	}
-	Vector3& operator-=(Vector3& rhs) {
-		*this = *this - rhs;
-		return *this;
-	}
-	Vector3 operator- (Vector3& rhs) {
-		Vector3 tmp = *this;
-		tmp.x -= rhs.x;
-		tmp.y -= rhs.y;
-		tmp.z -= rhs.z;;
-		return tmp;
-	}
+	Vector3(float x, float y, float z);
+	Vector3();
+	Vector3& operator=(Vector3& rhs);
+	Vector3& operator=(Vector3* rhs);
+	Vector3& operator+=(Vector3& rhs);
+	Vector3& operator+=(Vector3* rhs);
+	Vector3 operator+ (Vector3& rhs);
+	Vector3 operator+ (Vector3* rhs);
+	Vector3& operator-=(Vector3& rhs);
+	Vector3 operator- (Vector3& rhs);
+	Vector3 operator* (float rhs);
+	Vector3 operator/ (float rhs);
+	Vector3& operator*=(float rhs);
+	Vector3& operator/=(float rhs);
 };
+
+//变换组件
 class Transform {
 public:
 	Vector3 position;
 	Vector3 rotation;
-	Transform() {
-		position = new Vector3(0, 0, 0);
-		rotation = new Vector3(0, 0, 0);
-	}
-	Transform(Vector3* pos, Vector3* rot) {
-		position = pos;
-		rotation = rot;
-	}
-	~Transform() {
+	Transform();
+	Transform(Vector3* pos, Vector3* rot);
+	~Transform();
+	void Translate(Vector3& transition);
+	void Translate(float x, float y, float z);
+	void Rotate(Vector3& rot);
+	void Rotate(float x, float y, float z);
 
-	}
-	void Translate(Vector3& transition) {
-		position += transition;
-	}
-	void Translate(float x, float y, float z) {
-		position += new Vector3(x, y, z);
-	}
-	void Rotate(Vector3& rot) {
-		rotation += rot;
-	}
-	void Rotate(float x, float y, float z) {
-		rotation += new Vector3(x, y, z);
-	}
+	//看来不可避免地要写矩阵了呢。。。
+	Vector3 forward();
+	Vector3 right();
+	Vector3 up();
 };
+
+
+//组件父类
 class MonoBehavour {
 public:
-	MonoBehavour* next;
-	MonoBehavour() :next(NULL) {
-
-	}
-	virtual ~MonoBehavour() {
-		OnDestroy();
-	}
-	virtual void Update() {
-
-	}
-	virtual void Awake() {
-
-	}
-	virtual void Start() {
-
-	}
-	virtual void OnDestroy() {
-
-	}
+	char* name;
+	MonoBehavour *next;
+	GameObject *gameObject;
+	Transform *transform;
+	MonoBehavour();
+	virtual ~MonoBehavour();
+	//每一帧被调用
+	virtual void Update();
+	//于加载组件时被调用
+	virtual void Awake();
+	//开始被调用
+	virtual void Start();
+	virtual void OnDestroy();
 };
 
-
+//游戏物体
 class GameObject {
 public:
 	GameObject* parent;
@@ -124,158 +75,46 @@ public:
 	MonoBehavour* componentsPointer;
 
 	//构造函数
-	GameObject(Vector3& position, Vector3& rotation) :parent(parent) {
-		GameObject();
-		transform.position = position;
-		transform.rotation = rotation;
-	}
-	GameObject(Vector3* position, Vector3* rotation) :parent(parent) {
-		GameObject();
-		transform.position = position;
-		transform.rotation = rotation;
-	}
-	GameObject(Vector3& position, Vector3* rotation) :parent(parent) {
-		GameObject();
-		transform.position = position;
-		transform.rotation = rotation;
-	}
-	GameObject() :parent(NULL), child(NULL), next(NULL), componentsPointer(NULL) {
-
-	}
-	~GameObject() {
-		//清空组件
-		while (componentsPointer != NULL)
-			PopComponent();
-	}
+	GameObject(Vector3& position, Vector3& rotation);
+	GameObject(Vector3* position, Vector3* rotation);
+	GameObject(Vector3& position, Vector3* rotation);
+	GameObject();
+	~GameObject();
 	//渲染
-	virtual void Render() {
+	virtual void Render();
+	void SetParent(GameObject *parent);
+	GameObject* AddChild(GameObject *child);
 
-	}
-	void SetParent(GameObject *parent) {
-		this->parent = parent;
-		parent->AddChild(this);
-	}
-	void AddChild(GameObject *child) {
-		GameObject* p = child;
-		while (p != NULL) {
-			p = p->next;
-		}
-		p = child;
-		child->SetParent(this);
-	}
 	//添加组件
-	void AddComponent(MonoBehavour* component) {
-		component->next = componentsPointer;
-		componentsPointer = component;
-	}
+	void AddComponent(MonoBehavour* component);
 private:
+	//设置父子关系
+	static void SetParent(GameObject* parent, GameObject* child);
 	//删除第一个组件
-	void PopComponent() {
-		if (componentsPointer != NULL) {
-			MonoBehavour* pointer = componentsPointer->next;
-			delete componentsPointer;
-			componentsPointer = pointer;
-		}
-	}
+	void PopComponent();
 };
 
-
-
+//场景
 class Scene {
 public:
 	GameObject *root;
-	Transform camera;
-	Scene() :root(NULL) {
-
-	}
-	~Scene() {
-		//清空场景
-		DestroyLayer(root);
-	}
-	void Render() {
-		//摄像机
-		glRotatef(camera.rotation.y, 0, 1, 0);
-		glRotatef(camera.rotation.z, 0, 0, 1);
-		glRotatef(camera.rotation.x, 1, 0, 0);
-		glTranslatef(camera.position.x, camera.position.y, camera.position.z);
-
-		//物体
-		if (root == NULL)return;
-		RenderGameObjects(root);
-	}
-	void SetCamera(Vector3* pos, Vector3 *rot) {
-		camera.position = pos;
-		camera.rotation = rot;
-	}
-	void AddGameObject(GameObject* g) {
-		GameObject* p = root;
-		while (p != NULL) {
-			p = p->next;
-		}
-		p = g;
-		g->SetParent(NULL);
-	}
+	GameObject camera;
+	CSkyBox skyBox;
+	Scene();
+	~Scene();
+	void Render();
+	void SetCamera(Vector3* pos, Vector3 *rot);
+	GameObject* AddGameObject(GameObject* g);
 	//摧毁物体及其子物体
-	void Destroy(GameObject* g) {
-		if (g == NULL)return;
-		DestroyLayer(g->child);
-		delete g;
-	}
+	void Destroy(GameObject* g);
 	//摧毁物体及其同级物体
-	void DestroyLayer(GameObject* g) {
-		if (g == NULL)return;
-		DestroyLayer(g->next);
-		Destroy(g);
-	}
-	void Awake() {
-		if (root == NULL)return;
-		Awake(root);
-	}
-	void Start() {
-		if (root == NULL)return;
-		Start(root);
-	}
-	void Update() {
-		if (root == NULL)return;
-		Update(root);
-	}
+	void DestroyLayer(GameObject* g);
+	void Awake();
+	void Start();
+	void Update();
 private:
-	void Awake(GameObject* g) {
-		MonoBehavour *p = g->componentsPointer;
-		while (p != NULL) {
-			p->Awake();
-			p = p->next;
-		}
-		Awake(g->child);
-		Awake(g->next);
-	}
-	void Start(GameObject* g) {
-		MonoBehavour *p = g->componentsPointer;
-		while (p != NULL) {
-			p->Start();
-			p = p->next;
-		}
-		Start(g->child);
-		Start(g->next);
-	}
-	void Update(GameObject* g) {
-		MonoBehavour *p = g->componentsPointer;
-		while (p != NULL) {
-			p->Update();
-			p = p->next;
-		}
-		Update(g->child);
-		Update(g->next);
-	}
-	void RenderGameObjects(GameObject* g) {
-		glPushMatrix();
-		glTranslatef(g->transform.position.x, g->transform.position.y, g->transform.position.z);
-		glRotatef(g->transform.rotation.x, 1, 0, 0);
-		glRotatef(g->transform.rotation.z, 0, 0, 1);
-		glRotatef(g->transform.rotation.y, 0, 1, 0);
-		g->Render();
-		RenderGameObjects(g->child);
-		glPopMatrix();
-		RenderGameObjects(g->next);
-	}
+	void Awake(GameObject* g);
+	void Start(GameObject* g);
+	void Update(GameObject* g);
+	void RenderGameObjects(GameObject* g);
 };
