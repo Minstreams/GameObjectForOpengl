@@ -1,4 +1,4 @@
-﻿#include"OpenglPrefab.h"
+﻿#include"OpenglIndex.h"
 
 bool Input::FPSmode = false;
 void Input::SetFPSmode(bool b) {
@@ -27,7 +27,9 @@ int Input::lastMouseX = centerX;
 int Input::lastMouseY = centerY;
 bool Input::isMouseDown = false;
 bool Input::GetKey(unsigned char key) {
-	return key == keyChar;
+	if (key != keyChar) return false;
+	//keyChar = 0;
+	return true;
 }
 bool Input::GetKeyDown(unsigned char key) {
 	return false;
@@ -56,6 +58,7 @@ int Input::GetMouseY() {
 	}
 	return out;
 }
+
 void Input::SetLastMousePos(int x, int y) {
 	lastMouseX = x;
 	lastMouseY = y;
@@ -90,6 +93,5 @@ void Mouse(int button, int state, int x, int y) {
 void MouseMove(int x, int y) {
 	Input::mouseXPos = x;
 	Input::mouseYPos = y;
-	printf("%d,%d\n", x, y);
 	//不明，也许是鼠标位置吧
 }

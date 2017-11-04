@@ -13,7 +13,7 @@
 *
 */
 //========================================================
-#include "OpenglPrefab.h"
+#include "OpenglIndex.h"
 
 /** ¹¹Ôìº¯Êý */
 CBMPLoader::CBMPLoader()

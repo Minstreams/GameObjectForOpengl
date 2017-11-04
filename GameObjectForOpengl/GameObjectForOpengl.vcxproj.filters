@@ -16,48 +16,57 @@
     <Filter Include="Components">
       <UniqueIdentifier>{a7e3aa76-cf77-42b4-bdea-0f297f900a13}</UniqueIdentifier>
     </Filter>
+    <Filter Include="数学库">
+      <UniqueIdentifier>{adfab873-4a0a-46ee-89e6-b41f1342e285}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Unity">
+      <UniqueIdentifier>{eb22354a-50f3-4ea4-940e-980080184d48}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="GameObject.cpp">
-      <Filter>头文件</Filter>
-    </ClCompile>
-    <ClCompile Include="OpenglPrefab.cpp">
-      <Filter>头文件</Filter>
+    <ClCompile Include="SkyBox.cpp">
+      <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="CBPMLoader.cpp">
-      <Filter>头文件</Filter>
+      <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="SkyBox.cpp">
-      <Filter>头文件</Filter>
+    <ClCompile Include="Vector3.cpp">
+      <Filter>数学库</Filter>
+    </ClCompile>
+    <ClCompile Include="Matrix.cpp">
+      <Filter>数学库</Filter>
+    </ClCompile>
+    <ClCompile Include="Quaternion.cpp">
+      <Filter>数学库</Filter>
     </ClCompile>
     <ClCompile Include="Input.cpp">
-      <Filter>头文件</Filter>
+      <Filter>Unity</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject.cpp">
+      <Filter>Unity</Filter>
+    </ClCompile>
+    <ClCompile Include="MonoBehavour.cpp">
+      <Filter>Unity</Filter>
+    </ClCompile>
+    <ClCompile Include="transform.cpp">
+      <Filter>Unity</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene.cpp">
+      <Filter>Unity</Filter>
+    </ClCompile>
+    <ClCompile Include="OpenglIndex.cpp">
+      <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="GameObject.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="GameObjects.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="OpenglPrefab.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="Input.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="Components.h">
       <Filter>Components</Filter>
     </ClInclude>
     <ClInclude Include="AutoRotate.h">
       <Filter>Components</Filter>
-    </ClInclude>
-    <ClInclude Include="Mesh.h">
-      <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="CBMPLoader.h">
       <Filter>头文件</Filter>
@@ -66,6 +75,48 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="MouseRotater.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Vector3.h">
+      <Filter>数学库</Filter>
+    </ClInclude>
+    <ClInclude Include="Matrix.h">
+      <Filter>数学库</Filter>
+    </ClInclude>
+    <ClInclude Include="Quaternion.h">
+      <Filter>数学库</Filter>
+    </ClInclude>
+    <ClInclude Include="TransformIndex.h">
+      <Filter>数学库</Filter>
+    </ClInclude>
+    <ClInclude Include="Input.h">
+      <Filter>Unity</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject.h">
+      <Filter>Unity</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObjects.h">
+      <Filter>Unity</Filter>
+    </ClInclude>
+    <ClInclude Include="UnityIndex.h">
+      <Filter>Unity</Filter>
+    </ClInclude>
+    <ClInclude Include="MonoBehavour.h">
+      <Filter>Unity</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene.h">
+      <Filter>Unity</Filter>
+    </ClInclude>
+    <ClInclude Include="transform.h">
+      <Filter>Unity</Filter>
+    </ClInclude>
+    <ClInclude Include="OpenglIndex.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="FPSMover.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="LightComponent.h">
       <Filter>Components</Filter>
     </ClInclude>
   </ItemGroup>

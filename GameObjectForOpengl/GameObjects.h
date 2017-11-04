@@ -1,12 +1,12 @@
 #pragma once
-#include"GameObject.h"
+#include"UnityIndex.h"
 class Earth :public GameObject {
 public:
 	float rEarth;
-	Earth(float r, Vector3* pos, Vector3* rot) : GameObject(pos, rot), rEarth(r) {
+	Earth(const char* name, float r, Vector3& pos, Quaternion& rot) : GameObject(name, pos, rot), rEarth(r) {
 
 	}
-	Earth() :rEarth(5) {
+	Earth(const char* name) :GameObject(name), rEarth(5) {
 
 	}
 	void Render() override {
@@ -27,10 +27,10 @@ public:
 class Sun :public GameObject {
 public:
 	float rSun;
-	Sun(float r, Vector3* pos, Vector3* rot) : GameObject(pos, rot), rSun(r) {
+	Sun(const char* name, float r, Vector3& pos, Quaternion& rot) : GameObject(name, pos, rot), rSun(r) {
 
 	}
-	Sun() :rSun(50) {
+	Sun(const char* name) :GameObject(name), rSun(50) {
 
 	}
 	void Render() override {
@@ -52,10 +52,10 @@ public:
 class Moon :public GameObject {
 public:
 	float rMoon;
-	Moon(float r, Vector3* pos, Vector3* rot) : GameObject(pos, rot), rMoon(r) {
+	Moon(const char* name, float r, Vector3& pos, Quaternion& rot) : GameObject(name, pos, rot), rMoon(r) {
 
 	}
-	Moon() :rMoon(2) {
+	Moon(const char* name) :GameObject(name), rMoon(2) {
 
 	}
 	void Render() override {

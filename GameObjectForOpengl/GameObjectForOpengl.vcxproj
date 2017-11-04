@@ -114,20 +114,35 @@
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="Input.cpp" />
     <ClCompile Include="Main.cpp" />
-    <ClCompile Include="OpenglPrefab.cpp" />
+    <ClCompile Include="Matrix.cpp" />
+    <ClCompile Include="MonoBehavour.cpp" />
+    <ClCompile Include="OpenglIndex.cpp" />
+    <ClCompile Include="Quaternion.cpp" />
+    <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SkyBox.cpp" />
+    <ClCompile Include="transform.cpp" />
+    <ClCompile Include="Vector3.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CBMPLoader.h" />
     <ClInclude Include="Components.h" />
+    <ClInclude Include="FPSMover.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GameObjects.h" />
     <ClInclude Include="Input.h" />
-    <ClInclude Include="Mesh.h" />
+    <ClInclude Include="LightComponent.h" />
+    <ClInclude Include="Matrix.h" />
+    <ClInclude Include="MonoBehavour.h" />
     <ClInclude Include="MouseRotater.h" />
-    <ClInclude Include="OpenglPrefab.h" />
+    <ClInclude Include="OpenglIndex.h" />
     <ClInclude Include="AutoRotate.h" />
+    <ClInclude Include="Quaternion.h" />
+    <ClInclude Include="Scene.h" />
     <ClInclude Include="SkyBox.h" />
+    <ClInclude Include="transform.h" />
+    <ClInclude Include="TransformIndex.h" />
+    <ClInclude Include="UnityIndex.h" />
+    <ClInclude Include="Vector3.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

@@ -14,13 +14,12 @@
 */
 //========================================================
 
-#include "OpenglPrefab.h"
+#include "OpenglIndex.h"
 
 
 CSkyBox::CSkyBox() :length(700.0f), width(700.0f), height(700.0f), yRot(0.01f)
 {
-	for (int i = 0;i < 6; i++)
-		m_texture[i].ID = i;
+
 }
 
 CSkyBox::~CSkyBox()

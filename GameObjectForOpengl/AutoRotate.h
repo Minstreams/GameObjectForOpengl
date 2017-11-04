@@ -1,11 +1,11 @@
 #pragma once
 class AutoRotate : public MonoBehavour {
 public:
-	AutoRotate(Vector3* rot) {
+	AutoRotate(Vector3 rot) {
 		rotation = rot;
 	}
 	void Update() override {
-		transform->Rotate(rotation*deltaTime/1000.0f);
+		transform->Rotate(Quaternion::Slerp(Quaternion::identity, Quaternion::Euler(rotation), deltaTime));
 	}
 
 private:

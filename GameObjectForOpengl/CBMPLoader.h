@@ -13,8 +13,7 @@
 *
 */
 //========================================================
-#ifndef __CBMPLOADER_H__
-#define __CBMPLOADER_H__
+#pragma once
 
 #define BITMAP_ID 0x4D42	/**< 位图文件的标志 */
 
@@ -35,5 +34,4 @@ public:
 	unsigned char *image;            /**< 指向图像数据的指针 */
 };
 
-#endif //__CBMPLOADER_H__
 

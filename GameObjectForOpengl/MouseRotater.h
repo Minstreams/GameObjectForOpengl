@@ -7,10 +7,10 @@ private:
 
 	void Update() override
 	{
-		float x = Input::GetMouseX();
-		float y = Input::GetMouseY();
-		transform->Rotate(-y * Ysensitivity, 0, 0);
-		transform->Rotate(0, -x * Xsensitivity, 0);
+		int x = Input::GetMouseX();
+		int y = Input::GetMouseY();
+		transform->Rotate(Quaternion::EulerY(-x * Xsensitivity), World);
+		transform->Rotate(Quaternion::EulerX(-y * Ysensitivity), Self);
 	}
 
 	void Start() override

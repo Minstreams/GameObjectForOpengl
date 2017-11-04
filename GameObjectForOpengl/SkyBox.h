@@ -13,11 +13,8 @@
 *
 */
 //========================================================
-#ifndef __SKYBOX_H__
-#define __SKYBOX_H__
-
-#define GL_CLAMP_TO_EDGE	0x812F
-
+#pragma once
+#include "CBMPLoader.h"
 /** Ìì¿ÕºÐÀà */
 class CSkyBox
 {
@@ -41,6 +38,3 @@ private:
 	float       yRot;           /**< ÈÆYÖáÐý×ª */
 
 };
-
-
-#endif ///__SKYBOX_H__
