@@ -5,29 +5,57 @@ Scene mainScene;
 double deltaTime;//To实现
 int lastTime;
 
-void Initial()
-{
-	deltaTime = 1000.0f / 60;
-	lastTime = GetTickCount();
+void Initial() {
+	//glutGameModeString("1920x1080");
+	//设置全屏模式时使用的分辨率
+	/*
+	格式如下:
+	“WxH:Bpp@Rr”
+	W - 屏幕宽度的像素
+	H - 屏幕高度的像素
+	Bpp - 每个像素的比特数
+	Rr - 垂直刷新的速率, 单位是赫兹(hz)
+
+	在进行下一步之前, 注意这些设置只是请求到硬件.如果指定的模式是不可用, 设置会被忽略.
+	例如:
+	"800x600:32@100" - 屏幕大小800x600; 32位真色彩; 100赫兹 垂直刷新
+	"640x480:16@75" - 屏幕大小640x480; 16位真色彩; 75赫兹
+
+	下面这字符串模板用来设置需要的全屏设置是允许的:
+	“WxH”
+	“WxH : Bpp”
+	“WxH@Rr”
+	“@Rr”
+	“:Bpp”
+	“Bpp : @Rr”*/
+	//SetGameMode(true);
+	BasicInitial();
+	SceneInitial();
+}
+void BasicInitial() {
+	glutReshapeFunc(ChangeSize);
+	glutDisplayFunc(RenderScene);
+	Input::Init();
+	glutTimerFunc(100, TimerFunc, 1);
 
 	glEnable(GL_DEPTH_TEST | GL_FOG);	// 启用深度测试
 	glFrontFace(GL_CCW);		// 指定逆时针绕法表示多边形正面
-	glClearColor(1.0f, 0.0f, 0.0f, 1.0f);	//背景
-
-	//其他设置
-	//glDepthFunc(GL_LEQUAL);
 	glShadeModel(GL_SMOOTH);
-	//glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);
-
-	
 	if (!mainScene.skyBox.init())
 	{
 		MessageBox(NULL, "初始化天空失败!", "错误", MB_OK);
 		exit(0);
 	}
-	SetScene();
 	SetLight();
-
+}
+void SceneInitial() {
+	glClearColor(1.0f, 0.0f, 0.0f, 1.0f);	//背景
+	deltaTime = 1000.0f / 60;
+	lastTime = GetTickCount();
+	//其他设置
+	//glDepthFunc(GL_LEQUAL);
+	//glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);
+	SetScene();
 	mainScene.Start();
 }
 void ChangeSize(int w, int h)
@@ -54,15 +82,11 @@ void ChangeSize(int w, int h)
 	*/
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
-	
-
-	//清空鼠标显示计数器
-	ShowCursor(false);
 }
 
 void RenderScene(void) {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	 //重置模型视图矩阵
+	//重置模型视图矩阵
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 
@@ -71,6 +95,7 @@ void RenderScene(void) {
 	deltaTime = delta / 1000.0;
 	lastTime = time;
 
+	Input::Update();
 
 	mainScene.Update();
 	mainScene.Render();
@@ -81,4 +106,27 @@ void TimerFunc(int value)
 {
 	glutPostRedisplay();
 	glutTimerFunc(1000 / 60, TimerFunc, 1);
+}
+
+void SetCursorVisible(bool visible) {
+	while (visible != (ShowCursor(visible) >= 0));
+}
+
+void SetGameMode(bool b) {
+	if (b) {
+		if (glutGameModeGet(GLUT_GAME_MODE_POSSIBLE)) {
+			glutEnterGameMode();
+			BasicInitial();
+		}
+		else {
+			ShowWarnMessage("无法进入全屏模式！");
+		}
+	}
+	else {
+		glutLeaveGameMode();
+	}
+}
+
+void ShowWarnMessage(const char* message, const char* title) {
+	MessageBox(NULL, message, title, MB_ICONEXCLAMATION);
 }

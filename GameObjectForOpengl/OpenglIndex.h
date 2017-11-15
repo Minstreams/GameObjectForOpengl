@@ -20,9 +20,13 @@
 
 
 void Initial();//初始化
+void BasicInitial();//基本初始化
+void SceneInitial();//场景初始化
 void ChangeSize(int w, int h);
 void RenderScene(void);
 void TimerFunc(int value);
 void SetScene();//编辑场景
 void SetLight();//设置光源
-void Keyboard(unsigned char key, int x, int y);
+void SetCursorVisible(bool visible);//设置光标是否可见
+void SetGameMode(bool b);//设置全屏游戏模式，取消时会退出游戏
+void ShowWarnMessage(const char* message, const char* title = "警告");//显示警告信息

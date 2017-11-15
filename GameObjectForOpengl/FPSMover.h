@@ -3,6 +3,9 @@ class FPSMover : public MonoBehavour {
 public:
 	FPSMover() {
 	}
+	void Start() override{
+		Input::SetFPSmode(true);
+	}
 	void Update() override {
 		if (Input::GetKey('w')) {
 			transform->Translate(transform->forward());
@@ -15,6 +18,19 @@ public:
 		}		
 		if (Input::GetKey('d')) {
 			transform->Translate(transform->right());
+		}
+		if (Input::GetKey(KeyCode::Space)) {
+			transform->Translate(transform->up());
+		}
+		if (Input::GetKey(KeyCode::LeftCtrl)) {
+			transform->Translate(-transform->up());
+		}
+		if (Input::GetKeyDown(KeyCode::Esc)) {
+			SetGameMode(false);
+			exit(0);
+		}
+		if (Input::GetKeyDown('f')) {
+			Input::SetFPSmode(!Input::FPSmode);
 		}
 	}
 

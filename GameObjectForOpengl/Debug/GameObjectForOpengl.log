@@ -1,2 +1,12 @@
 ﻿  Main.cpp
+c:\users\47465\documents\github\gameobjectforopengl\gameobjectforopengl\input.h(43): warning C4309: “初始化”: 截断常量值
+c:\users\47465\documents\github\gameobjectforopengl\gameobjectforopengl\input.h(44): warning C4309: “初始化”: 截断常量值
+c:\users\47465\documents\github\gameobjectforopengl\gameobjectforopengl\input.h(45): warning C4309: “初始化”: 截断常量值
+c:\users\47465\documents\github\gameobjectforopengl\gameobjectforopengl\input.h(46): warning C4309: “初始化”: 截断常量值
+c:\users\47465\documents\github\gameobjectforopengl\gameobjectforopengl\input.h(47): warning C4309: “初始化”: 截断常量值
+c:\users\47465\documents\github\gameobjectforopengl\gameobjectforopengl\input.h(48): warning C4309: “初始化”: 截断常量值
+c:\users\47465\documents\github\gameobjectforopengl\gameobjectforopengl\input.h(49): warning C4309: “初始化”: 截断常量值
+c:\users\47465\documents\github\gameobjectforopengl\gameobjectforopengl\input.h(50): warning C4309: “初始化”: 截断常量值
+c:\users\47465\documents\github\gameobjectforopengl\gameobjectforopengl\input.h(51): warning C4309: “初始化”: 截断常量值
+c:\users\47465\documents\github\gameobjectforopengl\gameobjectforopengl\input.h(52): warning C4309: “初始化”: 截断常量值
   GameObjectForOpengl.vcxproj -> C:\Users\47465\Documents\GitHub\GameObjectForOpengl\Debug\GameObjectForOpengl.exe

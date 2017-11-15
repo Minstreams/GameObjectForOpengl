@@ -37,11 +37,6 @@ int main(int argc, char* argv[])
 	glutInitWindowSize(1280, 720);
 	glutCreateWindow("日地月模型");
 
-	glutReshapeFunc(ChangeSize);
-	glutDisplayFunc(RenderScene);
-	Input::Init();
-	glutTimerFunc(100, TimerFunc, 1);
-
 	Initial();
 	glutMainLoop();
 
