@@ -5,6 +5,7 @@
 *.obj
 
 /v15/*
+*.ipch
 
 # Precompiled Headers
 *.gch
