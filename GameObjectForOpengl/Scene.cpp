@@ -24,7 +24,7 @@ void Scene::Render() {
 	if (root == NULL)return;
 	RenderGameObjects(root);
 }
-void Scene::SetCamera(Vector3& pos, Quaternion& rot) {
+void Scene::SetCamera(const Vector3& pos, const Quaternion& rot) {
 	camera.transform.localPosition = pos;
 	camera.transform.rotation = rot;
 }

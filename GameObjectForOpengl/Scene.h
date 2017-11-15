@@ -9,7 +9,7 @@ public:
 	Scene();
 	~Scene();
 	void Render();
-	void SetCamera(Vector3& pos, Quaternion& rot);
+	void SetCamera(const Vector3& pos, const Quaternion& rot);
 	GameObject* AddGameObject(GameObject* g);
 	//摧毁物体及其子物体
 	void Destroy(GameObject* g);

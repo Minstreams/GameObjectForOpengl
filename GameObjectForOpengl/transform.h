@@ -42,10 +42,12 @@ public:
 	Matrix& GetLocalMatrix();
 	//获取并刷新世界变换矩阵
 	Matrix& GetWorldMatrix();
+	//获取世界坐标
+	Vector3 GetPosition();
 	//刷新矩阵
 	void Flush();
 	//向下更新世界矩阵
-	void FlushDown();
+	void FlushDown(bool asRoot);
 	const Vector3 forward();
 	const Vector3 right();
 	const Vector3 up();

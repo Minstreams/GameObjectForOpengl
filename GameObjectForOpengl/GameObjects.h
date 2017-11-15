@@ -3,7 +3,7 @@
 class Earth :public GameObject {
 public:
 	float rEarth;
-	Earth(const char* name, float r, Vector3& pos, Quaternion& rot) : GameObject(name, pos, rot), rEarth(r) {
+	Earth(const char* name, float r, const Vector3& pos, const Quaternion& rot) : GameObject(name, pos, rot), rEarth(r) {
 
 	}
 	Earth(const char* name) :GameObject(name), rEarth(5) {
@@ -27,7 +27,7 @@ public:
 class Sun :public GameObject {
 public:
 	float rSun;
-	Sun(const char* name, float r, Vector3& pos, Quaternion& rot) : GameObject(name, pos, rot), rSun(r) {
+	Sun(const char* name, float r, const Vector3& pos, const Quaternion& rot) : GameObject(name, pos, rot), rSun(r) {
 
 	}
 	Sun(const char* name) :GameObject(name), rSun(50) {
@@ -52,7 +52,7 @@ public:
 class Moon :public GameObject {
 public:
 	float rMoon;
-	Moon(const char* name, float r, Vector3& pos, Quaternion& rot) : GameObject(name, pos, rot), rMoon(r) {
+	Moon(const char* name, float r, const Vector3& pos, const Quaternion& rot) : GameObject(name, pos, rot), rMoon(r) {
 
 	}
 	Moon(const char* name) :GameObject(name), rMoon(2) {

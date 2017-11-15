@@ -30,6 +30,9 @@ int Input::centerY = 540;
 int Input::lastMouseX = centerX;
 int Input::lastMouseY = centerY;
 bool Input::isMouseDown = false;
+double Input::hAxis = 0;
+double Input::vAxis = 0;
+const double Input::axisAcceleratingRate = 3.5;
 bool Input::GetKey(unsigned char key) {
 	return keyHold[key];
 }
@@ -68,6 +71,14 @@ int Input::GetMouseY() {
 	}
 	return out;
 }
+double Input::GetAxisHorizontal()
+{
+	return hAxis;
+}
+double Input::GetAxisVertical()
+{
+	return vAxis;
+}
 void Input::SetLastMousePos(int x, int y) {
 	lastMouseX = x;
 	lastMouseY = y;
@@ -92,7 +103,27 @@ void Input::Init() {
 	}
 }
 void Input::Update() {
+	int v = 0;
+	if (GetKey('w') || GetKey(KeyCode::Up))v++;
+	if (GetKey('s') || GetKey(KeyCode::Down))v--;
+	if (v > 0 != vAxis > 0 || v == 0) {
+		vAxis /= 1.1;
+	}
 
+	int h = 0;
+	if (GetKey('a') || GetKey(KeyCode::Left))h--;
+	if (GetKey('d') || GetKey(KeyCode::Right))h++;
+	if (h > 0 != hAxis > 0 || h == 0) {
+		hAxis /= 1.1;
+	}
+
+	vAxis += v * axisAcceleratingRate * deltaTime;
+	hAxis += h * axisAcceleratingRate * deltaTime;
+
+	if (vAxis > 1)vAxis = 1;
+	if (vAxis < -1)vAxis = -1;
+	if (hAxis > 1)hAxis = 1;
+	if (hAxis < -1)hAxis = -1;
 }
 void SetDown(unsigned char key) {
 	if (!Input::keyHold[key]) {
@@ -109,7 +140,7 @@ void SetUp(unsigned char key) {
 //键盘按下响应回调函数
 void KeyboardDown(unsigned char key, int x, int y)
 {
-	printf_s("\n%d \tpressed", key);
+//	printf_s("\n%d \tpressed", key);
 	SetDown(key);
 	//对于小写字母
 	if (97 <= key&&key <= 122) {
@@ -136,7 +167,7 @@ void KeyboardUp(unsigned char key, int x, int y)
 	/*•返回键盘上被按下键的ASCII码和鼠标位置*/
 }
 void SpecialKeyboardDown(int key, int x, int y) {
-	printf_s("\n%d \tSpcPressed", key);
+//	printf_s("\n%d \tSpcPressed", key);
 	int keyCode = 0;
 	switch (key) {
 	case GLUT_KEY_UP:

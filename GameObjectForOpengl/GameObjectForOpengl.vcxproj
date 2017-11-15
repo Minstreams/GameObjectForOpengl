@@ -136,6 +136,7 @@
     <ClInclude Include="MouseRotater.h" />
     <ClInclude Include="OpenglIndex.h" />
     <ClInclude Include="AutoRotate.h" />
+    <ClInclude Include="PressLToShowPosition.h" />
     <ClInclude Include="Quaternion.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SkyBox.h" />

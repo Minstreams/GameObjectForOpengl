@@ -17,6 +17,8 @@ public:
 	static bool GetKeyUp(unsigned char key);
 	static int GetMouseX();//鼠标移动变量
 	static int GetMouseY();//鼠标移动变量
+	static double GetAxisHorizontal();
+	static double GetAxisVertical();
 	static void SetLastMousePos(int x, int y);
 	static void Init();
 	static void Update();//每一帧被调用
@@ -25,6 +27,9 @@ private:
 	static int mouseYCenterworld;//当前中心相对屏幕坐标
 	static int lastMouseX;
 	static int lastMouseY;
+	static double hAxis;//水平Axis
+	static double vAxis;//垂直Axis
+	static const double axisAcceleratingRate;//Axis加速度
 };
 void KeyboardDown(unsigned char key, int x, int y);
 void KeyboardUp(unsigned char key, int x, int y);
@@ -36,18 +41,18 @@ void MouseMove(int x, int y);
 class KeyCode {
 public:
 	//normal <128
-	static const char Space = 32;
-	static const char Esc = 27;
+	static const char Space = (char)32;
+	static const char Esc = (char)27;
 
 	//special >=128
-	static const char Up = 128;
-	static const char Down = 129;
-	static const char Left = 130;
-	static const char Right = 132;
-	static const char LeftShift = 133;
-	static const char RightShift = 134;
-	static const char LeftCtrl = 135;
-	static const char RightCtrl = 136;
-	static const char LeftAlt = 137;
-	static const char RightAlt = 138;
+	static const char Up = (char)128;
+	static const char Down = (char)129;
+	static const char Left = (char)130;
+	static const char Right = (char)132;
+	static const char LeftShift = (char)133;
+	static const char RightShift = (char)134;
+	static const char LeftCtrl = (char)135;
+	static const char RightCtrl = (char)136;
+	static const char LeftAlt = (char)137;
+	static const char RightAlt = (char)138;
 };

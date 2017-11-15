@@ -114,9 +114,9 @@ const Matrix Matrix::operator*(const Matrix&rhs)const {
 const Vector3 Matrix::operator*(const Vector3 & rhs) const
 {
 	return Vector3(
-		m[0] * rhs.x + m[4] * rhs.y + m[8] * rhs.z + m[11],
-		m[1] * rhs.x + m[5] * rhs.y + m[9] * rhs.z + m[12],
-		m[2] * rhs.x + m[6] * rhs.y + m[10] * rhs.z + m[13]
+		m[0] * rhs.x + m[4] * rhs.y + m[8] * rhs.z + m[12],
+		m[1] * rhs.x + m[5] * rhs.y + m[9] * rhs.z + m[13],
+		m[2] * rhs.x + m[6] * rhs.y + m[10] * rhs.z + m[14]
 	);
 }
 

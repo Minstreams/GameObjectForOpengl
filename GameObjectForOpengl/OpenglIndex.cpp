@@ -28,7 +28,7 @@ void Initial() {
 	¡°@Rr¡±
 	¡°:Bpp¡±
 	¡°Bpp : @Rr¡±*/
-	//SetGameMode(true);
+	SetGameMode(true);
 	BasicInitial();
 	SceneInitial();
 }

@@ -119,6 +119,9 @@
     <ClInclude Include="LightComponent.h">
       <Filter>Components</Filter>
     </ClInclude>
+    <ClInclude Include="PressLToShowPosition.h">
+      <Filter>Components</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

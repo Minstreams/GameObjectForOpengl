@@ -28,15 +28,13 @@ void Transform::Rotate(Quaternion& rot, Space space) {
 	Quaternion world;
 	switch (space) {
 	case Self:
-		world = GetWorldMatrix().GetRotation();
-		rotation = world * rot * ~world * rotation;
+		rotation = rotation * rot;
 		break;
 	case World:
 		rotation = rot * rotation;
 		break;
 	}
 	Flush();
-	//rotation = rot * rotation;
 }
 void Transform::Rotate(double x, double y, double z, Space space) {
 	Rotate(Quaternion::Euler(x, y, z), space);
@@ -68,32 +66,39 @@ Matrix& Transform::GetWorldMatrix()
 	if (!worldNeedFlush)return worldMatrix;
 	//ÏòÉÏµÝ¹é
 	if (gameObject->parent == NULL)return GetLocalMatrix();
-	worldMatrix = (gameObject->parent->transform.GetWorldMatrix()) * GetLocalMatrix();
+	worldMatrix = GetLocalMatrix() * (gameObject->parent->transform.GetWorldMatrix());
 	worldNeedFlush = false;
 	//printf("getWorld");
 	return worldMatrix;
 }
 
+Vector3 Transform::GetPosition()
+{
+	Vector3 out = Vector3::zero;
+	out = GetWorldMatrix()*out;
+	return out;
+}
+
 void Transform::Flush()
 {
 	localNeedFlush = true;
-	FlushDown();
+	FlushDown(true);
 }
 
-void Transform::FlushDown()
+void Transform::FlushDown(bool asRoot)
 {
-	rotation.Normalize();
+	//rotation.Normalize();
+	if (!asRoot && gameObject->next != NULL)
+		gameObject->next->transform.FlushDown(false);
 	if (worldNeedFlush) return;
 	worldNeedFlush = true;
-	if (gameObject->next != NULL)
-		gameObject->next->transform.FlushDown();
-	if (gameObject->next != NULL)
-		gameObject->child->transform.FlushDown();
+	if (gameObject->child != NULL)
+		gameObject->child->transform.FlushDown(false);
 }
 
 const Vector3 Transform::forward()
 {
-	return -(rotation * Vector3::forward);
+	return (rotation * Vector3::forward);
 }
 
 const Vector3 Transform::right()
