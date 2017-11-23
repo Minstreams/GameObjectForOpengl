@@ -6,6 +6,7 @@ public:
 	GameObject *root;
 	GameObject camera;
 	CSkyBox skyBox;
+	Physics physicEngine;
 	Scene();
 	~Scene();
 	void Render();

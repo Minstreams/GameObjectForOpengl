@@ -10,6 +10,7 @@ public:
 	const char* Name;
 
 	Transform transform;
+	RigidBody *rigidBody;
 
 	MonoBehavour* componentsPointer;
 

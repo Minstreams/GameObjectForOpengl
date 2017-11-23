@@ -56,6 +56,7 @@ void SceneInitial() {
 	//glDepthFunc(GL_LEQUAL);
 	//glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);
 	SetScene();
+	mainScene.Awake();
 	mainScene.Start();
 }
 void ChangeSize(int w, int h)

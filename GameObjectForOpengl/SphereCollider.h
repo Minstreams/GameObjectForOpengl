@@ -11,4 +11,5 @@ public:
 	Vector3 GetPosition();
 private:
 	void Awake() override;
+	void Start() override;
 };

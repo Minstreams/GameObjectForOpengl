@@ -11,6 +11,10 @@ void MonoBehavour::Update() {
 void MonoBehavour::FixedUpdate() {
 
 }
+void MonoBehavour::Init()
+{
+
+}
 void MonoBehavour::Awake() {
 
 }

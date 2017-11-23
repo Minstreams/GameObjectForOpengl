@@ -1,14 +1,14 @@
 #include"UnityIndex.h"
 
 //构造函数
-GameObject::GameObject(const char* name, const Vector3& position, const Quaternion& rotation) 
-	:Name(name), parent(NULL), child(NULL), next(NULL), componentsPointer(NULL), transform(this) 
+GameObject::GameObject(const char* name, const Vector3& position, const Quaternion& rotation)
+	:Name(name), parent(NULL), child(NULL), next(NULL), componentsPointer(NULL), transform(this), rigidBody(NULL)
 {
 	transform.localPosition = position;
 	transform.rotation = rotation;
 }
 GameObject::GameObject(const char* name)
-	: Name(name), parent(NULL), child(NULL), next(NULL), componentsPointer(NULL), transform(this)
+	: Name(name), parent(NULL), child(NULL), next(NULL), componentsPointer(NULL), transform(this), rigidBody(NULL)
 {
 
 }
@@ -35,7 +35,7 @@ void GameObject::AddComponent(MonoBehavour* component) {
 	componentsPointer = component;
 	component->gameObject = this;
 	component->transform = &transform;
-	component->Awake();
+	component->Init();
 }
 //设置父子关系
 void GameObject::SetParent(GameObject* parent, GameObject* child) {
