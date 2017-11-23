@@ -4,8 +4,8 @@
 *.o
 *.obj
 
-/.vs/
-/Debug/
+/.vs/*
+/Debug/*
 *.ipch
 
 # Precompiled Headers
@@ -77,8 +77,6 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
-*.ipch
-.vs/GameObjectForOpengl/v15/.suo
 *.log
 *.tlog
 *.pdb
