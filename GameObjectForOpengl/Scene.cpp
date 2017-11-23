@@ -65,6 +65,10 @@ void Scene::Update() {
 	Update(&camera);
 	Update(root);
 }
+void Scene::FixedUpdate() {
+	FixedUpdate(&camera);
+	FixedUpdate(root);
+}
 void Scene::Awake(GameObject* g) {
 	if (g == NULL)return;
 	MonoBehavour *p = g->componentsPointer;
@@ -94,6 +98,16 @@ void Scene::Update(GameObject* g) {
 	}
 	Update(g->child);
 	Update(g->next);
+}
+void Scene::FixedUpdate(GameObject* g) {
+	if (g == NULL)return;
+	MonoBehavour *p = g->componentsPointer;
+	while (p != NULL) {
+		p->FixedUpdate();
+		p = p->next;
+	}
+	FixedUpdate(g->child);
+	FixedUpdate(g->next);
 }
 void Scene::RenderGameObjects(GameObject* g) {
 	if (g == NULL)return;

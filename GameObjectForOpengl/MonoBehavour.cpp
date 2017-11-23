@@ -8,6 +8,9 @@ MonoBehavour::~MonoBehavour() {
 void MonoBehavour::Update() {
 
 }
+void MonoBehavour::FixedUpdate() {
+
+}
 void MonoBehavour::Awake() {
 
 }

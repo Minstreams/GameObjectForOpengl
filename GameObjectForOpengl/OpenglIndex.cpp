@@ -98,6 +98,7 @@ void RenderScene(void) {
 	Input::Update();
 
 	mainScene.Update();
+	mainScene.FixedUpdate();
 	mainScene.Render();
 	glutSwapBuffers();
 }

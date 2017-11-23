@@ -18,9 +18,11 @@ public:
 	void Awake();
 	void Start();
 	void Update();
+	void FixedUpdate();
 private:
 	void Awake(GameObject* g);
 	void Start(GameObject* g);
 	void Update(GameObject* g);
+	void FixedUpdate(GameObject* g);
 	void RenderGameObjects(GameObject* g);
 };

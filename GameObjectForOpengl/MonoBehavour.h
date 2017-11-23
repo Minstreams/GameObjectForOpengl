@@ -14,6 +14,8 @@ public:
 	virtual ~MonoBehavour();
 	//每一帧被调用
 	virtual void Update();
+	//于Update后被调用，用于物理计算
+	virtual void FixedUpdate();
 	//于加载组件时被调用
 	virtual void Awake();
 	//开始被调用
