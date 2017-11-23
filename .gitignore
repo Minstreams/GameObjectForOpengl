@@ -4,10 +4,11 @@
 *.o
 *.obj
 
-/.vs/*
-/Debug/*
-/x64/*
-/GameObjectForOpengl/x64
+/.vs/
+/Debug/
+/x64/
+/GameObjectForOpengl/x64/
+/GameObjectForOpengl/Debug/
 *.ipch
 
 # Precompiled Headers
