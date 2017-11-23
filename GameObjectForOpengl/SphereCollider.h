@@ -5,21 +5,10 @@ public:
 	const Vector3 offset;
 	double radius;
 	Vector3 position;	//世界坐标
-	SphereCollider(double r) :offset(Vector3::zero), radius(r) {
-
-	}
-	SphereCollider(double r, const Vector3& offset) :offset(offset), radius(r) {
-
-	}
+	SphereCollider(double r);
+	SphereCollider(double r, const Vector3& offset);
 	//获取碰撞中心世界坐标
-	Vector3 GetPosition() {
-		if (transform->worldNeedFlush) {
-			position = transform->GetWorldMatrix()*offset;
-		}
-		return position;
-	}
+	Vector3 GetPosition();
 private:
-	void Awake() override {
-		position = transform->GetWorldMatrix()*offset;
-	}
+	void Awake() override;
 };
