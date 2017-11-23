@@ -4,3 +4,4 @@
 #include "FPSMover.h"
 #include "LightComponent.h"
 #include "PressLToShowPosition.h"
+#include "SphereCollider.h"
