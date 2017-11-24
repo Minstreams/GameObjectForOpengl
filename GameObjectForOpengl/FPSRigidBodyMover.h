@@ -10,7 +10,7 @@ public:
 	}
 	void Awake() override {
 		if (gameObject->rigidBody == NULL) {
-			printf_s("There is no rigidBody!!\n");
+			ShowWarnMessage("There is no rigidBody!!\n没有刚体组件！！","来自FPSRigidBodyMover");
 			gameObject->DestroyComponent(this);
 		}
 		else {
