@@ -25,7 +25,8 @@ void RigidBody::SetVelocity(const Vector3 & v)
 	}
 }
 
-RigidBody::RigidBody(double g) :g(g) {
+RigidBody::RigidBody(double g, double mass) :g(g), Mass(mass)
+{
 	mainScene.physicEngine.rigidBodyNum++;
 }
 RigidBody::~RigidBody() {

@@ -6,6 +6,8 @@ public:
 	int colliderNum = 0;
 	//可以考虑在awake的时候初始化,在Start赋值
 	SphereCollider** colliders = NULL;
+	//重量
+	double Mass;
 private:
 	//用于引导添加
 	int startAddColliderPointer = 0;
@@ -19,7 +21,7 @@ public:
 	///</summary>
 	void SetVelocity(const Vector3& v);
 
-	RigidBody(double g = 10.0);
+	RigidBody(double g = 10.0, double mass = 1);
 	~RigidBody();
 	void Init() override;
 	void Awake() override;
