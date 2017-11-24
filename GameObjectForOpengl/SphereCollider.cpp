@@ -1,17 +1,28 @@
 #include"UnityIndex.h"
-SphereCollider::SphereCollider(double r) :SphereCollider(r, Vector3::zero) {
+SphereCollider::SphereCollider(double r) :SphereCollider(r, Vector3::zero, 0)
+{
 
 }
-SphereCollider::SphereCollider(double r, const Vector3& offset) : offset(offset), radius(r) {
-	if (gameObject->rigidBody == NULL) {
-		mainScene.physicEngine.solidColliderNum++;
-	}
+SphereCollider::SphereCollider(double r, const Vector3& offset) : SphereCollider(r, offset, 0)
+{
+
+}
+SphereCollider::SphereCollider(double r, const Vector3 & offset, double boundness) : offset(offset), radius(r), boundness(boundness)
+{
+
 }
 Vector3 SphereCollider::GetPosition() {
 	if (transform->worldNeedFlush) {
 		position = transform->GetWorldMatrix()*offset;
 	}
 	return position;
+}
+Vector3 SphereCollider::GetNextPosition()
+{
+	if (gameObject->rigidBody == NULL) {
+		return GetPosition();
+	}
+	return transform->GetWorldMatrix()*offset + gameObject->rigidBody->velocity;
 }
 void SphereCollider::Awake() {
 	position = transform->GetWorldMatrix()*offset;
@@ -25,5 +36,12 @@ void SphereCollider::Awake() {
 void SphereCollider::Start() {
 	if (gameObject->rigidBody != NULL) {
 		gameObject->rigidBody->StartAddCollider(this);
+	}
+}
+
+void SphereCollider::Init()
+{
+	if (gameObject->rigidBody == NULL) {
+		mainScene.physicEngine.solidColliderNum++;
 	}
 }

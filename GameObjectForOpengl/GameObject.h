@@ -24,11 +24,13 @@ public:
 	GameObject* AddChild(GameObject *child);
 
 	//添加组件
-	void AddComponent(MonoBehavour* component);
+	MonoBehavour* AddComponent(MonoBehavour* component);
+	//删除组件
+	void DestroyComponent(MonoBehavour* component);
+	//删除第一个组件
+	void PopComponent();
 private:
 	//设置父子关系
 	static void SetParent(GameObject* parent, GameObject* child);
-	//删除第一个组件
-	void PopComponent();
 };
 

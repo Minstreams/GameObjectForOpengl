@@ -117,6 +117,7 @@
     <ClCompile Include="Matrix.cpp" />
     <ClCompile Include="MonoBehavour.cpp" />
     <ClCompile Include="OpenglIndex.cpp" />
+    <ClCompile Include="Physics.cpp" />
     <ClCompile Include="Quaternion.cpp" />
     <ClCompile Include="RigidBody.cpp" />
     <ClCompile Include="Scene.cpp" />
@@ -129,6 +130,7 @@
     <ClInclude Include="CBMPLoader.h" />
     <ClInclude Include="Components.h" />
     <ClInclude Include="FPSMover.h" />
+    <ClInclude Include="FPSRigidBodyMover.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GameObjects.h" />
     <ClInclude Include="Input.h" />
@@ -145,6 +147,7 @@
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SkyBox.h" />
     <ClInclude Include="SphereCollider.h" />
+    <ClInclude Include="Tracker.h" />
     <ClInclude Include="transform.h" />
     <ClInclude Include="TransformIndex.h" />
     <ClInclude Include="UnityIndex.h" />

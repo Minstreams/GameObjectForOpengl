@@ -148,7 +148,7 @@ Quaternion Quaternion::Lerp(const Quaternion&a, const Quaternion&b, double t) {
 	return Quaternion((1 - t) * a.x + t * b.x,
 		(1 - t) * a.y + t * b.y,
 		(1 - t) * a.z + t * b.z,
-		(1 - t) * a.w + t * b.w);
+		(1 - t) * a.w + t * b.w).Normalize();
 }
 //«Ú–Œ≤Â÷µ
 Quaternion Quaternion::Slerp(const Quaternion &lhs, const Quaternion &rhs, double t)
@@ -192,6 +192,9 @@ Quaternion Quaternion::Slerp(const Quaternion &lhs, const Quaternion &rhs, doubl
 	//			// interpolate  
 	//return Quaternion(a.x * c1 + b.x * c2, a.y * c1 + b.y * c2, a.z * c1 + b.z * c2, a.w * c1 + b.w * c2);
 	double theta = Angle(lhs, rhs);
+	if (theta < 0.001) {
+		return lhs;
+	}
 	double sintheta = sin(theta);
 	Quaternion out = lhs*(sin((1 - t)*theta) / sintheta) + rhs*(sin(t*theta) / sintheta);
 	out.Normalize();

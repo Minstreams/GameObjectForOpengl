@@ -8,6 +8,10 @@ public:
 	Vector3 localPosition;
 	//旋转四元数
 	Quaternion rotation;
+	//世界旋转四元数
+	Quaternion worldRotation;
+	bool worldRotationNeedFlush;
+
 	//欧拉角
 	const Vector3 eulerAngle()const;
 	//连接的游戏物体
@@ -20,14 +24,14 @@ public:
 	Matrix worldMatrix;
 	//世界变换矩阵是否需要刷新
 	bool worldNeedFlush;
-	
+
 	Transform(GameObject* g);
 	Transform(Vector3 pos, Quaternion rot);
 	~Transform();
 	//平移
-	void Translate(const Vector3& transition);
+	void Translate(double x, double y, double z, Space space = Space::Self);
 	//平移
-	void Translate(double x, double y, double z);
+	void Translate(const Vector3& transition, Space space = Space::Self);
 	//旋转
 	void Rotate(Quaternion& rot, Space space = Space::Self);
 	//欧拉旋转
@@ -42,12 +46,17 @@ public:
 	Matrix& GetLocalMatrix();
 	//获取并刷新世界变换矩阵
 	Matrix& GetWorldMatrix();
+	//获取父世界变换矩阵
+	Matrix GetParentWorldMatrix();
+
+	Quaternion GetWorldRotation();
+	Quaternion GetParentWorldRotation();
 	//获取世界坐标
 	Vector3 GetPosition();
 	//刷新矩阵
-	void Flush();
+	void Flush(bool ifRotate = false);
 	//向下更新世界矩阵
-	void FlushDown(bool asRoot);
+	void FlushDown(bool asRoot, bool ifRotate);
 	const Vector3 forward();
 	const Vector3 right();
 	const Vector3 up();

@@ -2,6 +2,11 @@
 #include <math.h>
 #include "TransformIndex.h"
 
+/**
+ * TODO: 待优化：去掉最后一列的无用计算
+ *
+ */
+
 void glApplyMatrix(Matrix& m) {
 	glMultMatrixd(m.m);
 }

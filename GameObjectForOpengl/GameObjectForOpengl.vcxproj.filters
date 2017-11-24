@@ -66,6 +66,9 @@
     <ClCompile Include="RigidBody.cpp">
       <Filter>Unity</Filter>
     </ClCompile>
+    <ClCompile Include="Physics.cpp">
+      <Filter>Unity</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Components.h">
@@ -136,6 +139,12 @@
     </ClInclude>
     <ClInclude Include="RigidBody.h">
       <Filter>Unity</Filter>
+    </ClInclude>
+    <ClInclude Include="Tracker.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="FPSRigidBodyMover.h">
+      <Filter>Components</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

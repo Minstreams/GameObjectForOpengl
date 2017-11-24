@@ -102,6 +102,7 @@ void Scene::Update(GameObject* g) {
 	Update(g->next);
 }
 void Scene::FixedUpdate(GameObject* g) {
+	physicEngine.Contract();
 	if (g == NULL)return;
 	MonoBehavour *p = g->componentsPointer;
 	while (p != NULL) {

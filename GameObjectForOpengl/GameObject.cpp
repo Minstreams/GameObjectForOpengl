@@ -30,12 +30,32 @@ GameObject* GameObject::AddChild(GameObject *child) {
 }
 
 //添加组件
-void GameObject::AddComponent(MonoBehavour* component) {
+MonoBehavour* GameObject::AddComponent(MonoBehavour* component) {
 	component->next = componentsPointer;
 	componentsPointer = component;
 	component->gameObject = this;
 	component->transform = &transform;
 	component->Init();
+	return component;
+}
+void GameObject::DestroyComponent(MonoBehavour * component)
+{
+	if (componentsPointer == component) {
+		PopComponent();
+		return;
+	}
+	MonoBehavour *p = componentsPointer;
+	while (p->next != component);
+	p->next = component->next;
+	delete component;
+}
+//删除第一个组件
+void GameObject::PopComponent() {
+	if (componentsPointer != NULL) {
+		MonoBehavour* pointer = componentsPointer->next;
+		delete componentsPointer;
+		componentsPointer = pointer;
+	}
 }
 //设置父子关系
 void GameObject::SetParent(GameObject* parent, GameObject* child) {
@@ -51,11 +71,4 @@ void GameObject::SetParent(GameObject* parent, GameObject* child) {
 	}
 	pc->next = child;
 }
-//删除第一个组件
-void GameObject::PopComponent() {
-	if (componentsPointer != NULL) {
-		MonoBehavour* pointer = componentsPointer->next;
-		delete componentsPointer;
-		componentsPointer = pointer;
-	}
-}
+
