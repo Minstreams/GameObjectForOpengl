@@ -118,7 +118,9 @@ void SetGameMode(bool b) {
 	if (b) {
 		if (glutGameModeGet(GLUT_GAME_MODE_POSSIBLE)) {
 			glutEnterGameMode();
-			BasicInitial();
+			//禁用DPI缩放
+			SetProcessDPIAware();
+			//BasicInitial();
 		}
 		else {
 			ShowWarnMessage("无法进入全屏模式！");

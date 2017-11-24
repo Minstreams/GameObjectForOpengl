@@ -55,7 +55,7 @@ int main(int argc, char* argv[])
 {
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
-	glutInitWindowSize(1280, 720);
+	glutInitWindowSize(1920, 1080);
 	glutCreateWindow("日地月模型");
 
 	Initial();

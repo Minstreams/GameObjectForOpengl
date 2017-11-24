@@ -67,6 +67,8 @@ void Physics::Contract(RigidBody* rigidBody, SphereCollider *solidCollider) {
 		}
 	}
 }
+
+//与其他rigidBody进行碰撞检测
 void Physics::Contract(RigidBody* lhs, RigidBody* rhs) {
 
 }
