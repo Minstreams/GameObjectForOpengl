@@ -18,15 +18,11 @@ public:
 		}
 	}
 	void Update() override {
-		double h = Input::GetAxisHorizontal();
-		double v = Input::GetAxisVertical();
-		Vector3 vec(h, 0, -v);
-		if (Input::GetKey(KeyCode::Space)) {
-			vec += Vector3::up;
-		}
-		if (Input::GetKey(KeyCode::LeftCtrl)) {
-			vec -= Vector3::up;
-		}
+		double h = (Input::GetKey('d') ? 1 : 0) + (Input::GetKey('a') ? -1 : 0);
+		double v = (Input::GetKey('w') ? 1 : 0) + (Input::GetKey('s') ? -1 : 0);
+		double u = (Input::GetKey(KeyCode::Space) ? 1 : 0) + (Input::GetKey(KeyCode::LeftCtrl) ? -1 : 0);
+		Vector3 vec(h, u, -v);
+
 		if (Input::GetKeyDown(KeyCode::Esc)) {
 			SetGameMode(false);
 			exit(0);
@@ -34,9 +30,7 @@ public:
 		if (Input::GetKeyDown('f')) {
 			Input::SetFPSmode(!Input::FPSmode);
 		}
-		rid->SetVelocity(
-			transform->GetWorldMatrix() ^ (vec*speed)
-		);
+		rid->SetVelocity(transform->GetWorldMatrix() ^ (vec * speed));
 	}
 
 };

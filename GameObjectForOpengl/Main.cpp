@@ -10,27 +10,31 @@ void SetScene() {
 	//mainScene.camera.AddComponent(new MouseRotater(0.05f, 0.05f));
 	//mainScene.camera.AddComponent(new PressLToShowPosition());
 
-	GameObject *sun = mainScene.AddGameObject(new Sun("t1", 6, Vector3(0, 0, -200), Quaternion::EulerY(180)));
+	GameObject *sun = mainScene.AddGameObject(new Moon("t1", 8, Vector3(0, 0, -200), Quaternion::EulerY(180)));
 	mainScene.camera.AddComponent(new Tracker(&(sun->transform), 0.9, true, false));
 	sun->AddComponent(new MouseRotater(0.05f, 0.05f));
-	sun->AddComponent(new RigidBody());
-	sun->AddComponent(new SphereCollider(6, Vector3::zero, 1));
-	sun->AddComponent(new FPSRigidBodyMover(1));
+	sun->AddComponent(new FPSRigidBodyMover(20));
+	sun->AddComponent(new RigidBody(10));
+	sun->AddComponent(new SphereCollider(8, Vector3::zero, 1));
 
 
-	sun = sun->AddChild(new GameObject("asd", Vector3(0, 0, 100), Quaternion::EulerY(180)));
+	sun = sun->AddChild(new GameObject("camPos", Vector3(0, 0, 100), Quaternion::EulerY(180)));
 	sun->AddComponent(new PressLToShowPosition());
 	mainScene.camera.AddComponent(new Tracker(&(sun->transform), 0.9));
 
+
 	GameObject *g = mainScene.AddGameObject(new Sun("Sun!"));
 	g->AddComponent(new AutoRotate(Vector3(0, 12, 0)));//公转速度
-	g->AddComponent(new SphereCollider(50));
+	g->AddComponent(new SphereCollider(50, Vector3::zero, 1));
+
 
 	g = g->AddChild(new GameObject("Sun's Son", Vector3(80, 0, 0), Quaternion::identity));
 	g->AddComponent(new AutoRotate(Vector3(0, -5, 0)));//抵消公转速度
 
+
 	g = g->AddChild(new GameObject("Earth's parent", Vector3(0, 0, 0), Quaternion::Euler(Vector3(0, 0, 30))));
 	g->AddComponent(new AutoRotate(Vector3(0, 10, 0)));//自转速度
+
 
 	GameObject *earth = g->AddChild(new Earth("Earth"));
 	earth->AddComponent(new LightComponent());

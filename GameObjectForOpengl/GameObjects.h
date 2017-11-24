@@ -21,7 +21,8 @@ public:
 		glMaterialfv(GL_FRONT, GL_EMISSION, earth_mat_emission);
 		glMaterialf(GL_FRONT, GL_SHININESS, earth_mat_shininess);
 
-		glutSolidSphere(rEarth, 15, 15);
+		//glutSolidSphere(rEarth, 15, 15);
+		gluSphere(gluNewQuadric(), rEarth, 15, 15);
 	}
 };
 class Sun :public GameObject {
@@ -45,8 +46,8 @@ public:
 		glMaterialfv(GL_FRONT, GL_EMISSION, sun_mat_emission);
 		glMaterialf(GL_FRONT, GL_SHININESS, sun_mat_shininess);
 
-		GLUquadric *obj = gluNewQuadric();
-		gluSphere(obj, rSun, 30, 30);
+		//gluSphere(gluNewQuadric(), rSun, 30, 30);
+		glutSolidSphere(rSun, 30, 30);
 	}
 };
 class Moon :public GameObject {

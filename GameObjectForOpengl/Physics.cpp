@@ -63,7 +63,7 @@ void Physics::Contract(RigidBody* rigidBody, SphereCollider *solidCollider) {
 
 			//·´µ¯
 			delta /= distance;
-			rigidBody->velocity += delta * Vector3::Dot(rigidBody->velocity, delta) * ((solidCollider->boundness + sp->boundness) / 2 + 1);
+			rigidBody->velocity -= delta * Vector3::Dot(rigidBody->velocity, delta) * ((solidCollider->boundness + sp->boundness) / 2 + 1);
 		}
 	}
 }

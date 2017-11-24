@@ -23,5 +23,6 @@ public:
 	~RigidBody();
 	void Init() override;
 	void Awake() override;
+	void Update() override;
 	void FixedUpdate() override;
 };

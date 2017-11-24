@@ -51,7 +51,7 @@ void BasicInitial() {
 void SceneInitial() {
 	glClearColor(1.0f, 0.0f, 0.0f, 1.0f);	//±≥æ∞
 	deltaTime = 1000.0f / 60;
-	lastTime = GetTickCount();
+	lastTime = clock();
 	//∆‰À˚…Ë÷√
 	//glDepthFunc(GL_LEQUAL);
 	//glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);
@@ -91,7 +91,7 @@ void RenderScene(void) {
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 
-	int time = GetTickCount();
+	int time = clock();
 	int delta = time - lastTime;
 	deltaTime = delta / 1000.0;
 	lastTime = time;
