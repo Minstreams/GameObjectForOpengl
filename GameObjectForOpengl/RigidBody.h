@@ -1,4 +1,7 @@
 #pragma once
+///<summary>
+///刚体，必须加在关联的碰撞箱前面
+///</summary>
 class RigidBody :public MonoBehavour {
 public:
 	Vector3 velocity = Vector3::zero;
@@ -21,6 +24,9 @@ public:
 	///</summary>
 	void SetVelocity(const Vector3& v);
 
+	///<summary>
+	///刚体，必须加在关联的碰撞箱前面
+	///</summary>
 	RigidBody(double g = 10.0, double mass = 1);
 	~RigidBody();
 	void Init() override;

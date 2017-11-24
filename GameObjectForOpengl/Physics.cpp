@@ -70,5 +70,39 @@ void Physics::Contract(RigidBody* rigidBody, SphereCollider *solidCollider) {
 
 //与其他rigidBody进行碰撞检测
 void Physics::Contract(RigidBody* lhs, RigidBody* rhs) {
+	for (int j = 0;j < rhs->colliderNum;j++) {
+		SphereCollider *rCollider = rhs->colliders[j];
+		for (int i = 0;i < lhs->colliderNum;i++) {
+			SphereCollider *lCollider = lhs->colliders[i];
 
+			Vector3 delta = rCollider->GetPosition() - lCollider->GetPosition();
+			double r = lCollider->radius + rCollider->radius;
+			double distance = delta.magnitude();
+
+			if (distance < r) {
+				double squeeze = (r - distance) / (2 * distance);
+				Vector3 squeezeVec = delta * squeeze;
+
+				//两边挤出
+				lhs->transform->Translate(-squeezeVec, Space::World);
+				rhs->transform->Translate(squeezeVec, Space::World);
+
+				//反弹
+				delta /= distance;
+
+				double lv = Vector3::Dot(lhs->velocity, delta);
+				double rv = Vector3::Dot(rhs->velocity, delta);
+
+				double mSum = lhs->Mass + rhs->Mass;
+				double lm = lhs->Mass / mSum;
+				double rm = rhs->Mass / mSum;
+
+				double lvResult = lv * (lm - rm - 1) + 2 * rm * rv;
+				double rvResult = rv * (rm - lm - 1) + 2 * lm * lv;
+
+				lhs->velocity += delta * lvResult;
+				rhs->velocity += delta * rvResult;
+			}
+		}
+	}
 }

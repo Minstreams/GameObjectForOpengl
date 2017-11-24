@@ -12,9 +12,9 @@ void SetScene() {
 
 	GameObject *sun = mainScene.AddGameObject(new Moon("t1", 8, Vector3(0, 0, -200), Quaternion::EulerY(180)));
 	mainScene.camera.AddComponent(new Tracker(&(sun->transform), 0.9, true, false));
+	sun->AddComponent(new RigidBody(10));
 	sun->AddComponent(new MouseRotater(0.05f, 0.05f));
 	sun->AddComponent(new FPSRigidBodyMover(20));
-	sun->AddComponent(new RigidBody(10));
 	sun->AddComponent(new SphereCollider(8, Vector3::zero, 1));
 
 
@@ -22,10 +22,14 @@ void SetScene() {
 	sun->AddComponent(new PressLToShowPosition());
 	mainScene.camera.AddComponent(new Tracker(&(sun->transform), 0.9));
 
+	GameObject *t = mainScene.AddGameObject(new Sun("t2", 6, Vector3(10, 0, -100), Quaternion::identity));
+	t->AddComponent(new RigidBody());
+	t->AddComponent(new SphereCollider(6));
 
 	GameObject *g = mainScene.AddGameObject(new Sun("Sun!"));
 	g->AddComponent(new AutoRotate(Vector3(0, 12, 0)));//公转速度
 	g->AddComponent(new SphereCollider(50, Vector3::zero, 1));
+	g->AddComponent(new LightComponent());
 
 
 	g = g->AddChild(new GameObject("Sun's Son", Vector3(80, 0, 0), Quaternion::identity));
@@ -37,7 +41,6 @@ void SetScene() {
 
 
 	GameObject *earth = g->AddChild(new Earth("Earth"));
-	earth->AddComponent(new LightComponent());
 	g->AddComponent(new SphereCollider(5));
 	//earth->AddComponent(new PressLToShowPosition());
 
