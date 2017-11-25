@@ -54,8 +54,9 @@ void Physics::Contract(RigidBody* rigidBody, SphereCollider *solidCollider) {
 		Vector3 delta = sp->GetPosition() - pos;
 		double r = sp->radius + solidCollider->radius;
 
-		double distance = delta.magnitude();
-		if (distance < r) {
+		double distance = delta.sqrtMagnitude();
+		if (distance < r*r) {
+			distance = sqrt(distance);
 			//¼·³ö
 			rigidBody->transform->Translate(delta*((r - distance) / distance), Space::World);
 
