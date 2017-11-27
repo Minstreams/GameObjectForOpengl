@@ -55,9 +55,24 @@ void SceneInitial() {
 	//其他设置
 	//glDepthFunc(GL_LEQUAL);
 	//glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);
+	currentGameObjectPointer = &mainScene.camera;
 	SetScene();
+
 	mainScene.Awake();
 	mainScene.Start();
+}
+GameObject* AddGameObject(GameObject* g) {
+	currentGameObjectPointer = mainScene.AddGameObject(g);
+	return currentGameObjectPointer;
+}
+GameObject * AddChild(GameObject * child)
+{
+	currentGameObjectPointer = currentGameObjectPointer->AddChild(child);
+	return currentGameObjectPointer;
+}
+MonoBehavour * AddComponent(MonoBehavour * component)
+{
+	return currentGameObjectPointer->AddComponent(component);
 }
 void ChangeSize(int w, int h)
 {
@@ -120,7 +135,6 @@ void SetGameMode(bool b) {
 			glutEnterGameMode();
 			//禁用DPI缩放
 			SetProcessDPIAware();
-			//BasicInitial();
 		}
 		else {
 			ShowWarnMessage("无法进入全屏模式！");
