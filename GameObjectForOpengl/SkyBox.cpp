@@ -64,9 +64,9 @@ void CSkyBox::render()
 	glBegin(GL_QUADS);
 
 	/** 指定纹理坐标和顶点坐标 */
-	glTexCoord2f(0.0f, 1.0f); glVertex3f(-width, -height, -length + 1);
-	glTexCoord2f(0.0f, 0.0f); glVertex3f(-width, height, -length + 1);
 	glTexCoord2f(1.0f, 0.0f); glVertex3f(width, height, -length + 1);
+	glTexCoord2f(0.0f, 0.0f); glVertex3f(-width, height, -length + 1);
+	glTexCoord2f(0.0f, 1.0f); glVertex3f(-width, -height, -length + 1);
 	glTexCoord2f(1.0f, 1.0f); glVertex3f(width, -height, -length + 1);
 	glEnd();
 
