@@ -14,7 +14,6 @@
 */
 //========================================================
 #pragma once
-#include "CBMPLoader.h"
 /** 天空盒类 */
 class CSkyBox
 {
@@ -31,7 +30,7 @@ public:
 
 private:
 
-	CBMPLoader  m_texture[6];   /**< 天空盒纹理   */
+	GLint  m_texture[6];   /**< 天空盒纹理   */
 	float       length;         /**< 长度 */
 	float       width;          /**< 宽度 */
 	float       height;         /**< 高度 */
