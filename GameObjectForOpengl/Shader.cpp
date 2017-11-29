@@ -21,6 +21,25 @@ void Shader::use() const
 {
 	glUseProgram(this->programId);
 }
+void Shader::LoadMatrix() const
+{
+	float m[] = { 1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1 };
+	//待改进：引入本地缩放矩阵
+	glUniformMatrix4fv(glGetUniformLocation(programId, "model"),
+		1, GL_FALSE, m);
+	glGetFloatv(GL_TRANSPOSE_PROJECTION_MATRIX, m);
+	glUniformMatrix4fv(glGetUniformLocation(programId, "projection"),
+		1, GL_FALSE, m);
+	glGetFloatv(GL_MODELVIEW_MATRIX, m);
+	glUniformMatrix4fv(glGetUniformLocation(programId, "view"),
+		1, GL_FALSE, m);
+	//std::cout << "\n------------------\n"
+	//	<< m[0] << "\t," << m[1] << "\t," << m[2] << "\t," << m[3] << "\n"
+	//	<< m[4] << "\t," << m[5] << "\t," << m[6] << "\t," << m[7] << "\n"
+	//	<< m[8] << "\t," << m[9] << "\t," << m[10] << "\t," << m[11] << "\n"
+	//	<< m[12] << "\t," << m[13] << "\t," << m[14] << "\t," << m[15] << "\n"
+	//	<< "\n------------------";
+}
 Shader::~Shader()
 {
 	if (this->programId)
