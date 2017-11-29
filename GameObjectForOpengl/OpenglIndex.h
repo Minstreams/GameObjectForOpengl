@@ -1,13 +1,11 @@
 #pragma once
 #include <windows.h>
 #include <iostream>
-#include <gl\gl.h>
-#include <gl\glu.h>
 #include <GL\glew.h>
-#include <GL\glut.h>
 #include "UnityIndex.h"
 #include "Input.h"
-#include "CBMPLoader.h"
+#include "Texture.h"
+#include "Shader.h"
 #include "SkyBox.h"
 ////////////////////////////////////////////////////////////////////////////
 //实验要求：(1)理解OpenGL中的变换过程√                                   //
@@ -32,8 +30,4 @@ void SetCursorVisible(bool visible);//设置光标是否可见
 void SetGameMode(bool b);//设置全屏游戏模式，取消时会退出游戏
 void ShowWarnMessage(const char* message, const char* title = "警告");//显示警告信息
 
-//以下是简化设置场景步骤 而加的方法
-GameObject* currentGameObjectPointer = NULL;
-extern GameObject* AddGameObject(GameObject* g);
-extern GameObject* AddChild(GameObject *child);
-extern MonoBehavour* AddComponent(MonoBehavour* component);
+

@@ -1,4 +1,6 @@
+#include <GL\glew.h>
 #include"UnityIndex.h"
+
 Scene::Scene() :root(NULL),camera("MainCamera"){
 
 }
@@ -16,8 +18,6 @@ void Scene::Render() {
 	m.SetIdentity();
 	m.SetTransition(-camera.transform.localPosition);
 	glApplyMatrix(m);
-
-	//glTranslated(-camera.transform.localPosition.x, -camera.transform.localPosition.y, -camera.transform.localPosition.z);
 
 
 	//物体
@@ -39,6 +39,7 @@ GameObject* Scene::AddGameObject(GameObject* g) {
 	}
 	p->next = g;
 	g->SetParent(NULL);
+	currentGameObjectPointer = g;
 	return g;
 }
 //摧毁物体及其子物体
@@ -125,4 +126,18 @@ void Scene::RenderGameObjects(GameObject* g) {
 	RenderGameObjects(g->child);
 	glPopMatrix();
 	RenderGameObjects(g->next);
+}
+
+GameObject* AddGameObject(GameObject* g) {
+	mainScene.AddGameObject(g);
+	return currentGameObjectPointer;
+}
+GameObject * AddChild(GameObject * child)
+{
+	currentGameObjectPointer->AddChild(child);
+	return currentGameObjectPointer;
+}
+MonoBehavour * AddComponent(MonoBehavour * component)
+{
+	return currentGameObjectPointer->AddComponent(component);
 }

@@ -1,6 +1,8 @@
 #include <time.h>
 #include "OpenglIndex.h"
 
+GameObject* currentGameObjectPointer = NULL;
+
 Scene mainScene;
 double deltaTime;//To实现
 int lastTime;
@@ -32,15 +34,36 @@ void Initial() {
 	BasicInitial();
 	SceneInitial();
 }
+/*全屏与窗口模式共用的初始化方法
+*/
 void BasicInitial() {
+	// 初始化GLEW 获取OpenGL函数
+	glewExperimental = GL_TRUE; // 让glew获取所有拓展函数
+	GLenum status = glewInit();
+	if (status != GLEW_OK)
+	{
+		std::cout << "Error::GLEW glew version:" << glewGetString(GLEW_VERSION)
+			<< " error string:" << glewGetErrorString(status) << std::endl;
+		//glfwTerminate();
+		std::system("pause");
+		//return -1;
+	}
+
+
 	glutReshapeFunc(ChangeSize);
 	glutDisplayFunc(RenderScene);
 	Input::Init();
 	glutTimerFunc(100, TimerFunc, 1);
 
-	glEnable(GL_DEPTH_TEST | GL_FOG);	// 启用深度测试
-	glFrontFace(GL_CCW);		// 指定逆时针绕法表示多边形正面
-	glShadeModel(GL_SMOOTH);
+	glEnable(GL_DEPTH_TEST);
+	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+	glEnableClientState(GL_VERTEX_ARRAY);
+	glEnableClientState(GL_COLOR_ARRAY);
+	glEnableClientState(GL_NORMAL_ARRAY);
+	//glEnable(GL_CULL_FACE);
+	//glEnable(GL_FOG);	// 启用深度测试
+	//glFrontFace(GL_CCW);		// 指定逆时针绕法表示多边形正面
+	//glShadeModel(GL_SMOOTH);
 	if (!mainScene.skyBox.init())
 	{
 		MessageBox(NULL, "初始化天空失败!", "错误", MB_OK);
@@ -49,31 +72,20 @@ void BasicInitial() {
 	SetLight();
 }
 void SceneInitial() {
-	glClearColor(1.0f, 0.0f, 0.0f, 1.0f);	//背景
+	glClearColor(0.2f, 1.0f, 0.1f, 1.0f);	//背景
 	deltaTime = 1000.0f / 60;
 	lastTime = clock();
 	//其他设置
 	//glDepthFunc(GL_LEQUAL);
 	//glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);
 	currentGameObjectPointer = &mainScene.camera;
+
 	SetScene();
 
 	mainScene.Awake();
 	mainScene.Start();
 }
-GameObject* AddGameObject(GameObject* g) {
-	currentGameObjectPointer = mainScene.AddGameObject(g);
-	return currentGameObjectPointer;
-}
-GameObject * AddChild(GameObject * child)
-{
-	currentGameObjectPointer = currentGameObjectPointer->AddChild(child);
-	return currentGameObjectPointer;
-}
-MonoBehavour * AddComponent(MonoBehavour * component)
-{
-	return currentGameObjectPointer->AddComponent(component);
-}
+
 void ChangeSize(int w, int h)
 {
 	if (h == 0)	h = 1;

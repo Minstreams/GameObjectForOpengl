@@ -26,6 +26,7 @@ void GameObject::SetParent(GameObject *parent) {
 }
 GameObject* GameObject::AddChild(GameObject *child) {
 	SetParent(this, child);
+	currentGameObjectPointer = child;
 	return child;
 }
 
