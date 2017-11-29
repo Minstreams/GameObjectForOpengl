@@ -2,7 +2,7 @@
 enum Space;
 #include<iostream>
 #include"TransformIndex.h"
-#include<GL\glut.h>
+#include <vector>
 
 class MonoBehavour;
 class GameObject;

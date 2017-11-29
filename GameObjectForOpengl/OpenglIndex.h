@@ -2,6 +2,7 @@
 #include <windows.h>
 #include <iostream>
 #include <GL\glew.h>
+#include <GL\glut.h>
 #include "UnityIndex.h"
 #include "Input.h"
 #include "Texture.h"
