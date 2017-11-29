@@ -1,4 +1,6 @@
-#include <gl\glut.h>
+#include <Windows.h>
+#include <iostream>
+#include <GL\glew.h>
 #include <math.h>
 #include "TransformIndex.h"
 
@@ -163,6 +165,15 @@ Matrix Matrix::VectorAsRow(const Vector3& v1, const Vector3& v2, const Vector3& 
 		v1.z, v2.z, v3.z, 0,
 		0, 0, 0, 1
 	);
+}
+void Matrix::OutPut()
+{
+	std::cout << "\n------------------\n" 
+		<< m[0] << "\t," << m[1] << "\t," << m[2] << "\t," << m[3] << "\n" 
+		<< m[4] << "\t," << m[5] << "\t," << m[6] << "\t," << m[7] << "\n"
+		<< m[8] << "\t," << m[9] << "\t," << m[10] << "\t," << m[11] << "\n"
+		<< m[12] << "\t," << m[13] << "\t," << m[14] << "\t," << m[15] << "\n"
+		<< "\n------------------";
 }
 //像数组一样访问矩阵
 double* Matrix::operator[](int row) {

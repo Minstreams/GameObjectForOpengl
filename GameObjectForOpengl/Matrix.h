@@ -1,6 +1,5 @@
 #pragma once
-//应用矩阵
-extern void glApplyMatrix(Matrix& m);
+
 //矩阵类
 class Matrix
 {
@@ -47,10 +46,13 @@ public:
 	static Matrix VectorAsColumn(const Vector3& v1, const Vector3& v2, const Vector3& v3);
 	//取三个vector作为行向量
 	static Matrix VectorAsRow(const Vector3& v1, const Vector3& v2, const Vector3& v3);
+
+	void OutPut();
 private:
 	//像数组一样访问矩阵
 	double* operator[](int row);
 };
 
-
+//应用矩阵
+extern void glApplyMatrix(Matrix& m);
 

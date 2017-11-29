@@ -4,12 +4,12 @@ class Earth :public GameObject {
 public:
 	float rEarth;
 	Earth(const char* name, float r, const Vector3& pos, const Quaternion& rot) : GameObject(name, pos, rot), rEarth(r) {
-
 	}
 	Earth(const char* name) :GameObject(name), rEarth(5) {
-
 	}
 	void Render() override {
+		//glEnable(GL_TEXTURE_2D);
+		//glBindTexture(GL_TEXTURE_2D, texture.ID);
 		GLfloat earth_mat_ambient[] = { 0.0f, 0.0f, 0.5f, 1.0f };
 		GLfloat earth_mat_diffuse[] = { 0.2f, 0.2f, 0.5f, 1.0f };
 		GLfloat earth_mat_specular[] = { 0.1f, 0.1f, 0.1f, 1.0f };
@@ -21,8 +21,10 @@ public:
 		glMaterialfv(GL_FRONT, GL_EMISSION, earth_mat_emission);
 		glMaterialf(GL_FRONT, GL_SHININESS, earth_mat_shininess);
 
-		//glutSolidSphere(rEarth, 15, 15);
-		gluSphere(gluNewQuadric(), rEarth, 15, 15);
+		GLUquadric* qobj = gluNewQuadric();
+		//gluQuadricTexture(qobj, GL_TRUE);
+		gluSphere(qobj, rEarth, 15, 15);
+		//glDisable(GL_TEXTURE_2D);
 	}
 };
 class Sun :public GameObject {
@@ -73,5 +75,17 @@ public:
 
 		GLUquadric *obj = gluNewQuadric();
 		gluSphere(obj, rMoon, 30, 30);
+	}
+};
+
+class TestModel :public GameObject {
+public:
+	TestModel(const char* name) :GameObject(name) {
+	}
+	TestModel(const char* name, const Vector3& pos, const Quaternion& rot) : GameObject(name, pos, rot){
+
+	}
+	void Render() override {
+		Models::List()->model1.draw(Shaders::List()->shader1);
 	}
 };
