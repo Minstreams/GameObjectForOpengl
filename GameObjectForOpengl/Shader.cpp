@@ -40,6 +40,10 @@ void Shader::LoadMatrix() const
 	//	<< m[12] << "\t," << m[13] << "\t," << m[14] << "\t," << m[15] << "\n"
 	//	<< "\n------------------";
 }
+void Shader::useNone()
+{
+	glUseProgram(0);
+}
 Shader::~Shader()
 {
 	if (this->programId)
