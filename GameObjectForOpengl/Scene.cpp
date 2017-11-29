@@ -29,6 +29,7 @@ void Scene::SetCamera(const Vector3& pos, const Quaternion& rot) {
 	camera.transform.rotation = rot;
 }
 GameObject* Scene::AddGameObject(GameObject* g) {
+	currentGameObjectPointer = g;
 	if (root == NULL) {
 		root = g;
 		return g;
@@ -39,7 +40,6 @@ GameObject* Scene::AddGameObject(GameObject* g) {
 	}
 	p->next = g;
 	g->SetParent(NULL);
-	currentGameObjectPointer = g;
 	return g;
 }
 //摧毁物体及其子物体
