@@ -8,23 +8,24 @@ public:
 	Earth(const char* name) :GameObject(name), rEarth(5) {
 	}
 	void Render() override {
-		//glEnable(GL_TEXTURE_2D);
-		//glBindTexture(GL_TEXTURE_2D, texture.ID);
-		GLfloat earth_mat_ambient[] = { 0.0f, 0.0f, 0.5f, 1.0f };
-		GLfloat earth_mat_diffuse[] = { 0.2f, 0.2f, 0.5f, 1.0f };
-		GLfloat earth_mat_specular[] = { 0.1f, 0.1f, 0.1f, 1.0f };
-		GLfloat earth_mat_emission[] = { 0.0f, 0.0f, 0.0f, 1.0f };
-		GLfloat earth_mat_shininess = 30.0f;
-		glMaterialfv(GL_FRONT, GL_AMBIENT, earth_mat_ambient);
-		glMaterialfv(GL_FRONT, GL_DIFFUSE, earth_mat_diffuse);
-		glMaterialfv(GL_FRONT, GL_SPECULAR, earth_mat_specular);
-		glMaterialfv(GL_FRONT, GL_EMISSION, earth_mat_emission);
-		glMaterialf(GL_FRONT, GL_SHININESS, earth_mat_shininess);
+		Shaders::List()->shader1.use();
+		Shaders::List()->shader1.LoadMatrix();
+
+		//GLfloat earth_mat_ambient[] = { 0.0f, 0.0f, 0.5f, 1.0f };
+		//GLfloat earth_mat_diffuse[] = { 0.2f, 0.2f, 0.5f, 1.0f };
+		//GLfloat earth_mat_specular[] = { 0.1f, 0.1f, 0.1f, 1.0f };
+		//GLfloat earth_mat_emission[] = { 0.0f, 0.0f, 0.0f, 1.0f };
+		//GLfloat earth_mat_shininess = 30.0f;
+		//glMaterialfv(GL_FRONT, GL_AMBIENT, earth_mat_ambient);
+		//glMaterialfv(GL_FRONT, GL_DIFFUSE, earth_mat_diffuse);
+		//glMaterialfv(GL_FRONT, GL_SPECULAR, earth_mat_specular);
+		//glMaterialfv(GL_FRONT, GL_EMISSION, earth_mat_emission);
+		//glMaterialf(GL_FRONT, GL_SHININESS, earth_mat_shininess);
 
 		GLUquadric* qobj = gluNewQuadric();
-		//gluQuadricTexture(qobj, GL_TRUE);
+		gluQuadricTexture(qobj, GL_TRUE);
 		gluSphere(qobj, rEarth, 15, 15);
-		//glDisable(GL_TEXTURE_2D);
+		Shader::useNone();
 	}
 };
 class Sun :public GameObject {
@@ -37,19 +38,24 @@ public:
 
 	}
 	void Render() override {
-		GLfloat sun_mat_ambient[] = { 0.0f, 0.0f, 0.3f, 1.0f };
-		GLfloat sun_mat_diffuse[] = { 0.5f, 0.5f, 0.0f, 1.0f };
-		GLfloat sun_mat_specular[] = { 0.0f, 0.0f, 0.0f, 1.0f };
-		GLfloat sun_mat_emission[] = { 0.8f, 0.8f, 0.0f, 1.0f };
-		GLfloat sun_mat_shininess = 0.0f;
-		glMaterialfv(GL_FRONT, GL_AMBIENT, sun_mat_ambient);
-		glMaterialfv(GL_FRONT, GL_DIFFUSE, sun_mat_diffuse);
-		glMaterialfv(GL_FRONT, GL_SPECULAR, sun_mat_specular);
-		glMaterialfv(GL_FRONT, GL_EMISSION, sun_mat_emission);
-		glMaterialf(GL_FRONT, GL_SHININESS, sun_mat_shininess);
+		Shaders::List()->shader1.use();
+		Shaders::List()->shader1.LoadMatrix();
+
+		//GLfloat sun_mat_ambient[] = { 0.0f, 0.0f, 0.3f, 1.0f };
+		//GLfloat sun_mat_diffuse[] = { 0.5f, 0.5f, 0.0f, 1.0f };
+		//GLfloat sun_mat_specular[] = { 0.0f, 0.0f, 0.0f, 1.0f };
+		//GLfloat sun_mat_emission[] = { 0.8f, 0.8f, 0.0f, 1.0f };
+		//GLfloat sun_mat_shininess = 0.0f;
+		//glMaterialfv(GL_FRONT, GL_AMBIENT, sun_mat_ambient);
+		//glMaterialfv(GL_FRONT, GL_DIFFUSE, sun_mat_diffuse);
+		//glMaterialfv(GL_FRONT, GL_SPECULAR, sun_mat_specular);
+		//glMaterialfv(GL_FRONT, GL_EMISSION, sun_mat_emission);
+		//glMaterialf(GL_FRONT, GL_SHININESS, sun_mat_shininess);
 
 		//gluSphere(gluNewQuadric(), rSun, 30, 30);
 		glutSolidSphere(rSun, 30, 30);
+
+		Shader::useNone();
 	}
 };
 class Moon :public GameObject {
@@ -62,6 +68,9 @@ public:
 
 	}
 	void Render() override {
+		Shaders::List()->shader1.use();
+		Shaders::List()->shader1.LoadMatrix();
+/*
 		GLfloat mat_ambient[] = { 0.0f, 0.0f, 0.0f, 1.0f };
 		GLfloat mat_diffuse[] = { 0.5f, 0.5f, 0.5f, 1.0f };
 		GLfloat mat_specular[] = { 0.2f, 0.2f, 0.2f, 1.0f };
@@ -72,9 +81,11 @@ public:
 		glMaterialfv(GL_FRONT, GL_SPECULAR, mat_specular);
 		glMaterialfv(GL_FRONT, GL_EMISSION, mat_emission);
 		glMaterialf(GL_FRONT, GL_SHININESS, mat_shininess);
-
+*/
 		GLUquadric *obj = gluNewQuadric();
 		gluSphere(obj, rMoon, 30, 30);
+
+		Shader::useNone();
 	}
 };
 

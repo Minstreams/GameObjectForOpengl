@@ -55,13 +55,9 @@ void BasicInitial() {
 	Input::Init();
 	glutTimerFunc(100, TimerFunc, 1);
 
-	glEnable(GL_DEPTH_TEST);
-	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
-	glEnableClientState(GL_VERTEX_ARRAY);
-	glEnableClientState(GL_COLOR_ARRAY);
-	glEnableClientState(GL_NORMAL_ARRAY);
-	//glEnable(GL_CULL_FACE);
-	//glEnable(GL_FOG);	// 启用深度测试
+	glEnable(GL_DEPTH_TEST);// 启用深度测试
+	glEnable(GL_CULL_FACE);
+	//glEnable(GL_FOG);	
 	//glFrontFace(GL_CCW);		// 指定逆时针绕法表示多边形正面
 	//glShadeModel(GL_SMOOTH);
 	if (!mainScene.skyBox.init())
