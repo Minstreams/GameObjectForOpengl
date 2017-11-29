@@ -1,56 +1,34 @@
 #include"UnityIndex.h"
 
-void Physics::AwakeInit() {
-	if (solidColliderNum != 0) {
-		solidColliders = new SphereCollider*[solidColliderNum];
-	}
-	if (rigidBodyNum != 0) {
-		rigidBodys = new RigidBody*[rigidBodyNum];
-	}
+void Physics::AddRigidBody(RigidBody * pointer)
+{
+	rigidBodyList.push_back(pointer);
 }
-void Physics::StartInit() {
-	for (int i = 0;i < rigidBodyNum;i++) {
-		if (rigidBodys[i]->colliderNum != 0) {
-			rigidBodys[i]->colliders = new SphereCollider*[rigidBodys[i]->colliderNum];
-		}
-	}
-}
-Physics::~Physics() {
-	if (solidColliders != NULL) {
-		delete solidColliders;
-	}
-	if (rigidBodys != NULL) {
-		delete rigidBodys;
-	}
-}
-void Physics::AwakeAddSolidCollider(SphereCollider *pointer) {
-	solidColliders[awakeSolidColliderNumPointer] = pointer;
-	awakeSolidColliderNumPointer++;
-}
-void Physics::AwakeAddRigidBody(RigidBody *pointer) {
-	rigidBodys[awakeRigidBodyNumPointer] = pointer;
-	awakeRigidBodyNumPointer++;
+
+void Physics::AddSphereCollider(SphereCollider * pointer)
+{
+	sphereColliderList.push_back(pointer);
 }
 
 //Contract方法用于进行碰撞，并根据结果复写rigidBody的速度
 void Physics::Contract() {
 	//对每一个rigidBody
-	for (int r = 0; r < rigidBodyNum;r++) {
+	for (unsigned int r = 0;r < rigidBodyList.size();r++) {
 		//与静态碰撞箱检测
-		for (int i = 0;i < solidColliderNum;i++) {
-			Contract(rigidBodys[r], solidColliders[i]);
+		for each(SphereCollider* s in sphereColliderList) {
+			Contract(rigidBodyList[r], s);
 		}
 		//与其他rigidBody检测
-		for (int i = r + 1;i < rigidBodyNum;i++) {
-			Contract(rigidBodys[r], rigidBodys[i]);
+		for (unsigned i = r + 1;i < rigidBodyList.size();i++) {
+			Contract(rigidBodyList[r], rigidBodyList[i]);
 		}
 	}
 }
 
 void Physics::Contract(RigidBody* rigidBody, SphereCollider *solidCollider) {
 	Vector3 pos = solidCollider->GetPosition();
-	for (int i = 0;i < rigidBody->colliderNum;i++) {
-		SphereCollider *sp = rigidBody->colliders[i];
+	for each (SphereCollider* sp in rigidBody->sphereColliderList)
+	{
 		Vector3 delta = sp->GetPosition() - pos;
 		double r = sp->radius + solidCollider->radius;
 
@@ -71,11 +49,10 @@ void Physics::Contract(RigidBody* rigidBody, SphereCollider *solidCollider) {
 
 //与其他rigidBody进行碰撞检测
 void Physics::Contract(RigidBody* lhs, RigidBody* rhs) {
-	for (int j = 0;j < rhs->colliderNum;j++) {
-		SphereCollider *rCollider = rhs->colliders[j];
-		for (int i = 0;i < lhs->colliderNum;i++) {
-			SphereCollider *lCollider = lhs->colliders[i];
-
+	for each (SphereCollider* rCollider in rhs->sphereColliderList)
+	{
+		for each (SphereCollider* lCollider in lhs->sphereColliderList)
+		{
 			Vector3 delta = rCollider->GetPosition() - lCollider->GetPosition();
 			double r = lCollider->radius + rCollider->radius;
 			double distance = delta.magnitude();

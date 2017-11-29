@@ -55,12 +55,10 @@ void Scene::DestroyLayer(GameObject* g) {
 	Destroy(g);
 }
 void Scene::Awake() {
-	physicEngine.AwakeInit();
 	Awake(&camera);
 	Awake(root);
 }
 void Scene::Start() {
-	physicEngine.StartInit();
 	Start(&camera);
 	Start(root);
 }

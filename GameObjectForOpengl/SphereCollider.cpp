@@ -27,21 +27,9 @@ Vector3 SphereCollider::GetNextPosition()
 void SphereCollider::Awake() {
 	position = transform->GetWorldMatrix()*offset;
 	if (gameObject->rigidBody == NULL) {
-		mainScene.physicEngine.AwakeAddSolidCollider(this);
+		mainScene.physicEngine.AddSphereCollider(this);
 	}
 	else {
-		gameObject->rigidBody->colliderNum++;
-	}
-}
-void SphereCollider::Start() {
-	if (gameObject->rigidBody != NULL) {
-		gameObject->rigidBody->StartAddCollider(this);
-	}
-}
-
-void SphereCollider::Init()
-{
-	if (gameObject->rigidBody == NULL) {
-		mainScene.physicEngine.solidColliderNum++;
+		gameObject->rigidBody->AddSphereCollider(this);
 	}
 }

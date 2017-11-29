@@ -14,6 +14,4 @@ public:
 	Vector3 GetNextPosition();
 private:
 	void Awake() override;
-	void Start() override;
-	void Init() override;
 };

@@ -1,8 +1,8 @@
 #include"UnityIndex.h"
 
-void RigidBody::StartAddCollider(SphereCollider *pointer) {
-	colliders[startAddColliderPointer] = pointer;
-	startAddColliderPointer++;
+void RigidBody::AddSphereCollider(SphereCollider * pointer)
+{
+	sphereColliderList.push_back(pointer);
 }
 
 void RigidBody::SetVelocity(const Vector3 & v)
@@ -27,19 +27,12 @@ void RigidBody::SetVelocity(const Vector3 & v)
 
 RigidBody::RigidBody(double g, double mass) :g(g), Mass(mass)
 {
-	mainScene.physicEngine.rigidBodyNum++;
-}
-RigidBody::~RigidBody() {
-	if (colliders != NULL) {
-		delete colliders;
-	}
-}
-void RigidBody::Init() {
-	gameObject->rigidBody = this;
+
 }
 
-void RigidBody::Awake() {
-	mainScene.physicEngine.AwakeAddRigidBody(this);
+void RigidBody::Init() {
+	gameObject->rigidBody = this;
+	mainScene.physicEngine.AddRigidBody(this);
 }
 
 void RigidBody::Update()
