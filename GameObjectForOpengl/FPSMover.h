@@ -2,9 +2,6 @@
 //上下左右和空格ctrl控制transform
 class FPSMover : public MonoBehavour {
 public:
-	void Start() override {
-//		Input::SetFPSmode(true);
-	}
 	void Update() override {
 		double h = Input::GetAxisHorizontal();
 		double v = Input::GetAxisVertical();

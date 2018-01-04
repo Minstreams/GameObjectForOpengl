@@ -13,6 +13,7 @@ void Input::SetFPSmode(bool b) {
 		GetCursorPos(&p);
 		mouseXCenterworld = p.x + centerX - mouseXPos;
 		mouseYCenterworld = p.y + centerY - mouseYPos;
+		SetCursorPos(mouseXCenterworld, mouseYCenterworld);
 		mouseXPos = centerX;
 		mouseYPos = centerY;
 	}
@@ -54,7 +55,6 @@ int Input::GetMouseX() {
 	int out = mouseXPos - lastMouseX;
 	if (FPSmode) {
 		if (out <= 1 && out >= -1)out = 0;
-		SetCursorPos(mouseXCenterworld, mouseYCenterworld);
 	}
 	else {
 		lastMouseX = mouseXPos;
@@ -65,6 +65,7 @@ int Input::GetMouseY() {
 	int out = mouseYPos - lastMouseY;
 	if (FPSmode) {
 		if (out <= 1 && out >= -1)out = 0;
+		SetCursorPos(mouseXCenterworld, mouseYCenterworld);
 	}
 	else {
 		lastMouseY = mouseYPos;
@@ -140,7 +141,7 @@ void SetUp(unsigned char key) {
 //键盘按下响应回调函数
 void KeyboardDown(unsigned char key, int x, int y)
 {
-//	printf_s("\n%d \tpressed", key);
+	//	printf_s("\n%d \tpressed", key);
 	SetDown(key);
 	//对于小写字母
 	if (97 <= key&&key <= 122) {
@@ -167,7 +168,7 @@ void KeyboardUp(unsigned char key, int x, int y)
 	/*•返回键盘上被按下键的ASCII码和鼠标位置*/
 }
 void SpecialKeyboardDown(int key, int x, int y) {
-//	printf_s("\n%d \tSpcPressed", key);
+	//	printf_s("\n%d \tSpcPressed", key);
 	int keyCode = 0;
 	switch (key) {
 	case GLUT_KEY_UP:
