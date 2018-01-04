@@ -6,9 +6,11 @@
 
 /.vs/
 /Debug/
+/Release/
 /x64/
 /GameObjectForOpengl/x64/
 /GameObjectForOpengl/Debug/
+/GameObjectForOpengl/Release/
 *.ipch
 
 # Precompiled Headers
