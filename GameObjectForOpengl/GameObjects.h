@@ -70,18 +70,18 @@ public:
 	void Render() override {
 		Shaders::List()->shader1.use();
 		Shaders::List()->shader1.LoadMatrix();
-/*
-		GLfloat mat_ambient[] = { 0.0f, 0.0f, 0.0f, 1.0f };
-		GLfloat mat_diffuse[] = { 0.5f, 0.5f, 0.5f, 1.0f };
-		GLfloat mat_specular[] = { 0.2f, 0.2f, 0.2f, 1.0f };
-		GLfloat mat_emission[] = { 0.0f, 0.0f, 0.0f, 1.0f };
-		GLfloat mat_shininess = 0.0f;
-		glMaterialfv(GL_FRONT, GL_AMBIENT, mat_ambient);
-		glMaterialfv(GL_FRONT, GL_DIFFUSE, mat_diffuse);
-		glMaterialfv(GL_FRONT, GL_SPECULAR, mat_specular);
-		glMaterialfv(GL_FRONT, GL_EMISSION, mat_emission);
-		glMaterialf(GL_FRONT, GL_SHININESS, mat_shininess);
-*/
+		/*
+				GLfloat mat_ambient[] = { 0.0f, 0.0f, 0.0f, 1.0f };
+				GLfloat mat_diffuse[] = { 0.5f, 0.5f, 0.5f, 1.0f };
+				GLfloat mat_specular[] = { 0.2f, 0.2f, 0.2f, 1.0f };
+				GLfloat mat_emission[] = { 0.0f, 0.0f, 0.0f, 1.0f };
+				GLfloat mat_shininess = 0.0f;
+				glMaterialfv(GL_FRONT, GL_AMBIENT, mat_ambient);
+				glMaterialfv(GL_FRONT, GL_DIFFUSE, mat_diffuse);
+				glMaterialfv(GL_FRONT, GL_SPECULAR, mat_specular);
+				glMaterialfv(GL_FRONT, GL_EMISSION, mat_emission);
+				glMaterialf(GL_FRONT, GL_SHININESS, mat_shininess);
+		*/
 		GLUquadric *obj = gluNewQuadric();
 		gluSphere(obj, rMoon, 30, 30);
 
@@ -91,12 +91,47 @@ public:
 
 class TestModel :public GameObject {
 public:
-	TestModel(const char* name) :GameObject(name) {
-	}
-	TestModel(const char* name, const Vector3& pos, const Quaternion& rot) : GameObject(name, pos, rot){
-
-	}
+	TestModel(const char* name) :GameObject(name) {}
+	TestModel(const char* name, const Vector3& pos, const Quaternion& rot) : GameObject(name, pos, rot) {}
 	void Render() override {
 		Models::List()->model1.draw(Shaders::List()->shader1);
+	}
+};
+
+class ScaledTestModel :public GameObject {
+public:
+	ScaledTestModel(const char* name, const Vector3& pos, const Quaternion& rot, const Vector3& scale)
+		: GameObject(name, pos, rot, scale) {}
+	void Render() override {
+		Models::List()->model1.draw(Shaders::List()->shader1);
+	}
+};
+
+class Ground :public GameObject {
+public:
+	Ground(const char* name, double height) :GameObject(name) {
+		transform.localPosition.y = height - 1;
+		transform.localScale = Vector3(2, 0.01, 2);
+	}
+	void Render()override {
+		Shaders::List()->shader1.use();
+		Shaders::List()->shader1.LoadMatrix();
+		glutSolidCube(100);
+		Shader::useNone();
+	}
+};
+
+class Ball :public GameObject {
+public:
+	double r;
+	Ball(const char* name, double r, const Vector3& pos, const Quaternion& rot, const Vector3& scale)
+		: GameObject(name, pos, rot, scale), r(r) {}
+	Ball(const char* name, double r, const Vector3& pos, const Quaternion& rot) : GameObject(name, pos, rot), r(r) {}
+	Ball(const char* name, double r) :GameObject(name), r(r) {}
+	void Render() override {
+		Shaders::List()->shader1.use();
+		Shaders::List()->shader1.LoadMatrix();
+		glutSolidSphere(r, 15, 15);
+		Shader::useNone();
 	}
 };
