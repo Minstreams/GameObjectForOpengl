@@ -9,48 +9,20 @@
 
 void SetScene() {
 
-	mainScene.SetCamera(Vector3(0, 1, 3), Quaternion::identity);
-
-	GameObject *sun = AddGameObject(new GameObject("t1", Vector3(0, 0, -200), Quaternion::EulerY(180)));
-	AddComponent(new RigidBody(30, 0.1));
-	AddComponent(new MouseRotater(0.05f, 0.05f));
-	AddComponent(new FPSRigidBodyMover(20));
-	AddComponent(new SphereCollider(3, Vector3(0,-10,0), 1));
-	AddComponent(new PressLToShowPosition());
-
-	AddChild(new TestModel("t1", Vector3(0, -10, 0), Quaternion::EulerY(180)));
-	AddComponent(new MouseRotater(0, 0.05f));
-	mainScene.camera.AddComponent(new Tracker(&(sun->transform), 0.9, true, false));
-
-	sun = sun->AddChild(new GameObject("camPos", Vector3(0, 0, 30), Quaternion::EulerY(180)));
-
-	mainScene.camera.AddComponent(new Tracker(&(sun->transform), 0.9));
-
-	AddGameObject(new Sun("t2", 6, Vector3(10, 0, -100), Quaternion::identity));
-	AddComponent(new RigidBody());
-	AddComponent(new SphereCollider(6));
-
-	AddGameObject(new TestModel("Sun!"));
-	AddComponent(new AutoRotate(Vector3(0, 12, 0)));//公转速度
-	AddComponent(new SphereCollider(4, Vector3::zero, 1));
-	AddComponent(new LightComponent());
+	mainScene.SetCamera(Vector3(0, 10, 30), Quaternion::identity);	//设置相机位置
+	mainScene.physicEngine.SetFloorParameters(0, 1);				//设置地面参数
+	AddComponent(new MouseRotater(0.3f, 0.3f));
+	AddComponent(new FPSMover());
 
 
-	AddChild(new GameObject("Sun's Son", Vector3(80, 0, 0), Quaternion::identity));
-	AddComponent(new AutoRotate(Vector3(0, -5, 0)));//抵消公转速度
+	AddGameObject(new Ground("Ground", 0));
 
+	AddGameObject(new Ball("Ball", 5, Vector3(10, 15, 0), Quaternion::identity));
+	AddComponent(new RigidBody(5, 1));
+	AddComponent(new SphereCollider(5, Vector3::zero, 1.01));
+	AddComponent(new Gravity(30));
 
-	AddChild(new GameObject("Earth's parent", Vector3(0, 0, 0), Quaternion::Euler(Vector3(0, 0, 30))));
-	AddComponent(new AutoRotate(Vector3(0, 10, 0)));//自转速度
-
-
-	GameObject *earth = AddChild(new Earth("Earth"));
-	AddComponent(new SphereCollider(5));
-	//AddComponent(new PressLToShowPosition());
-	AddComponent(new AutoRotate(Vector3(0, 60, 0)));//月球公转速度
-
-	AddChild(new Moon("Moon", 2, Vector3(20, 0, 0), Quaternion::Euler(Vector3(0, 0, 0))));
-	//AddComponent(new PressLToShowPosition());
+	AddGameObject(new ScaledTestModel("Model", Vector3::zero, Quaternion::identity, Vector3(1, 1, 2)));
 }
 
 void SetLight() {
@@ -63,8 +35,31 @@ int main(int argc, char* argv[])
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
 	glutInitWindowSize(1920, 1080);
-	glutCreateWindow("日地月模型");
+	glutCreateWindow("图形学课设");
 
+	//glutGameModeString("1920x1080");
+	//设置全屏模式时使用的分辨率
+	/*
+	格式如下:
+	“WxH:Bpp@Rr”
+	W - 屏幕宽度的像素
+	H - 屏幕高度的像素
+	Bpp - 每个像素的比特数
+	Rr - 垂直刷新的速率, 单位是赫兹(hz)
+
+	在进行下一步之前, 注意这些设置只是请求到硬件.如果指定的模式是不可用, 设置会被忽略.
+	例如:
+	"800x600:32@100" - 屏幕大小800x600; 32位真色彩; 100赫兹 垂直刷新
+	"640x480:16@75" - 屏幕大小640x480; 16位真色彩; 75赫兹
+
+	下面这字符串模板用来设置需要的全屏设置是允许的:
+	“WxH”
+	“WxH : Bpp”
+	“WxH@Rr”
+	“@Rr”
+	“:Bpp”
+	“Bpp : @Rr”*/
+	SetGameMode(true);
 	Initial();
 	glutMainLoop();
 

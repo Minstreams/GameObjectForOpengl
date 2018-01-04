@@ -8,29 +8,6 @@ double deltaTime;//To实现
 int lastTime;
 
 void Initial() {
-	//glutGameModeString("1920x1080");
-	//设置全屏模式时使用的分辨率
-	/*
-	格式如下:
-	“WxH:Bpp@Rr”
-	W - 屏幕宽度的像素
-	H - 屏幕高度的像素
-	Bpp - 每个像素的比特数
-	Rr - 垂直刷新的速率, 单位是赫兹(hz)
-
-	在进行下一步之前, 注意这些设置只是请求到硬件.如果指定的模式是不可用, 设置会被忽略.
-	例如:
-	"800x600:32@100" - 屏幕大小800x600; 32位真色彩; 100赫兹 垂直刷新
-	"640x480:16@75" - 屏幕大小640x480; 16位真色彩; 75赫兹
-
-	下面这字符串模板用来设置需要的全屏设置是允许的:
-	“WxH”
-	“WxH : Bpp”
-	“WxH@Rr”
-	“@Rr”
-	“:Bpp”
-	“Bpp : @Rr”*/
-	SetGameMode(true);
 	BasicInitial();
 	SceneInitial();
 }
@@ -69,8 +46,7 @@ void BasicInitial() {
 }
 void SceneInitial() {
 	glClearColor(0.2f, 1.0f, 0.1f, 1.0f);	//背景
-	deltaTime = 1000.0f / 60;
-	lastTime = clock();
+	lastTime = -1;
 	//其他设置
 	//glDepthFunc(GL_LEQUAL);
 	//glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);
@@ -114,6 +90,13 @@ void RenderScene(void) {
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 
+	mainScene.Render();
+	glutSwapBuffers();
+
+
+	if (lastTime < 0) {
+		lastTime = clock();
+	}
 	int time = clock();
 	int delta = time - lastTime;
 	deltaTime = delta / 1000.0;
@@ -123,8 +106,6 @@ void RenderScene(void) {
 
 	mainScene.Update();
 	mainScene.FixedUpdate();
-	mainScene.Render();
-	glutSwapBuffers();
 }
 
 void TimerFunc(int value)
