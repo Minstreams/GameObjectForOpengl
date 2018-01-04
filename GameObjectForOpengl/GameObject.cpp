@@ -1,14 +1,20 @@
 #include"UnityIndex.h"
 
-//¹¹Ôìº¯Êý
-GameObject::GameObject(const char* name, const Vector3& position, const Quaternion& rotation)
-	:Name(name), parent(NULL), child(NULL), next(NULL), componentsPointer(NULL), transform(this), rigidBody(NULL)
+GameObject::GameObject(const char * name, const Vector3 & position, const Quaternion & rotation, const Vector3 & scale)
+	:Name(name), parent(NULL), child(NULL), next(NULL), componentsPointer(NULL), 
+	transform(this, position, rotation, scale), rigidBody(NULL)
 {
-	transform.localPosition = position;
-	transform.rotation = rotation;
+
+}
+GameObject::GameObject(const char* name, const Vector3& position, const Quaternion& rotation)
+	:Name(name), parent(NULL), child(NULL), next(NULL), componentsPointer(NULL), 
+	transform(this, position, rotation), rigidBody(NULL)
+{
+
 }
 GameObject::GameObject(const char* name)
-	: Name(name), parent(NULL), child(NULL), next(NULL), componentsPointer(NULL), transform(this), rigidBody(NULL)
+	: Name(name), parent(NULL), child(NULL), next(NULL), componentsPointer(NULL), 
+	transform(this), rigidBody(NULL)
 {
 
 }

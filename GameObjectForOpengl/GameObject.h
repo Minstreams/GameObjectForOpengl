@@ -15,7 +15,8 @@ public:
 	MonoBehavour* componentsPointer;
 
 	//ππ‘Ï∫Ø ˝
-	GameObject(const char* name, const Vector3& position,const Quaternion& rotation);
+	GameObject(const char* name, const Vector3& position, const Quaternion& rotation, const Vector3& scale);
+	GameObject(const char* name, const Vector3& position, const Quaternion& rotation);
 	GameObject(const char* name);
 	~GameObject();
 	//‰÷»æ
