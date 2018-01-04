@@ -93,7 +93,6 @@ void RenderScene(void) {
 	mainScene.Render();
 	glutSwapBuffers();
 
-
 	if (lastTime < 0) {
 		lastTime = clock();
 	}

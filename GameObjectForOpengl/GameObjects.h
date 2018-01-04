@@ -131,7 +131,11 @@ public:
 	void Render() override {
 		Shaders::List()->shader1.use();
 		Shaders::List()->shader1.LoadMatrix();
-		glutSolidSphere(r, 15, 15);
+	/*	glUniform1i(glGetUniformLocation(Shaders::List()->shader1.programId,
+			"texture_diffuse0"), 0);*/
+		GLUquadric* qobj = gluNewQuadric();
+		gluQuadricTexture(qobj, GL_TRUE);
+		gluSphere(qobj, r, 30, 30);
 		Shader::useNone();
 	}
 };

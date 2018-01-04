@@ -15,7 +15,6 @@ void Mesh::draw(const Shader& shader) const// »æÖÆMesh
 	{
 		return;
 	}
-	//shader.use();
 	glBindVertexArray(this->VAOId);
 	int diffuseCnt = 0, specularCnt = 0, texUnitCnt = 0;
 	for (std::vector<Texture>::const_iterator it = this->textures.begin();
@@ -50,8 +49,6 @@ void Mesh::draw(const Shader& shader) const// »æÖÆMesh
 		}
 	}
 	glDrawElements(GL_TRIANGLES, this->indices.size(), GL_UNSIGNED_INT, 0);
-	//glBindVertexArray(0);
-	//glUseProgram(0);
 }
 Mesh::Mesh() :VAOId(0), VBOId(0), EBOId(0) {}
 Mesh::Mesh(const std::vector<Vertex>& vertData,

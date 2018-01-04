@@ -34,7 +34,7 @@ bool CSkyBox::init()
 {
 	char filename[128];                                         /**< 用来保存文件名 */
 	char *bmpName[] = { "back","front","up","left","right","down" };
-	for (int i = 0; i< 6; i++)
+	for (int i = 0; i < 6; i++)
 	{
 		sprintf_s(filename, "data/Sky Box Bmp/%s", bmpName[i]);
 		strcat_s(filename, ".bmp");
@@ -53,8 +53,9 @@ void CSkyBox::render()
 	GLboolean lp;
 	glGetBooleanv(GL_LIGHTING, &lp);
 
-	glDisable(GL_LIGHTING);            /**< 关闭光照 */
-	glEnable(GL_TEXTURE_2D);
+	if (lp)  /**< 关闭光照 */
+		glDisable(GL_LIGHTING);
+	glActiveTexture(GL_TEXTURE0);
 
 	/** 开始绘制 */
 	glPushMatrix();
@@ -139,6 +140,4 @@ void CSkyBox::render()
 
 	if (lp)                         /** 恢复光照状态 */
 		glEnable(GL_LIGHTING);
-
-	glDisable(GL_TEXTURE_2D);
 }
