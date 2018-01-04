@@ -42,5 +42,4 @@ void RigidBody::Update()
 
 void RigidBody::FixedUpdate() {
 	transform->Translate(velocity * deltaTime, Space::World);
-	//printf_s("x: %.2f,y:%.2f,z:%.2f\n", velocity.x, velocity.y, velocity.z);
 }

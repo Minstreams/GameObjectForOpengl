@@ -1,4 +1,5 @@
 #pragma once
+//鼠标移动控制旋转
 class MouseRotater : public MonoBehavour {
 private:
 	float Xsensitivity = 1;

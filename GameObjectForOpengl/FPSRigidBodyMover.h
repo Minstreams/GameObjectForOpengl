@@ -1,16 +1,14 @@
 #pragma once
+//综合组件，控制rigidbody
 class FPSRigidBodyMover : public MonoBehavour {
 private:
 	RigidBody *rid = NULL;
 	double speed;
 public:
-	FPSRigidBodyMover(double speed) :speed(speed)
-	{
-
-	}
+	FPSRigidBodyMover(double speed) :speed(speed) {}
 	void Awake() override {
 		if (gameObject->rigidBody == NULL) {
-			ShowWarnMessage("There is no rigidBody!!\n没有刚体组件！！","来自FPSRigidBodyMover");
+			ShowWarnMessage("There is no rigidBody!!\n没有刚体组件！！", "来自FPSRigidBodyMover组件");
 			gameObject->DestroyComponent(this);
 		}
 		else {

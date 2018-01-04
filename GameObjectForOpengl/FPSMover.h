@@ -1,4 +1,5 @@
 #pragma once
+//上下左右和空格ctrl控制transform
 class FPSMover : public MonoBehavour {
 public:
 	void Start() override {
