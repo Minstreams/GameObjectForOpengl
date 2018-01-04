@@ -1,5 +1,19 @@
 #include"UnityIndex.h"
 
+Physics::Physics() :floorHeight(0), floorBoundness(0.1)
+{
+}
+
+Physics::Physics(double height, double boundness) : floorHeight(height), floorBoundness(boundness)
+{
+}
+
+void Physics::SetFloorParameters(double height, double boundness)
+{
+	floorHeight = height;
+	floorBoundness = boundness;
+}
+
 void Physics::AddRigidBody(RigidBody * pointer)
 {
 	rigidBodyList.push_back(pointer);
@@ -14,6 +28,8 @@ void Physics::AddSphereCollider(SphereCollider * pointer)
 void Physics::Contract() {
 	//对每一个rigidBody
 	for (unsigned int r = 0;r < rigidBodyList.size();r++) {
+		//与地面检测
+		Contract(rigidBodyList[r]);
 		//与静态碰撞箱检测
 		for each(SphereCollider* s in sphereColliderList) {
 			Contract(rigidBodyList[r], s);
@@ -25,6 +41,25 @@ void Physics::Contract() {
 	}
 }
 
+//与地面进行碰撞检测
+void Physics::Contract(RigidBody * rigidBody)
+{
+	//TODO
+	for each (SphereCollider* sp in rigidBody->sphereColliderList)
+	{
+		double distance = floorHeight - sp->GetPosition().y + sp->radius;
+		if (distance > 0) {
+			//挤出
+			rigidBody->transform->Translate(Vector3::up*distance, Space::World);
+
+			//反弹
+			rigidBody->velocity +=
+				Vector3::up * Vector3::Dot(rigidBody->velocity, Vector3::down) * (floorBoundness * sp->boundness + 1);
+		}
+	}
+}
+
+//与静态碰撞箱进行碰撞检测
 void Physics::Contract(RigidBody* rigidBody, SphereCollider *solidCollider) {
 	Vector3 pos = solidCollider->GetPosition();
 	for each (SphereCollider* sp in rigidBody->sphereColliderList)
@@ -42,7 +77,7 @@ void Physics::Contract(RigidBody* rigidBody, SphereCollider *solidCollider) {
 
 			//反弹
 			delta /= distance;
-			rigidBody->velocity -= delta * Vector3::Dot(rigidBody->velocity, delta) * ((solidCollider->boundness + sp->boundness) / 2 + 1);
+			rigidBody->velocity -= delta * Vector3::Dot(rigidBody->velocity, delta) * (solidCollider->boundness * sp->boundness + 1);
 		}
 	}
 }
