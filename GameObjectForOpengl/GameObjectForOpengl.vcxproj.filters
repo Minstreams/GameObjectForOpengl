@@ -179,6 +179,9 @@
     <ClInclude Include="Models.h">
       <Filter>资源库</Filter>
     </ClInclude>
+    <ClInclude Include="Gravity.h">
+      <Filter>Components</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
