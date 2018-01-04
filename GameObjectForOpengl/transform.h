@@ -1,5 +1,6 @@
 #pragma once
-
+//当前渲染物体的缩放向量
+extern Vector3 currentObjectScale;
 
 //变换组件
 class Transform {
@@ -8,6 +9,8 @@ public:
 	Vector3 localPosition;
 	//旋转四元数
 	Quaternion rotation;
+	//本地缩放向量
+	Vector3 localScale;
 	//世界旋转四元数
 	Quaternion worldRotation;
 	bool worldRotationNeedFlush;
@@ -26,7 +29,8 @@ public:
 	bool worldNeedFlush;
 
 	Transform(GameObject* g);
-	Transform(Vector3 pos, Quaternion rot);
+	Transform(GameObject* g, const Vector3& pos, const Quaternion& rot);
+	Transform(GameObject* g, const Vector3& pos, const Quaternion& rot, const Vector3& scale);
 	~Transform();
 	//平移
 	void Translate(double x, double y, double z, Space space = Space::Self);

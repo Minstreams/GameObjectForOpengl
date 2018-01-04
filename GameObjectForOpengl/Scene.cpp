@@ -9,6 +9,8 @@ Scene::~Scene() {
 	DestroyLayer(root);
 }
 void Scene::Render() {
+	//³õÊ¼»¯
+	currentObjectScale = Vector3::one;
 	//ÉãÏñ»ú
 	Matrix m;
 	m.SetIdentity();
@@ -115,6 +117,7 @@ void Scene::RenderGameObjects(GameObject* g) {
 	if (g == NULL)return;
 	glPushMatrix();
 	glApplyMatrix(g->transform.GetLocalMatrix());
+	currentObjectScale = g->transform.localScale;
 	g->Render();
 	MonoBehavour *p = g->componentsPointer;
 	while (p != NULL) {

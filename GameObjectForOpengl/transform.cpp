@@ -1,18 +1,30 @@
 #include "UnityIndex.h"
 
+Vector3 currentObjectScale = Vector3::one;
+
 const Vector3 Transform::eulerAngle() const {
 	return rotation.EulerAngle();
 }
-Transform::Transform(GameObject* g) :gameObject(g), localNeedFlush(true), worldNeedFlush(true), worldRotationNeedFlush(true)
+Transform::Transform(GameObject* g) :
+	gameObject(g), localNeedFlush(true), worldNeedFlush(true), worldRotationNeedFlush(true)
 {
 	localPosition = Vector3::zero;
 	rotation = Quaternion::identity;
+	localScale = Vector3::one;
 	localMatrix = Matrix::identity;
 }
-Transform::Transform(Vector3 pos, Quaternion rot) : localNeedFlush(true), worldNeedFlush(true), worldRotationNeedFlush(true)
+Transform::Transform(GameObject* g, const Vector3& pos, const Quaternion& rot) : gameObject(g), localNeedFlush(true), worldNeedFlush(true), worldRotationNeedFlush(true)
 {
 	localPosition = pos;
 	rotation = rot;
+	localScale = Vector3::one;
+	localMatrix = Matrix::identity;
+}
+Transform::Transform(GameObject* g, const Vector3& pos, const Quaternion& rot, const Vector3& scale) : gameObject(g), localNeedFlush(true), worldNeedFlush(true), worldRotationNeedFlush(true)
+{
+	localPosition = pos;
+	rotation = rot;
+	localScale = scale;
 	localMatrix = Matrix::identity;
 }
 Transform::~Transform() {
