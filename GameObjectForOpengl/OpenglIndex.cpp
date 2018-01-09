@@ -1,5 +1,6 @@
 #include <time.h>
 #include "OpenglIndex.h"
+#include "Lighting.h"
 
 GameObject* currentGameObjectPointer = NULL;
 
@@ -89,6 +90,8 @@ void RenderScene(void) {
 	//重置模型视图矩阵
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
+
+	LightData::FlushPositions();
 
 	mainScene.Render();
 	glutSwapBuffers();

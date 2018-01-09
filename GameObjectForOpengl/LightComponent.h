@@ -51,7 +51,7 @@ public:
 		FlushPosition();
 		FlushParameters();
 	}
-	void Render() override {
+	void Update() override {
 		FlushPosition();
 	}
 private:
