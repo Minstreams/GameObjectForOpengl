@@ -12,6 +12,7 @@ void SetScene() {
 	mainScene.SetCamera(Vector3(0, 10, 30), Quaternion::identity);	//设置相机位置
 	mainScene.physicEngine.SetFloorParameters(0, 1);				//设置地面参数
 	AddComponent(new MouseRotater(0.3f, 0.3f));
+	AddComponent(new FPSMover());
 
 	AddGameObject(new Ground("Ground", 0));
 
@@ -19,14 +20,19 @@ void SetScene() {
 	AddComponent(new RigidBody(5, 1));
 	AddComponent(new SphereCollider(5, Vector3::zero, 1.01));
 	AddComponent(new Gravity(30));
-	AddComponent(new LightComponent());
+	//AddComponent(new LightComponent());
 
 	AddGameObject(new Ball("Ball", 3, Vector3(0, 15, 9), Quaternion::identity));
 	AddComponent(new RigidBody(5, 1));
 	AddComponent(new SphereCollider(3, Vector3::zero, 1.01));
 	AddComponent(new Gravity(30));
 	AddComponent(new LightComponent());
-	AddComponent(new FPSMover());
+
+	AddGameObject(new Ball("Ball", 3, Vector3(0, 15, 89), Quaternion::identity));
+	AddComponent(new RigidBody(5, 1));
+	AddComponent(new SphereCollider(3, Vector3::zero, 1.01));
+	AddComponent(new Gravity(30));
+	AddComponent(new LightComponent());
 
 	AddGameObject(new ScaledTestModel("Model", Vector3::zero, Quaternion::identity, Vector3(1, 1, 1)));
 }
@@ -35,7 +41,7 @@ void SetLight() {
 	//设定第一个光源，即平行光
 	LightData::num++;
 
-	LightData::pos[0] = Vector3(0, 1, 0);	//光的方向为从这个点到原点
+	LightData::pos[0] = Vector3(0, 1, 0.4);	//光的方向为从这个点到原点
 
 	LightData::colors[0] = 1;
 	LightData::colors[1] = 1;

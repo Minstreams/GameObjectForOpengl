@@ -215,5 +215,11 @@
     <None Include="Model400.frag">
       <Filter>资源文件</Filter>
     </None>
+    <None Include="Basic400.vert">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="Basic400.frag">
+      <Filter>资源文件</Filter>
+    </None>
   </ItemGroup>
 </Project>
