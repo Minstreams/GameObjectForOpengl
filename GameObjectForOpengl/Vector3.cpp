@@ -88,7 +88,7 @@ double Vector3::Dot(const Vector3& lhs, const Vector3& rhs) {
 
 const Vector3 Vector3::Cross(const Vector3& lhs, const Vector3& rhs) {
 	return Vector3(
-		lhs.y*rhs.z - lhs.z*rhs.z,
+		lhs.y*rhs.z - lhs.z*rhs.y,
 		lhs.z*rhs.x - lhs.x*rhs.z,
 		lhs.x*rhs.y - lhs.y*rhs.x
 	);

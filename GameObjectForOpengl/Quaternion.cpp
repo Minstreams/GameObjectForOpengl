@@ -236,7 +236,7 @@ Quaternion Quaternion::operator*(double rhs) const {
 //ЁкртоРа©
 const Vector3 Quaternion::operator*(const Vector3&u) const {
 	Vector3 v(x, y, z);
-	Vector3 out = u*(2 * w*w - 1) + (Vector3::Cross(v, u)) * 2 * w + v * 2 * (Vector3::Dot(v, u));
+	Vector3 out = u*(2 * w * w - 1) + (Vector3::Cross(v, u)) * 2 * w + v * 2 * (Vector3::Dot(v, u));
 	return out;
 }
 
