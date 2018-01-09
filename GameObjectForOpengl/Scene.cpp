@@ -9,8 +9,6 @@ Scene::~Scene() {
 	DestroyLayer(root);
 }
 void Scene::Render() {
-	//初始化
-	currentObjectScale = Vector3::one;
 	//摄像机
 	Matrix m;
 	m.SetIdentity();
@@ -20,7 +18,6 @@ void Scene::Render() {
 	m.SetIdentity();
 	m.SetTransition(-camera.transform.localPosition);
 	glApplyMatrix(m);
-
 
 	//物体
 	if (root == NULL)return;
@@ -117,7 +114,7 @@ void Scene::RenderGameObjects(GameObject* g) {
 	if (g == NULL)return;
 	glPushMatrix();
 	glApplyMatrix(g->transform.GetLocalMatrix());
-	currentObjectScale = g->transform.localScale;
+	glScaled(g->transform.localScale.x, g->transform.localScale.y, g->transform.localScale.z);
 	g->Render();
 	MonoBehavour *p = g->componentsPointer;
 	while (p != NULL) {

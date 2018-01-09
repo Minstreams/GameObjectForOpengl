@@ -1,7 +1,5 @@
 #include "UnityIndex.h"
 
-Vector3 currentObjectScale = Vector3::one;
-
 const Vector3 Transform::eulerAngle() const {
 	return rotation.EulerAngle();
 }

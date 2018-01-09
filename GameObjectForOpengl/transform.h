@@ -1,6 +1,4 @@
 #pragma once
-//当前渲染物体的缩放向量
-extern Vector3 currentObjectScale;
 
 //变换组件
 class Transform {
