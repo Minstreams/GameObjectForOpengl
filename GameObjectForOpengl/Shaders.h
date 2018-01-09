@@ -14,6 +14,7 @@ public:
 	//const Shader test = Shader("Test.vert", "Test.frag");
 	//const Shader testModel = Shader("TestModel.vert", "TestModel.frag");
 	const Shader model4 = Shader("Model400.vert", "Model400.frag");
+	const Shader basic4 = Shader("Basic400.vert", "Basic400.frag");
 };
 
 Shaders* Shaders::list = NULL;
