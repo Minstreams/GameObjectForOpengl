@@ -41,11 +41,11 @@ class Ground :public GameObject {
 public:
 	Ground(const char* name, double height) :GameObject(name) {
 		transform.localPosition.y = height - 1;
-		transform.localScale = Vector3(2, 0.01, 2);
+		transform.localScale = Vector3(4, 0.01, 4);
 	}
 	void Render()override {
-		Shaders::List()->model4.use();
-		Shaders::List()->model4.LoadUniform();
+		Shaders::List()->basic4.use();
+		glColor3f(0.1f, 0.5f, 0.3f);
 		glutSolidCube(100);
 		Shader::useNone();
 	}
@@ -60,13 +60,11 @@ public:
 	Ball(const char* name, double r) :GameObject(name), r(r) {}
 	void Render() override {
 		//glDisable(GL_CULL_FACE);
-		glColor3f(1, 1, 1);
-		Shaders::List()->model4.use();
-		Shaders::List()->model4.LoadUniform();
-		glUniform1i(glGetUniformLocation(Shaders::List()->model4.programId,
-				"texture_diffuse0"), 0);
+		glColor3f(0.4f, 0.6f, 0.8f);
+		Shaders::List()->basic4.use();
 		GLUquadric* qobj = gluNewQuadric();
-		gluQuadricTexture(qobj, GL_TRUE);
+		//也许可以用旧版Shader获取纹理坐标？或者干脆不用Shader吧。。。
+		//gluQuadricTexture(qobj, GL_TRUE);
 		gluSphere(qobj, r, 30, 30);
 		Shader::useNone();
 		//glEnable(GL_CULL_FACE);
