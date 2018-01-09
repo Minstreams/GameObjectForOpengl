@@ -16,7 +16,7 @@ void Mesh::draw(const Shader& shader) const// 绘制Mesh
 		return;
 	}
 	glBindVertexArray(this->VAOId);
-	int diffuseCnt = 0, specularCnt = 0, texUnitCnt = 0;
+	int diffuseCnt = 0, specularCnt = 0, normalCnt = 0, texUnitCnt = 0;
 	for (std::vector<Texture>::const_iterator it = this->textures.begin();
 		this->textures.end() != it; ++it)
 	{
@@ -38,6 +38,16 @@ void Mesh::draw(const Shader& shader) const// 绘制Mesh
 			glBindTexture(GL_TEXTURE_2D, it->id);
 			std::stringstream samplerNameStr;
 			samplerNameStr << "texture_specular" << specularCnt++;
+			glUniform1i(glGetUniformLocation(shader.programId,
+				samplerNameStr.str().c_str()), texUnitCnt++);
+		}
+		break;
+		case aiTextureType_HEIGHT:
+		{
+			glActiveTexture(GL_TEXTURE0 + texUnitCnt);
+			glBindTexture(GL_TEXTURE_2D, it->id);
+			std::stringstream samplerNameStr;
+			samplerNameStr << "texture_normal" << normalCnt++;
 			glUniform1i(glGetUniformLocation(shader.programId,
 				samplerNameStr.str().c_str()), texUnitCnt++);
 		}
@@ -101,6 +111,10 @@ void Mesh::setupMesh()  // 建立VAO,VBO等缓冲区
 	glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE,
 		sizeof(Vertex), (GLvoid*)(5 * sizeof(GL_FLOAT)));
 	glEnableVertexAttribArray(2);
+	// 顶点切向量属性
+	glVertexAttribPointer(3, 3, GL_FLOAT, GL_FALSE,
+		sizeof(Vertex), (GLvoid*)(8 * sizeof(GL_FLOAT)));
+	glEnableVertexAttribArray(3);
 	// 索引数据
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->EBOId);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(GLuint)* this->indices.size(),

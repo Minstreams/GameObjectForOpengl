@@ -11,7 +11,6 @@
 void Model::draw(const Shader& shader) const
 {
 	shader.use();
-	shader.LoadUniform();
 	for (std::vector<Mesh>::const_iterator it = this->meshes.begin(); this->meshes.end() != it; ++it)
 	{
 		it->draw(shader);
@@ -28,7 +27,7 @@ bool Model::loadModel(const std::string& filePath)
 		return false;
 	}
 	const aiScene* sceneObjPtr = importer.ReadFile(filePath,
-		aiProcess_Triangulate | aiProcess_FlipUVs);
+		aiProcess_Triangulate | aiProcess_FlipUVs | aiProcess_CalcTangentSpace);
 	if (!sceneObjPtr
 		|| sceneObjPtr->mFlags == AI_SCENE_FLAGS_INCOMPLETE
 		|| !sceneObjPtr->mRootNode)
@@ -123,6 +122,12 @@ bool Model::processMesh(const aiMesh* meshPtr, const aiScene* sceneObjPtr, Mesh&
 			vertex.normal.y = meshPtr->mNormals[i].y;
 			vertex.normal.z = meshPtr->mNormals[i].z;
 		}
+		// 获取切向量数据
+		if (meshPtr->HasTangentsAndBitangents()) {
+			vertex.tangent.x = meshPtr->mBitangents[i].x;
+			vertex.tangent.y = meshPtr->mBitangents[i].y;
+			vertex.tangent.z = meshPtr->mBitangents[i].z;
+		}
 		vertData.push_back(vertex);
 	}
 	// 获取索引数据
@@ -151,6 +156,10 @@ bool Model::processMesh(const aiMesh* meshPtr, const aiScene* sceneObjPtr, Mesh&
 		std::vector<Texture> specularTexture;
 		this->processMaterial(materialPtr, sceneObjPtr, aiTextureType_SPECULAR, specularTexture);
 		textures.insert(textures.end(), specularTexture.begin(), specularTexture.end());
+		//获取normal类型
+		std::vector<Texture> normalTexture;
+		this->processMaterial(materialPtr, sceneObjPtr, aiTextureType_HEIGHT, normalTexture);
+		textures.insert(textures.end(), normalTexture.begin(), normalTexture.end());
 	}
 	meshObj.setData(vertData, textures, indices);
 	return true;
@@ -185,6 +194,13 @@ bool Model::processMaterial(const aiMaterial* matPtr, const aiScene* sceneObjPtr
 				<< retStatus << std::endl;
 			continue;
 		}
+
+		/*这部分用于测试*/
+		std::cout << "Load texture type=" << textureType
+			<< "index= " << i << " path= "
+			<< textPath.C_Str() << std::endl;
+		/****测试结束****/
+
 		std::string absolutePath = this->modelFileDir + "/" + textPath.C_Str();
 		LoadedTextMapType::const_iterator it = this->loadedTextureMap.find(absolutePath);
 		if (it == this->loadedTextureMap.end()) // 检查是否已经加载过了

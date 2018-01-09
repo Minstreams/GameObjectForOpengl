@@ -28,6 +28,7 @@ struct Vertex
 	vec3 position;
 	vec2 texCoords;
 	vec3 normal;
+	vec3 tangent;
 };
 
 // 表示一个Texture

@@ -21,19 +21,12 @@ Shader::Shader(const char* vertexPath, const char* fragPath, const char* geometr
 void Shader::use() const
 {
 	glUseProgram(this->programId);
+	LoadUniform();
 }
 void Shader::LoadUniform() const
 {
-	//加载缩放矩阵
-	float m[] = {
-		(float)currentObjectScale.x,0,0,0,0,
-		(float)currentObjectScale.y,0,0,0,0,
-		(float)currentObjectScale.z,0,0,0,0,1 };
-	glUniformMatrix4fv(glGetUniformLocation(programId, "modelScale"),
-		1, GL_FALSE, m);
 	//加载光照数据
 	glUniform1i(glGetUniformLocation(programId, "lightNum"), LightData::num);
-	LightData::FlushPositions();
 	glUniform3fv(glGetUniformLocation(programId, "lightPositions"), LIGHT_MAX_NUM, LightData::positions);
 	glUniform4fv(glGetUniformLocation(programId, "lightColors"), LIGHT_MAX_NUM, LightData::colors);
 	glUniform1fv(glGetUniformLocation(programId, "lightItensities"), LIGHT_MAX_NUM, LightData::itensities);
