@@ -84,6 +84,9 @@
     <ClCompile Include="Mesh.cpp">
       <Filter>图形库</Filter>
     </ClCompile>
+    <ClCompile Include="Lighting.cpp">
+      <Filter>Unity</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AutoRotate.h">
@@ -182,6 +185,9 @@
     <ClInclude Include="Gravity.h">
       <Filter>Components</Filter>
     </ClInclude>
+    <ClInclude Include="Lighting.h">
+      <Filter>Unity</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -189,6 +195,24 @@
       <Filter>资源文件</Filter>
     </None>
     <None Include="model.vertex">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="Test.vert">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="Test.frag">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="TestModel.vert">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="TestModel.frag">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="Model400.vert">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="Model400.frag">
       <Filter>资源文件</Filter>
     </None>
   </ItemGroup>

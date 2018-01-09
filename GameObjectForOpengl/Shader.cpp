@@ -1,6 +1,7 @@
 #include "OpenglIndex.h"
 #include <fstream>
 #include "Shader.h"
+#include "Lighting.h"
 
 Shader::Shader(const char* vertexPath, const char* fragPath) :programId(0)
 {
@@ -21,20 +22,22 @@ void Shader::use() const
 {
 	glUseProgram(this->programId);
 }
-void Shader::LoadMatrix() const
+void Shader::LoadUniform() const
 {
+	//加载缩放矩阵
 	float m[] = {
 		(float)currentObjectScale.x,0,0,0,0,
 		(float)currentObjectScale.y,0,0,0,0,
 		(float)currentObjectScale.z,0,0,0,0,1 };
-	glUniformMatrix4fv(glGetUniformLocation(programId, "model"),
+	glUniformMatrix4fv(glGetUniformLocation(programId, "modelScale"),
 		1, GL_FALSE, m);
-	glGetFloatv(GL_TRANSPOSE_PROJECTION_MATRIX, m);
-	glUniformMatrix4fv(glGetUniformLocation(programId, "projection"),
-		1, GL_FALSE, m);
-	glGetFloatv(GL_MODELVIEW_MATRIX, m);
-	glUniformMatrix4fv(glGetUniformLocation(programId, "view"),
-		1, GL_FALSE, m);
+	//加载光照数据
+	glUniform1i(glGetUniformLocation(programId, "lightNum"), LightData::num);
+	LightData::FlushPositions();
+	glUniform3fv(glGetUniformLocation(programId, "lightPositions"), LIGHT_MAX_NUM, LightData::positions);
+	glUniform4fv(glGetUniformLocation(programId, "lightColors"), LIGHT_MAX_NUM, LightData::colors);
+	glUniform1fv(glGetUniformLocation(programId, "lightItensities"), LIGHT_MAX_NUM, LightData::itensities);
+	glUniform1fv(glGetUniformLocation(programId, "lightDS"), LIGHT_MAX_NUM, LightData::distanceSqrs);
 }
 void Shader::useNone()
 {

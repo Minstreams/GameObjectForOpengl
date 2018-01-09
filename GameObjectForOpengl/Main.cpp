@@ -12,8 +12,6 @@ void SetScene() {
 	mainScene.SetCamera(Vector3(0, 10, 30), Quaternion::identity);	//设置相机位置
 	mainScene.physicEngine.SetFloorParameters(0, 1);				//设置地面参数
 	AddComponent(new MouseRotater(0.3f, 0.3f));
-	AddComponent(new FPSMover());
-
 
 	AddGameObject(new Ground("Ground", 0));
 
@@ -21,13 +19,32 @@ void SetScene() {
 	AddComponent(new RigidBody(5, 1));
 	AddComponent(new SphereCollider(5, Vector3::zero, 1.01));
 	AddComponent(new Gravity(30));
+	AddComponent(new LightComponent());
 
-	AddGameObject(new ScaledTestModel("Model", Vector3::zero, Quaternion::identity, Vector3(1, 1, 2)));
+	AddGameObject(new Ball("Ball", 3, Vector3(0, 15, 9), Quaternion::identity));
+	AddComponent(new RigidBody(5, 1));
+	AddComponent(new SphereCollider(3, Vector3::zero, 1.01));
+	AddComponent(new Gravity(30));
+	AddComponent(new LightComponent());
+	AddComponent(new FPSMover());
+
+	AddGameObject(new ScaledTestModel("Model", Vector3::zero, Quaternion::identity, Vector3(1, 1, 1)));
 }
 
 void SetLight() {
-	//glEnable(GL_LIGHT0);
-	//glEnable(GL_LIGHTING);
+	//设定第一个光源，即平行光
+	LightData::num++;
+
+	LightData::pos[0] = Vector3(0, 1, 0);	//光的方向为从这个点到原点
+
+	LightData::colors[0] = 1;
+	LightData::colors[1] = 1;
+	LightData::colors[2] = 1;
+	LightData::colors[3] = 1;
+
+	LightData::itensities[0] = 1;
+
+	LightData::distanceSqrs[0] = 1;
 }
 
 int main(int argc, char* argv[])
@@ -59,7 +76,7 @@ int main(int argc, char* argv[])
 	“@Rr”
 	“:Bpp”
 	“Bpp : @Rr”*/
-	SetGameMode(true);
+	//SetGameMode(true);
 	Initial();
 	glutMainLoop();
 

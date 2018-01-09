@@ -55,6 +55,9 @@ void CSkyBox::render()
 
 	if (lp)  /**< 关闭光照 */
 		glDisable(GL_LIGHTING);
+
+	glColor3f(1, 1, 1);
+
 	glActiveTexture(GL_TEXTURE0);
 
 	/** 开始绘制 */

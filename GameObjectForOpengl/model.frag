@@ -8,8 +8,10 @@ uniform sampler2D texture_specular0;
 uniform sampler2D texture_specular1;
 uniform sampler2D texture_specular2;
 
+layout( location = 0 ) out vec4 FragColor; 
 
 void main()
 {
-	gl_FragColor = texture(texture_diffuse0, TextCoord);
+	vec4 diffuse = texture(texture_diffuse0, TextCoord);
+	FragColor = diffuse;
 }

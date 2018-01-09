@@ -15,7 +15,7 @@ public:
 	Shader(const char* vertexPath, const char* fragPath);
 	Shader(const char* vertexPath, const char* fragPath, const char* geometryPath);
 	void use() const;
-	void LoadMatrix() const;
+	void LoadUniform() const;
 	static void useNone();
 	~Shader();
 public:

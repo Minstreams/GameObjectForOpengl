@@ -11,7 +11,7 @@
 void Model::draw(const Shader& shader) const
 {
 	shader.use();
-	shader.LoadMatrix();
+	shader.LoadUniform();
 	for (std::vector<Mesh>::const_iterator it = this->meshes.begin(); this->meshes.end() != it; ++it)
 	{
 		it->draw(shader);

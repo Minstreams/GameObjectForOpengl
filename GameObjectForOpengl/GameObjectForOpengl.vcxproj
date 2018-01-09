@@ -129,6 +129,7 @@
   <ItemGroup>
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="Input.cpp" />
+    <ClCompile Include="Lighting.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Matrix.cpp" />
     <ClCompile Include="Mesh.cpp" />
@@ -155,6 +156,7 @@
     <ClInclude Include="Gravity.h" />
     <ClInclude Include="Input.h" />
     <ClInclude Include="LightComponent.h" />
+    <ClInclude Include="Lighting.h" />
     <ClInclude Include="Matrix.h" />
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="Model.h" />
@@ -183,7 +185,15 @@
   <ItemGroup>
     <None Include="model.frag" />
     <None Include="model.vertex" />
+    <None Include="Model400.frag" />
+    <None Include="Model400.vert" />
     <None Include="packages.config" />
+    <None Include="Test.frag" />
+    <None Include="Test.vert">
+      <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</DeploymentContent>
+    </None>
+    <None Include="TestModel.frag" />
+    <None Include="TestModel.vert" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
