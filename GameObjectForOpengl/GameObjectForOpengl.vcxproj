@@ -193,19 +193,11 @@
   <ItemGroup>
     <None Include="Basic400.frag" />
     <None Include="Basic400.vert" />
-    <None Include="model.frag" />
-    <None Include="model.vertex" />
     <None Include="Model400.frag" />
     <None Include="Model400.vert" />
     <None Include="packages.config" />
     <None Include="ShadowMap.frag" />
     <None Include="ShadowMap.vert" />
-    <None Include="Test.frag" />
-    <None Include="Test.vert">
-      <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</DeploymentContent>
-    </None>
-    <None Include="TestModel.frag" />
-    <None Include="TestModel.vert" />
     <None Include="Texture400.frag" />
     <None Include="Texture400.vert" />
     <None Include="Unit400.frag" />

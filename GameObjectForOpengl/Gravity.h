@@ -13,7 +13,7 @@ public:
 			rid = gameObject->rigidBody;
 		}
 	}
-	void Update() override {
+	void FixedUpdate() override {
 		rid->velocity.y -= gravity * deltaTime;
 	}
 };

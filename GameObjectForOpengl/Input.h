@@ -22,9 +22,9 @@ public:
 	static void SetLastMousePos(int x, int y);
 	static void Init();
 	static void Update();//每一帧被调用
-private:
 	static int mouseXCenterworld;//当前中心相对屏幕坐标
 	static int mouseYCenterworld;//当前中心相对屏幕坐标
+private:
 	static int lastMouseX;
 	static int lastMouseY;
 	static double hAxis;//水平Axis

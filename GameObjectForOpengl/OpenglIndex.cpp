@@ -155,6 +155,8 @@ void RenderScene(void) {
 
 	LightData::FlushPositions();
 
+	mainScene.Update();
+
 	mainScene.Render();
 
 	glutSwapBuffers();
@@ -169,7 +171,6 @@ void RenderScene(void) {
 
 	Input::Update();
 
-	mainScene.Update();
 	mainScene.FixedUpdate();
 }
 

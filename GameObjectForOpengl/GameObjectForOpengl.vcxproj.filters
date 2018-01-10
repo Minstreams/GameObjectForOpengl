@@ -197,24 +197,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
-    <None Include="model.frag">
-      <Filter>资源文件</Filter>
-    </None>
-    <None Include="model.vertex">
-      <Filter>资源文件</Filter>
-    </None>
-    <None Include="Test.vert">
-      <Filter>资源文件</Filter>
-    </None>
-    <None Include="Test.frag">
-      <Filter>资源文件</Filter>
-    </None>
-    <None Include="TestModel.vert">
-      <Filter>资源文件</Filter>
-    </None>
-    <None Include="TestModel.frag">
-      <Filter>资源文件</Filter>
-    </None>
     <None Include="Model400.vert">
       <Filter>资源文件</Filter>
     </None>
