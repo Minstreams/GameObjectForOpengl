@@ -188,6 +188,9 @@
     <ClInclude Include="Lighting.h">
       <Filter>Unity</Filter>
     </ClInclude>
+    <ClInclude Include="Textures.h">
+      <Filter>资源库</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -219,6 +222,18 @@
       <Filter>资源文件</Filter>
     </None>
     <None Include="Basic400.frag">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="Texture400.vert">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="Texture400.frag">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="Unit400.vert">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="Unit400.frag">
       <Filter>资源文件</Filter>
     </None>
   </ItemGroup>

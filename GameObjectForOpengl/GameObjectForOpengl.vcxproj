@@ -182,6 +182,7 @@
     <ClInclude Include="SkyBox.h" />
     <ClInclude Include="SphereCollider.h" />
     <ClInclude Include="Texture.h" />
+    <ClInclude Include="Textures.h" />
     <ClInclude Include="Tracker.h" />
     <ClInclude Include="transform.h" />
     <ClInclude Include="TransformIndex.h" />
@@ -202,6 +203,10 @@
     </None>
     <None Include="TestModel.frag" />
     <None Include="TestModel.vert" />
+    <None Include="Texture400.frag" />
+    <None Include="Texture400.vert" />
+    <None Include="Unit400.frag" />
+    <None Include="Unit400.vert" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
