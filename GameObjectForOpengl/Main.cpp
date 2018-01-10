@@ -4,6 +4,7 @@
 
 #include "Shaders.h"
 #include "Models.h"
+#include "Textures.h"
 #include "GameObjects.h"
 #include "Components.h"
 
@@ -14,7 +15,7 @@ void SetScene() {
 	AddComponent(new MouseRotater(0.3f, 0.3f));
 	AddComponent(new FPSMover());
 
-	AddGameObject(new Ground("Ground", 0));
+	AddGameObject(new Ground("Ground", 0, 100, 100));
 
 	AddGameObject(new Ball("Ball", 5, Vector3(10, 15, 0), Quaternion::identity));
 	AddComponent(new RigidBody(5, 1));

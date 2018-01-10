@@ -38,15 +38,25 @@ public:
 };
 
 class Ground :public GameObject {
+private:
+	double width;
+	double length;
 public:
-	Ground(const char* name, double height) :GameObject(name) {
+	Ground(const char* name, double height, double width, double length) :GameObject(name), width(width / 2), length(length / 2) {
 		transform.localPosition.y = height - 1;
 		transform.localScale = Vector3(4, 0.01, 4);
 	}
 	void Render()override {
-		Shaders::List()->basic4.use();
-		glColor3f(0.1f, 0.5f, 0.3f);
-		glutSolidCube(100);
+		Shaders::List()->texture4.use();
+		Shaders::List()->texture4.LoadTexture(Textures::List()->tex1.id);
+
+		glBegin(GL_QUADS);
+		glTexCoord2f(1.0f, 0.0f); glVertex3d(-width, 0, length);
+		glTexCoord2f(0.0f, 0.0f); glVertex3d(width, 0, length);
+		glTexCoord2f(0.0f, 1.0f); glVertex3d(width, 0, -length);
+		glTexCoord2f(1.0f, 1.0f); glVertex3d(-width, 0, -length);
+		glEnd();
+
 		Shader::useNone();
 	}
 };
@@ -59,14 +69,14 @@ public:
 	Ball(const char* name, double r, const Vector3& pos, const Quaternion& rot) : GameObject(name, pos, rot), r(r) {}
 	Ball(const char* name, double r) :GameObject(name), r(r) {}
 	void Render() override {
-		//glDisable(GL_CULL_FACE);
+		Shaders::List()->texture4.use();
+		Shaders::List()->texture4.LoadTexture(Textures::List()->tex1.id);
 		glColor3f(0.4f, 0.6f, 0.8f);
-		Shaders::List()->basic4.use();
+
 		GLUquadric* qobj = gluNewQuadric();
-		//也许可以用旧版Shader获取纹理坐标？或者干脆不用Shader吧。。。
-		//gluQuadricTexture(qobj, GL_TRUE);
+		gluQuadricTexture(qobj, GL_TRUE);
 		gluSphere(qobj, r, 30, 30);
+
 		Shader::useNone();
-		//glEnable(GL_CULL_FACE);
 	}
 };

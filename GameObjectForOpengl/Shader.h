@@ -14,8 +14,9 @@ class Shader
 public:
 	Shader(const char* vertexPath, const char* fragPath);
 	Shader(const char* vertexPath, const char* fragPath, const char* geometryPath);
-	void use() const;
+	void use(bool ifLoadLight = true) const;
 	void LoadUniform() const;
+	void LoadTexture(int texID) const;
 	static void useNone();
 	~Shader();
 public:

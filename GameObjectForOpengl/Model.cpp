@@ -15,6 +15,7 @@ void Model::draw(const Shader& shader) const
 	{
 		it->draw(shader);
 	}
+	glActiveTexture(GL_TEXTURE0);
 	glBindVertexArray(0);
 	glUseProgram(0);
 }

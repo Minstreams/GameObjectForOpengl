@@ -35,6 +35,7 @@ void BasicInitial() {
 
 	glEnable(GL_DEPTH_TEST);// 启用深度测试
 	glEnable(GL_CULL_FACE);
+	glCullFace(GL_BACK);
 	//glEnable(GL_FOG);	
 	//glFrontFace(GL_CCW);		// 指定逆时针绕法表示多边形正面
 	//glShadeModel(GL_SMOOTH);

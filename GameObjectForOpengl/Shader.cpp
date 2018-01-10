@@ -18,10 +18,10 @@ Shader::Shader(const char* vertexPath, const char* fragPath, const char* geometr
 	fileVec.push_back(ShaderFile(GL_GEOMETRY_SHADER, geometryPath));
 	loadFromFile(fileVec);
 }
-void Shader::use() const
+void Shader::use(bool ifLoadLight) const
 {
 	glUseProgram(this->programId);
-	LoadUniform();
+	if (ifLoadLight) LoadUniform();
 }
 void Shader::LoadUniform() const
 {
@@ -31,6 +31,11 @@ void Shader::LoadUniform() const
 	glUniform4fv(glGetUniformLocation(programId, "lightColors"), LIGHT_MAX_NUM, LightData::colors);
 	glUniform1fv(glGetUniformLocation(programId, "lightItensities"), LIGHT_MAX_NUM, LightData::itensities);
 	glUniform1fv(glGetUniformLocation(programId, "lightDS"), LIGHT_MAX_NUM, LightData::distanceSqrs);
+}
+void Shader::LoadTexture(int texID) const
+{
+	TextureHelper::use2DTexture(texID);
+	glUniform1i(glGetUniformLocation(programId, "texture_diffuse0"), 0);
 }
 void Shader::useNone()
 {
