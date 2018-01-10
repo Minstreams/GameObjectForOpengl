@@ -1,7 +1,8 @@
 #include <GL\glew.h>
 #include"UnityIndex.h"
+#include"OpenglIndex.h"
 
-Scene::Scene() :root(NULL),camera("MainCamera"){
+Scene::Scene() :root(NULL), camera("MainCamera") {
 
 }
 Scene::~Scene() {
@@ -9,6 +10,18 @@ Scene::~Scene() {
 	DestroyLayer(root);
 }
 void Scene::Render() {
+	//阴影
+	glBindFramebuffer(GL_FRAMEBUFFER, shadowFBO);
+	glClear(GL_DEPTH_BUFFER_BIT);
+	glViewport(0, 0, SHADOWMAP_WIDTH, SHADOWMAP_HEIGHT);
+	glCullFace(GL_FRONT);
+	shadowOnly = true;
+	RenderGameObjects(root);
+
+	glBindFramebuffer(GL_FRAMEBUFFER, 0);
+	glViewport(0, 0, screenWidth, screenHeight);
+	glCullFace(GL_BACK);
+	shadowOnly = false;
 	//摄像机
 	Matrix m;
 	m.SetIdentity();
@@ -19,8 +32,11 @@ void Scene::Render() {
 	m.SetTransition(-camera.transform.localPosition);
 	glApplyMatrix(m);
 
+	double *mat = camera.transform.GetLocalMatrix().m;
+	for (int i = 0;i < 16;i++) {
+		viewReverseMat[i] = (float)mat[i];
+	}
 	//物体
-	if (root == NULL)return;
 	RenderGameObjects(root);
 }
 void Scene::SetCamera(const Vector3& pos, const Quaternion& rot) {
@@ -115,6 +131,7 @@ void Scene::RenderGameObjects(GameObject* g) {
 	glPushMatrix();
 	glApplyMatrix(g->transform.GetLocalMatrix());
 	glScaled(g->transform.localScale.x, g->transform.localScale.y, g->transform.localScale.z);
+	currentGameObjectPointer = g;
 	g->Render();
 	MonoBehavour *p = g->componentsPointer;
 	while (p != NULL) {

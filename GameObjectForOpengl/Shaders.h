@@ -14,6 +14,7 @@ public:
 	const Shader basic4 = Shader("Basic400.vert", "Basic400.frag");
 	const Shader unit4 = Shader("Unit400.vert", "Unit400.frag");
 	const Shader texture4 = Shader("Texture400.vert", "Texture400.frag");
+	const Shader shadowMap = Shader("ShadowMap.vert", "ShadowMap.frag");
 };
 
 Shaders* Shaders::list = NULL;

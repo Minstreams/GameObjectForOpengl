@@ -6,5 +6,6 @@
 #include "LightComponent.h"
 #include "PressLToShowPosition.h"
 #include "Tracker.h"
+#include "mover.h"
 
 #include "Gravity.h"

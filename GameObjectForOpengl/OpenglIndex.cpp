@@ -5,12 +5,23 @@
 GameObject* currentGameObjectPointer = NULL;
 
 Scene mainScene;
-double deltaTime;//To实现
+double deltaTime;
 int lastTime;
+
+GLuint depthTex;
+float shadowVP[16];
+float viewReverseMat[16];
+bool shadowOnly = false;
+GLuint shadowFBO;
+GLuint shadowMapShader;
+
+int screenWidth;
+int screenHeight;
 
 void Initial() {
 	BasicInitial();
 	SceneInitial();
+	SetUpShadowMap();
 }
 /*全屏与窗口模式共用的初始化方法
 */
@@ -59,11 +70,61 @@ void SceneInitial() {
 	mainScene.Awake();
 	mainScene.Start();
 }
+void SetUpShadowMap() {
+	glActiveTexture(GL_TEXTURE0 + SHADOW_TEX_CNT);
+	glGenTextures(1, &depthTex);
+	glBindTexture(GL_TEXTURE_2D, depthTex);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT24, SHADOWMAP_WIDTH, SHADOWMAP_HEIGHT, 0, GL_DEPTH_COMPONENT, GL_FLOAT, 0);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_BORDER);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_BORDER);
+	float border[4] = { 1,1,1,1 };
+	glTexParameterfv(GL_TEXTURE_2D, GL_TEXTURE_BORDER_COLOR, border);
+	//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_COMPARE_MODE, GL_COMPARE_REF_TO_TEXTURE);
+	//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_COMPARE_FUNC, GL_LESS);
 
+	//注册FBO，渲染深度到纹理
+	glGenFramebuffers(1, &shadowFBO);
+	glBindFramebuffer(GL_FRAMEBUFFER, shadowFBO);
+	glFramebufferTexture(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, depthTex, 0);
+
+	glDrawBuffer(GL_NONE);
+
+	GLenum result = glCheckFramebufferStatus(GL_FRAMEBUFFER);
+	if (result == GL_FRAMEBUFFER_COMPLETE) {
+		printf_s("Framebuffer is complete.\n");
+	}
+	else {
+		ShowWarnMessage("Framebuffer is not complete!");
+	}
+
+	glBindFramebuffer(GL_FRAMEBUFFER, 0);
+	glActiveTexture(GL_TEXTURE0);
+	//生成MVP矩阵
+	//projection
+	glOrtho(-128, 128, -128, 128, -64, 64);
+	Matrix p = Matrix();
+	glGetDoublev(GL_PROJECTION_MATRIX, p.m);
+
+	//view
+	Vector3 eye = LightData::pos[0];
+	gluLookAt(eye.x, eye.y, eye.z, 0, 0, 0, 0, 1, 0);
+	Matrix v = Matrix();
+	glGetDoublev(GL_MODELVIEW_MATRIX, v.m);
+
+	Matrix vp = v*p;
+
+	for (int i = 0;i < 16;i++) {
+		shadowVP[i] = (float)vp.m[i];
+	}
+}
 void ChangeSize(int w, int h)
 {
 	if (h == 0)	h = 1;
 
+	screenWidth = w;
+	screenHeight = h;
 	// 设置视区尺寸
 	glViewport(0, 0, w, h);
 
@@ -95,6 +156,7 @@ void RenderScene(void) {
 	LightData::FlushPositions();
 
 	mainScene.Render();
+
 	glutSwapBuffers();
 
 	if (lastTime < 0) {

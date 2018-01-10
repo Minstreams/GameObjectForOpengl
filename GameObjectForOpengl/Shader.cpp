@@ -9,6 +9,7 @@ Shader::Shader(const char* vertexPath, const char* fragPath) :programId(0)
 	fileVec.push_back(ShaderFile(GL_VERTEX_SHADER, vertexPath));
 	fileVec.push_back(ShaderFile(GL_FRAGMENT_SHADER, fragPath));
 	loadFromFile(fileVec);
+	printf_s("Shader loaded :%s , %s\n", vertexPath, fragPath);
 }
 Shader::Shader(const char* vertexPath, const char* fragPath, const char* geometryPath) :programId(0)
 {
@@ -20,6 +21,12 @@ Shader::Shader(const char* vertexPath, const char* fragPath, const char* geometr
 }
 void Shader::use(bool ifLoadLight) const
 {
+	if (shadowOnly) {
+		glUseProgram(shadowMapShader);
+		glUniformMatrix4fv(glGetUniformLocation(shadowMapShader, "shadowVP"),
+			1, GL_FALSE, shadowVP);
+		return;
+	}
 	glUseProgram(this->programId);
 	if (ifLoadLight) LoadUniform();
 }
@@ -31,9 +38,15 @@ void Shader::LoadUniform() const
 	glUniform4fv(glGetUniformLocation(programId, "lightColors"), LIGHT_MAX_NUM, LightData::colors);
 	glUniform1fv(glGetUniformLocation(programId, "lightItensities"), LIGHT_MAX_NUM, LightData::itensities);
 	glUniform1fv(glGetUniformLocation(programId, "lightDS"), LIGHT_MAX_NUM, LightData::distanceSqrs);
+	glUniformMatrix4fv(glGetUniformLocation(programId, "shadowVP"), 1, GL_FALSE, shadowVP);
+	glUniformMatrix4fv(glGetUniformLocation(programId, "viewReverseMat"), 1, GL_FALSE, viewReverseMat);
+	glUniform1i(glGetUniformLocation(programId, "shadowMap"), SHADOW_TEX_CNT);
 }
 void Shader::LoadTexture(int texID) const
 {
+	if (shadowOnly) {
+		return;
+	}
 	TextureHelper::use2DTexture(texID);
 	glUniform1i(glGetUniformLocation(programId, "texture_diffuse0"), 0);
 }

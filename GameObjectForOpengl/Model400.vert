@@ -9,11 +9,14 @@ out vec3 Position;
 out vec2 TextCoord;
 out vec3 vNormal;
 out vec3 Tangent;
+out vec3 ShadowCoord;
 
 uniform mat4 gl_ModelViewMatrix;  
 uniform mat3 gl_NormalMatrix;  
 uniform mat4 gl_ProjectionMatrix;  
 uniform mat4 gl_ModelViewProjectionMatrix;
+uniform mat4 shadowVP;
+uniform mat4 viewReverseMat;
   
 void main()  
 {  
@@ -22,6 +25,8 @@ void main()
 
     vNormal = normalize(gl_NormalMatrix * normal);  
 	Tangent = normalize(vec3(gl_ModelViewMatrix * vec4 (tangent,0)));
+	vec3 scd = (shadowVP * viewReverseMat * gl_ModelViewMatrix * vec4(position,1)).xyz;
+	ShadowCoord = scd * 0.5 + vec3(0.5,0.5,0.5);
 
     gl_Position = gl_ModelViewProjectionMatrix * vec4(position,1.0);  
 }  

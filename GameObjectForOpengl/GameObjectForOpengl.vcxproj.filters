@@ -191,6 +191,9 @@
     <ClInclude Include="Textures.h">
       <Filter>资源库</Filter>
     </ClInclude>
+    <ClInclude Include="mover.h">
+      <Filter>Components</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -234,6 +237,12 @@
       <Filter>资源文件</Filter>
     </None>
     <None Include="Unit400.frag">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="ShadowMap.vert">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="ShadowMap.frag">
       <Filter>资源文件</Filter>
     </None>
   </ItemGroup>

@@ -170,6 +170,7 @@
     <ClInclude Include="Models.h" />
     <ClInclude Include="MonoBehavour.h" />
     <ClInclude Include="MouseRotater.h" />
+    <ClInclude Include="mover.h" />
     <ClInclude Include="OpenglIndex.h" />
     <ClInclude Include="AutoRotate.h" />
     <ClInclude Include="Physics.h" />
@@ -197,6 +198,8 @@
     <None Include="Model400.frag" />
     <None Include="Model400.vert" />
     <None Include="packages.config" />
+    <None Include="ShadowMap.frag" />
+    <None Include="ShadowMap.vert" />
     <None Include="Test.frag" />
     <None Include="Test.vert">
       <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</DeploymentContent>

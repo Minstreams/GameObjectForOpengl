@@ -4,8 +4,10 @@ in vec4 Color;
 in vec3 Position;  
 in vec2 TextCoord;
 in vec3 Normal;
+in vec3 ShadowCoord;
 
 uniform sampler2D texture_diffuse0;
+uniform sampler2D shadowMap;
 
 uniform int lightNum;
 uniform vec3 lightPositions[8];  
@@ -21,9 +23,18 @@ void main() {
 	vec3 s = normalize(lightPositions[0]);
 	vec3 v = normalize(vec3(-Position));  
 	vec3 r = reflect( -s, Normal );
-		
-	vec4 dF = max( dot(s, Normal)*0.7 + 0.3, 0.0 ) * lightItensities[0] * lightColors[0];
-	vec4 sF = pow( max( dot(r,v), 0.0 ), 60 ) * lightItensities[0] * lightColors[0];
+
+	float sdn = dot(s, Normal);
+	float cosTheta = clamp(sdn * 0.7 + 0.3, 0, 1);
+
+	float bias = 0.002 * tan(acos(cosTheta));
+	float visibility = 1.0;
+	if(texture2D( shadowMap, ShadowCoord.xy).z < min(ShadowCoord.z,1) - bias){
+		visibility = 0.1;
+	}
+
+	vec4 dF = max( sdn * 0.7 + 0.3, 0.0 ) * lightItensities[0] * lightColors[0] * visibility;
+	vec4 sF = pow( max( dot(r,v), 0.0 ), 60 ) * lightItensities[0] * lightColors[0] * visibility;
 	
 	for(int i = 1; i < lightNum; i++){
 		vec3 delta = lightPositions[i] - Position;
@@ -41,6 +52,7 @@ void main() {
 	vec4 diffuse = texd * dF *0.7;
 	vec4 specular = texd * sF;
 	
-	FragColor = (ambient + diffuse + specular) * Color;
-    //FragColor = vec4(TextCoord,0,1);
+	FragColor = (ambient + diffuse + specular) * Color * visibility;
+    //FragColor = texture2D( shadowMap, ShadowCoord.xy);
+	//FragColor = vec4(ShadowCoord.z,ShadowCoord.z,ShadowCoord.z,1);
 }  
