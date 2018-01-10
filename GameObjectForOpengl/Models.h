@@ -11,7 +11,7 @@ public:
 	}
 	//以下是表列
 	const  Model model1 = Model("data/Models/nanosuit/nanosuit.obj");
-	//const  Model model2 = Model("data/Models/FERRARI 599/Ferrari 599 GT_RC-Model_2010.obj");
+	const  Model model2 = Model("data/Models/mazda 3/mazda 3.obj");
 };
 
 Models* Models::list = NULL;

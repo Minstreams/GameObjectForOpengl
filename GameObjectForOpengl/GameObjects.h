@@ -33,7 +33,7 @@ public:
 	ScaledTestModel(const char* name, const Vector3& pos, const Quaternion& rot, const Vector3& scale)
 		: GameObject(name, pos, rot, scale) {}
 	void Render() override {
-		Models::List()->model1.draw(Shaders::List()->model4);
+		Models::List()->model2.draw(Shaders::List()->model4);
 	}
 };
 
@@ -43,12 +43,13 @@ private:
 	double length;
 public:
 	Ground(const char* name, double height, double width, double length) :GameObject(name), width(width / 2), length(length / 2) {
-		transform.localPosition.y = height - 1;
+		transform.localPosition.y = height;
 		transform.localScale = Vector3(4, 0.01, 4);
 	}
 	void Render()override {
-		Shaders::List()->texture4.use();
-		Shaders::List()->texture4.LoadTexture(Textures::List()->tex1.id);
+		Shaders::List()->basic4.use();
+		//Shaders::List()->texture4.LoadTexture(Textures::List()->tex1.id);
+		glColor3f(0.4f, 0.6f, 0.8f);
 
 		glBegin(GL_QUADS);
 		glTexCoord2f(1.0f, 0.0f); glVertex3d(-width, 0, length);
@@ -69,9 +70,10 @@ public:
 	Ball(const char* name, double r, const Vector3& pos, const Quaternion& rot) : GameObject(name, pos, rot), r(r) {}
 	Ball(const char* name, double r) :GameObject(name), r(r) {}
 	void Render() override {
-		Shaders::List()->texture4.use();
-		Shaders::List()->texture4.LoadTexture(Textures::List()->tex1.id);
+		Shaders::List()->basic4.use();
+		Shaders::List()->basic4.LoadTexture(Textures::List()->tex1.id);
 		glColor3f(0.4f, 0.6f, 0.8f);
+		//glColor3f(1, 1, 1);
 
 		GLUquadric* qobj = gluNewQuadric();
 		gluQuadricTexture(qobj, GL_TRUE);

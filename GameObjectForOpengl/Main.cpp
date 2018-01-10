@@ -35,7 +35,8 @@ void SetScene() {
 	AddComponent(new Gravity(30));
 	AddComponent(new LightComponent());
 
-	AddGameObject(new ScaledTestModel("Model", Vector3::zero, Quaternion::identity, Vector3(1, 1, 1)));
+	AddGameObject(new ScaledTestModel("Model", Vector3::zero, Quaternion::identity, Vector3(0.003, 0.003, 0.003)));
+	AddComponent(new mover());
 }
 
 void SetLight() {
@@ -52,6 +53,8 @@ void SetLight() {
 	LightData::itensities[0] = 1;
 
 	LightData::distanceSqrs[0] = 1;
+
+	shadowMapShader = Shaders::List()->shadowMap.programId;
 }
 
 int main(int argc, char* argv[])
