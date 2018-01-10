@@ -5,8 +5,6 @@ layout(location = 1) in vec2 textCoord;
 layout(location = 2) in vec3 normal;
 layout(location = 3) in vec3 tangent;
   
-attribute vec4 gl_Color; 
-
 out vec3 Position;  
 out vec2 TextCoord;
 out vec3 vNormal;

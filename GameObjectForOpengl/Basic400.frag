@@ -19,8 +19,8 @@ void main() {
 	vec3 v = normalize(vec3(-Position));  
 	vec3 r = reflect( -s, Normal );
 		
-	float dF = max( dot(s, Normal)*0.5+0.5, 0.0 ) * lightItensities[0];
-	float sF = pow( max( dot(r,v), 0.0 ), 60 ) * lightItensities[0];
+	vec4 dF = max( dot(s, Normal)*0.5+0.5, 0.0 ) * lightItensities[0] * lightColors[0];
+	vec4 sF = pow( max( dot(r,v), 0.0 ), 60 ) * lightItensities[0] * lightColors[0];
 	
 
 	for(int i = 1; i < lightNum; i++){
@@ -31,8 +31,8 @@ void main() {
 		r = reflect( -s, Normal );
 
 		float rate = max(1-DS/lightDS[i],0.0);
-		dF += max( dot(s, Normal), 0.0 ) * lightItensities[i] * rate;
-		sF += pow( max( dot(r,v), 0.0 ), 60 ) * lightItensities[i] * rate;
+		dF += max( dot(s, Normal), 0.0 ) * lightItensities[i] * rate * lightColors[i];
+		sF += pow( max( dot(r,v), 0.0 ), 60 ) * lightItensities[i] * rate * lightColors[i];
 	}
 
 	vec4 ambient = Color * 0.1;
