@@ -50,5 +50,6 @@ void main() {
 	vec4 diffuse = Color * dF;
 	vec4 specular = Color * sF;
 
+    //FragColor = texture2D( shadowMap, ShadowCoord.xy);
 	FragColor = (ambient + diffuse + specular);
 }  

@@ -17,7 +17,7 @@
 #include "OpenglIndex.h"
 
 
-CSkyBox::CSkyBox() :length(700.0f), width(700.0f), height(700.0f), yRot(0.01f)
+CSkyBox::CSkyBox() :length(1400.0f), width(1400.0f), height(1400.0f), yRot(0.01f)
 {
 
 }

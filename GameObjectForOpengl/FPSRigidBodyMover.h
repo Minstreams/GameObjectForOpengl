@@ -3,9 +3,9 @@
 class FPSRigidBodyMover : public MonoBehavour {
 private:
 	RigidBody *rid = NULL;
-	double speed;
+	double maxSpeed;
 public:
-	FPSRigidBodyMover(double speed) :speed(speed) {}
+	FPSRigidBodyMover(double maxSpeed) :maxSpeed(maxSpeed) {}
 	void Awake() override {
 		if (gameObject->rigidBody == NULL) {
 			ShowWarnMessage("There is no rigidBody!!\n没有刚体组件！！", "来自FPSRigidBodyMover组件");
@@ -28,7 +28,7 @@ public:
 		if (Input::GetKeyDown('f')) {
 			Input::SetFPSmode(!Input::FPSmode);
 		}
-		rid->SetVelocity(transform->GetWorldMatrix() ^ (vec * speed));
+		rid->SetVelocity(transform->GetWorldMatrix() ^ (vec * maxSpeed));
 	}
 
 };

@@ -26,6 +26,7 @@ void SetGameMode(bool b);//设置全屏游戏模式，取消时会退出游戏
 void ShowWarnMessage(const char* message, const char* title = "警告");//显示警告信息
 
 extern GLuint depthTex;
+extern Matrix shadowVPM;
 extern float shadowVP[16];
 extern float viewReverseMat[16];
 extern bool shadowOnly;

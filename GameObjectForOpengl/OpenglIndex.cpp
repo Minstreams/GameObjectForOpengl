@@ -9,6 +9,7 @@ double deltaTime;
 int lastTime;
 
 GLuint depthTex;
+Matrix shadowVPM;
 float shadowVP[16];
 float viewReverseMat[16];
 bool shadowOnly = false;
@@ -37,7 +38,6 @@ void BasicInitial() {
 		std::system("pause");
 		//return -1;
 	}
-
 
 	glutReshapeFunc(ChangeSize);
 	glutDisplayFunc(RenderScene);
@@ -113,10 +113,10 @@ void SetUpShadowMap() {
 	Matrix v = Matrix();
 	glGetDoublev(GL_MODELVIEW_MATRIX, v.m);
 
-	Matrix vp = v*p;
+	shadowVPM = v*p;
 
 	for (int i = 0;i < 16;i++) {
-		shadowVP[i] = (float)vp.m[i];
+		shadowVP[i] = (float)shadowVPM.m[i];
 	}
 }
 void ChangeSize(int w, int h)
@@ -134,7 +134,7 @@ void ChangeSize(int w, int h)
 	// ÉèÖÃÐÞ¼ô¿Õ¼ä
 	GLfloat fAspect;
 	fAspect = (float)w / (float)h;
-	gluPerspective(45.0, fAspect, 1.0, 1500.0);
+	gluPerspective(45.0, fAspect, 1.0, 2500);
 
 	/*
 	GLfloat nRange = 100.0f;

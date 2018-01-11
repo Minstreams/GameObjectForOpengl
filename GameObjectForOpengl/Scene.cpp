@@ -10,6 +10,14 @@ Scene::~Scene() {
 	DestroyLayer(root);
 }
 void Scene::Render() {
+	Matrix mt;
+	mt.SetIdentity();
+	mt.SetTransition(-camera.transform.localPosition);
+	//更新shadowVP
+	Matrix vp = mt * shadowVPM;
+	for (int i = 0;i < 16;i++) {
+		shadowVP[i] = (float)vp.m[i];
+	}
 	//阴影
 	glBindFramebuffer(GL_FRAMEBUFFER, shadowFBO);
 	glClear(GL_DEPTH_BUFFER_BIT);
@@ -28,10 +36,9 @@ void Scene::Render() {
 	m.SetRotation(~camera.transform.rotation);
 	glApplyMatrix(m);
 	skyBox.render();
-	m.SetIdentity();
-	m.SetTransition(-camera.transform.localPosition);
-	glApplyMatrix(m);
-
+	glApplyMatrix(mt);
+	
+	//更新reverseMat
 	double *mat = camera.transform.GetLocalMatrix().m;
 	for (int i = 0;i < 16;i++) {
 		viewReverseMat[i] = (float)mat[i];

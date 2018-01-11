@@ -194,6 +194,9 @@
     <ClInclude Include="mover.h">
       <Filter>Components</Filter>
     </ClInclude>
+    <ClInclude Include="CarController.h">
+      <Filter>Components</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

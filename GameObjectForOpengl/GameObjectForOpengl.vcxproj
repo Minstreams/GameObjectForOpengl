@@ -154,6 +154,7 @@
     <ClCompile Include="Vector3.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="CarController.h" />
     <ClInclude Include="Components.h" />
     <ClInclude Include="FPSMover.h" />
     <ClInclude Include="FPSRigidBodyMover.h" />

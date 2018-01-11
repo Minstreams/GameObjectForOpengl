@@ -121,14 +121,14 @@ Quaternion Quaternion::LookAtRotation(Vector3 forward, Vector3 up) {
 	forward.Normalize();
 	up.Normalize();
 	Vector3 right = Vector3::Cross(forward, up);
-	Matrix m = Matrix::VectorAsRow(right, up, forward);
+	Matrix m = Matrix::VectorAsRow(right, up, -forward);
 	return m.GetRotation();
 }
 Quaternion Quaternion::FromToRotation(const Vector3& fromTo) {
 	Vector3 forward = fromTo.normalized();
 	Vector3 right = Vector3::Cross(forward, Vector3::up).normalized();
 	Vector3 up = Vector3::Cross(right, forward);
-	Matrix m = Matrix::VectorAsRow(right, up, forward);
+	Matrix m = Matrix::VectorAsRow(right, up, -forward);
 	return m.GetRotation();
 }
 Quaternion Quaternion::FromToRotation(const Vector3& from, const Vector3& to) {
@@ -140,7 +140,7 @@ double Quaternion::Dot(const Quaternion&lhs, const Quaternion&rhs) {
 }
 //角度
 double Quaternion::Angle(const Quaternion&lhs, const Quaternion&rhs) {
-	double out = acos(Dot(lhs, rhs) /*/ (lhs.Length*rhs.Length)*/);
+	double out = 2 * acos(Dot(lhs, rhs) /*/ (lhs.Length*rhs.Length)*/);
 	return out;
 }
 //线性插值
@@ -153,14 +153,11 @@ Quaternion Quaternion::Lerp(const Quaternion&a, const Quaternion&b, double t) {
 //球形插值
 Quaternion Quaternion::Slerp(const Quaternion &lhs, const Quaternion &rhs, double t)
 {
-	//double cos_theta = Dot(a, b);
-
-	//// if B is on opposite hemisphere from A, use -B instead  
-	//double sign;
+	//double cos_theta = Quaternion::Dot(lhs, rhs);
 	//if (cos_theta < 0)
 	//{
 	//	cos_theta = -cos_theta;
-	//	sign = -1;
+	//	//sign = -1;
 	//}
 	//else sign = 1;
 
@@ -195,9 +192,16 @@ Quaternion Quaternion::Slerp(const Quaternion &lhs, const Quaternion &rhs, doubl
 	if (theta < 0.001) {
 		return lhs;
 	}
+	while (theta >= 2 * PI) {
+		double thetaT = theta - 2 * PI;
+		//t = 1 - (1 - t)*thetaT / theta;
+		theta = thetaT;
+		//printf_s("%lf\n", theta);
+	}
 	double sintheta = sin(theta);
 	Quaternion out = lhs*(sin((1 - t)*theta) / sintheta) + rhs*(sin(t*theta) / sintheta);
 	out.Normalize();
+	//printf("%.3lf,%.3lf,%.3lf,%.3lf\n", out.x, out.y, out.z, out.w);
 	return out;
 }
 //赋值

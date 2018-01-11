@@ -76,7 +76,7 @@ Matrix& Matrix::Set(const Vector3 & v, const Quaternion & q)
 }
 //获取四元数
 Quaternion Matrix::GetRotation()const {
-	double w = 0.5*sqrt(1 + m[0] + m[5] + m[10]);
+	double w = 0.5 * sqrt (1 + m[0] + m[5] + m[10]);
 	double t = 1.0 / (4 * w);
 	Quaternion out = Quaternion(
 		(m[6] - m[9])*t,
@@ -84,6 +84,7 @@ Quaternion Matrix::GetRotation()const {
 		(m[1] - m[4])*t,
 		w
 	).Normalize();
+
 	return out;
 }
 Matrix Matrix::operator~() const
@@ -160,9 +161,9 @@ Matrix Matrix::VectorAsColumn(const Vector3& v1, const Vector3& v2, const Vector
 //取三个vector作为行向量
 Matrix Matrix::VectorAsRow(const Vector3& v1, const Vector3& v2, const Vector3& v3) {
 	return Matrix(
-		v1.x, v2.x, v3.x, 0,
-		v1.y, v2.y, v3.y, 0,
-		v1.z, v2.z, v3.z, 0,
+		v1.x, v1.y, v1.z, 0,
+		v2.x, v2.y, v2.z, 0,
+		v3.x, v3.y, v3.z, 0,
 		0, 0, 0, 1
 	);
 }

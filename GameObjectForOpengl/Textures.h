@@ -21,6 +21,7 @@ public:
 	}
 	//以下是表列
 	const TexID tex1 = TexID("test.png");
+	const TexID path = TexID("path.jpg");
 };
 
 Textures* Textures::list = NULL;

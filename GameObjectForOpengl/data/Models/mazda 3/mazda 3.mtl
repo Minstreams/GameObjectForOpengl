@@ -9,6 +9,9 @@ Ks  1.0 1.0 1.0
 d  1.0
 Ns  1.0
 illum 2
+
+map_Kd 1.tga
+
 #
 newmtl Standardmater1
 Ka  0.5 0.5 0.5
@@ -17,6 +20,9 @@ Ks  1.0 1.0 1.0
 d  1.0
 Ns  1.0
 illum 2
+map_Kd 2.tga
+
+
 #
 newmtl carpaint_02
 Ka  0.0 0.0 0.0
@@ -29,6 +35,11 @@ illum 2
 # Multi/Sub Material__172 done 
 #
 # Multi/Sub Material__412 (10) to come 
+
+map_Kd 3.tga
+
+
+
 #
 newmtl Standardmater17
 Ka  0.2 0.2 0.2
@@ -37,6 +48,11 @@ Ks  1.0 1.0 1.0
 d  1.0
 Ns  1.0
 illum 2
+
+map_Kd 4.tga
+
+
+
 #
 newmtl Standardmater18
 Ka  0.5 0.5 0.5
@@ -45,6 +61,9 @@ Ks  1.0 1.0 1.0
 d  1.0
 Ns  1.0
 illum 2
+map_Kd 5.tga
+
+
 #
 newmtl windows
 Ka  0.0 0.0 0.0
@@ -53,6 +72,8 @@ Ks  0.0 0.0 0.0
 d  0.7
 Ns  10.0
 illum 2
+
+
 #
 newmtl Standardmater10
 Ka  0.5 0.5 0.5
@@ -61,6 +82,8 @@ Ks  1.0 1.0 1.0
 d  1.0
 Ns  4.3
 illum 2
+
+
 #
 newmtl carpaint_02
 Ka  0.0 0.0 0.0
@@ -69,6 +92,8 @@ Ks  0.7 0.7 0.7
 d  1.0
 Ns  10.0
 illum 2
+
+
 #
 newmtl Standardmater19
 Ka  0.5 0.5 0.5
@@ -77,6 +102,8 @@ Ks  1.0 1.0 1.0
 d  1.0
 Ns  1.0
 illum 2
+
+
 #
 newmtl Standardmater13
 Ka  1.0 1.0 1.0
@@ -85,6 +112,8 @@ Ks  1.0 1.0 1.0
 d  1.0
 Ns  1.0
 illum 2
+
+
 #
 newmtl Standardmater14
 Ka  0.2 0.2 0.2
@@ -93,6 +122,8 @@ Ks  1.0 1.0 1.0
 d  1.0
 Ns  1.0
 illum 2
+
+
 #
 newmtl Standardmater15
 Ka  0.5 0.5 0.5
@@ -101,6 +132,8 @@ Ks  1.0 1.0 1.0
 d  1.0
 Ns  1.0
 illum 2
+
+
 #
 newmtl Standardmater16
 Ka  0.5 0.5 0.5
@@ -111,6 +144,8 @@ Ns  1.0
 illum 2
 #
 # Multi/Sub Material__412 done 
+
+
 #
 newmtl Standardmater16
 Ka  0.5 0.5 0.5
@@ -121,6 +156,8 @@ Ns  1.0
 illum 2
 #
 # Multi/Sub Material__503 (16) to come 
+
+
 #
 newmtl Standardmater27
 Ka  0.5 0.5 0.5
@@ -129,6 +166,8 @@ Ks  1.0 1.0 1.0
 d  1.0
 Ns  1.0
 illum 2
+
+
 #
 newmtl Standardmater28
 Ka  0.5 0.5 0.5
@@ -137,6 +176,8 @@ Ks  1.0 1.0 1.0
 d  1.0
 Ns  1.0
 illum 2
+
+
 #
 newmtl Standardmater6
 Ka  1.0 0.7 0.0
@@ -145,6 +186,8 @@ Ks  1.0 1.0 1.0
 d  1.0
 Ns  1.0
 illum 2
+
+
 #
 newmtl Standardmater29
 Ka  0.0 0.0 0.0
@@ -153,6 +196,8 @@ Ks  0.1 0.1 0.1
 d  1.0
 Ns  10.0
 illum 2
+
+
 #
 newmtl carpaint_02
 Ka  0.0 0.0 0.0
@@ -161,6 +206,8 @@ Ks  0.7 0.7 0.7
 d  1.0
 Ns  10.0
 illum 2
+
+
 #
 newmtl Standardmater30
 Ka  0.5 0.5 0.5
@@ -169,6 +216,8 @@ Ks  1.0 1.0 1.0
 d  1.0
 Ns  1.0
 illum 2
+
+
 #
 newmtl Standardmater31
 Ka  0.5 0.5 0.5
@@ -177,6 +226,8 @@ Ks  1.0 1.0 1.0
 d  1.0
 Ns  3.7
 illum 2
+
+
 #
 newmtl Standardmater32
 Ka  0.5 0.5 0.5

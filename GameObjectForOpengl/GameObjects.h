@@ -28,12 +28,20 @@
 //		Shader::useNone();
 //	}
 //};
+class CarModel :public GameObject {
+public:
+	CarModel(const char* name, const Vector3& pos, const Quaternion& rot, const Vector3& scale)
+		: GameObject(name, pos, rot, scale) {}
+	void Render() override {
+		Models::List()->model2.draw(Shaders::List()->model4);
+	}
+};
 class ScaledTestModel :public GameObject {
 public:
 	ScaledTestModel(const char* name, const Vector3& pos, const Quaternion& rot, const Vector3& scale)
 		: GameObject(name, pos, rot, scale) {}
 	void Render() override {
-		Models::List()->model2.draw(Shaders::List()->model4);
+		Models::List()->model1.draw(Shaders::List()->model4);
 	}
 };
 
@@ -47,9 +55,9 @@ public:
 		transform.localScale = Vector3(4, 0.01, 4);
 	}
 	void Render()override {
-		Shaders::List()->basic4.use();
-		//Shaders::List()->texture4.LoadTexture(Textures::List()->tex1.id);
-		glColor3f(0.4f, 0.6f, 0.8f);
+		Shaders::List()->texture4.use();
+		Shaders::List()->texture4.LoadTexture(Textures::List()->path.id);
+		glColor3f(1, 1, 1);
 
 		glBegin(GL_QUADS);
 		glTexCoord2f(1.0f, 0.0f); glVertex3d(-width, 0, length);
@@ -74,6 +82,24 @@ public:
 		Shaders::List()->basic4.LoadTexture(Textures::List()->tex1.id);
 		glColor3f(0.4f, 0.6f, 0.8f);
 		//glColor3f(1, 1, 1);
+
+		GLUquadric* qobj = gluNewQuadric();
+		gluQuadricTexture(qobj, GL_TRUE);
+		gluSphere(qobj, r, 30, 30);
+
+		Shader::useNone();
+	}
+};
+class Point :public GameObject {
+public:
+	double r;
+	Point(const char* name, double r, const Vector3& pos, const Quaternion& rot, const Vector3& scale)
+		: GameObject(name, pos, rot, scale), r(r) {}
+	Point(const char* name, double r, const Vector3& pos, const Quaternion& rot) : GameObject(name, pos, rot), r(r) {}
+	Point(const char* name, double r) :GameObject(name), r(r) {}
+	void Render() override {
+		Shaders::List()->unit4.use();
+		glColor3d(1, 1, 1);
 
 		GLUquadric* qobj = gluNewQuadric();
 		gluQuadricTexture(qobj, GL_TRUE);
