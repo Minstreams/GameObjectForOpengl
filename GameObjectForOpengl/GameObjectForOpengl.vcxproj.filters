@@ -87,6 +87,9 @@
     <ClCompile Include="Lighting.cpp">
       <Filter>Unity</Filter>
     </ClCompile>
+    <ClCompile Include="DebugModule.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AutoRotate.h">
@@ -195,6 +198,15 @@
       <Filter>Components</Filter>
     </ClInclude>
     <ClInclude Include="CarController.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="DebugModule.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="RainComponent.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="CamVelocityRecorder.h">
       <Filter>Components</Filter>
     </ClInclude>
   </ItemGroup>

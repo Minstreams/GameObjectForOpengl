@@ -38,10 +38,10 @@ void SetScene() {
 	AddComponent(new SphereCollider(3, Vector3::zero, 1.01));
 	AddComponent(new Gravity(30));
 
-	AddChild(new Point("lPoint", 0.5, Vector3(0, 0, 10), Quaternion::identity));
-	AddComponent(new LightComponent(Vector3(0.9, 0.6, 0.1), 1.5, 40));
+	//AddChild(new Point("lPoint", 0.5, Vector3(0, 0, 10), Quaternion::identity));
+	//AddComponent(new LightComponent(Vector3(0.9, 0.6, 0.1), 1.5, 40));
 
-	AddGameObject(new ScaledTestModel("man", Vector3(0, 0, -80), Quaternion::identity, Vector3::one * 0.5));
+	AddGameObject(new ScaledTestModel("man", Vector3(0, 0, -80), Quaternion::identity, Vector3::one * 0.05));
 	AddComponent(new SphereCollider(3, Vector3(0, 3, 0)));
 
 	AddGameObject(new ScaledTestModel("man", Vector3(20, 0, -80), Quaternion::identity, Vector3::one * 0.5));
@@ -62,6 +62,9 @@ void SetScene() {
 	AddGameObject(new ScaledTestModel("man", Vector3(120, 0, -80), Quaternion::identity, Vector3::one * 0.5));
 	AddComponent(new SphereCollider(3, Vector3(0, 3, 0)));
 
+	AddGameObject(new Earth("Earth", Vector3(80, 100, -80), Quaternion::identity, Vector3::one * 0.25));
+	AddComponent(new AutoRotate(Vector3(0, 5, 0)));
+
 	GameObject *car =
 		AddGameObject(new GameObject("Car", Vector3::zero, Quaternion::identity));
 	AddComponent(new RigidBody(10, 4));
@@ -73,12 +76,19 @@ void SetScene() {
 
 	AddChild(new CarModel("Model", Vector3(-4, 0, 0), Quaternion::identity, Vector3(0.003, 0.003, 0.003)));
 
+	car->AddChild(new Point("lPoint", 0.5, Vector3(0, 0, 10), Quaternion::identity));
+	AddComponent(new LightComponent(Vector3(0.9, 0.6, 0.1), 1.5, 40));
+
 	car->AddChild(new GameObject("CamFocusPoint", Vector3(0, 4, 0), Quaternion::identity));
 	AddComponent(new MouseRotater(0.3f, 0.3f));
 	mainScene.camera.AddComponent(new Tracker(&currentGameObjectPointer->transform, 0.5, true, false));
 
 	AddChild(new GameObject("CamPoint", Vector3(0, 0, 16), Quaternion::identity));
 	mainScene.camera.AddComponent(new Tracker(&currentGameObjectPointer->transform));
+	mainScene.camera.AddComponent(new CamVelocityRecorder());
+
+	AddGameObject(new GameObject("Rain"));
+	AddComponent(new RainComponent(&car->transform, Vector3(0.6f, 0.6f, 0.6f), 200, 80, 98, 50, 0.01f, 0.1f, 1000, 2, 1));
 }
 
 void SetLight() {
@@ -104,7 +114,7 @@ int main(int argc, char* argv[])
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
 	glutInitWindowSize(1920, 1080);
-	glutCreateWindow("图形学课设");
+	glutCreateWindow("Opengl作业");
 
 	//glutGameModeString("1920x1080");
 	//设置全屏模式时使用的分辨率

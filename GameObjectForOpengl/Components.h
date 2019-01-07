@@ -8,5 +8,7 @@
 #include "Tracker.h"
 #include "mover.h"
 #include "CarController.h"
+#include "CamVelocityRecorder.h"
+#include "RainComponent.h"
 
 #include "Gravity.h"

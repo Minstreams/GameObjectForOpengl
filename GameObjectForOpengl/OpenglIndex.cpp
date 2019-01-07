@@ -39,6 +39,8 @@ void BasicInitial() {
 		//return -1;
 	}
 
+	srand((unsigned int)time(0));
+
 	glutReshapeFunc(ChangeSize);
 	glutDisplayFunc(RenderScene);
 	Input::Init();
@@ -200,6 +202,3 @@ void SetGameMode(bool b) {
 	}
 }
 
-void ShowWarnMessage(const char* message, const char* title) {
-	MessageBox(NULL, message, title, MB_ICONEXCLAMATION);
-}

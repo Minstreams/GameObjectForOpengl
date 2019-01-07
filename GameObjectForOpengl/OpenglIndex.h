@@ -3,6 +3,7 @@
 #include <iostream>
 #include <GL\glew.h>
 #include <GL\glut.h>
+#include "DebugModule.h"
 #include "UnityIndex.h"
 #include "Input.h"
 #include "Texture.h"
@@ -23,7 +24,6 @@ void SetScene();//编辑场景
 void SetLight();//设置光源
 void SetCursorVisible(bool visible);//设置光标是否可见
 void SetGameMode(bool b);//设置全屏游戏模式，取消时会退出游戏
-void ShowWarnMessage(const char* message, const char* title = "警告");//显示警告信息
 
 extern GLuint depthTex;
 extern Matrix shadowVPM;

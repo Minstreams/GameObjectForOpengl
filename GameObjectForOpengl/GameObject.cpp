@@ -1,19 +1,20 @@
-#include"UnityIndex.h"
+#include "DebugModule.h"
+#include "UnityIndex.h"
 
 GameObject::GameObject(const char * name, const Vector3 & position, const Quaternion & rotation, const Vector3 & scale)
-	:Name(name), parent(NULL), child(NULL), next(NULL), componentsPointer(NULL), 
+	:Name(name), parent(NULL), child(NULL), next(NULL), componentsPointer(NULL),
 	transform(this, position, rotation, scale), rigidBody(NULL)
 {
 
 }
 GameObject::GameObject(const char* name, const Vector3& position, const Quaternion& rotation)
-	:Name(name), parent(NULL), child(NULL), next(NULL), componentsPointer(NULL), 
+	: Name(name), parent(NULL), child(NULL), next(NULL), componentsPointer(NULL),
 	transform(this, position, rotation), rigidBody(NULL)
 {
 
 }
 GameObject::GameObject(const char* name)
-	: Name(name), parent(NULL), child(NULL), next(NULL), componentsPointer(NULL), 
+	: Name(name), parent(NULL), child(NULL), next(NULL), componentsPointer(NULL),
 	transform(this), rigidBody(NULL)
 {
 
@@ -47,12 +48,20 @@ MonoBehavour* GameObject::AddComponent(MonoBehavour* component) {
 }
 void GameObject::DestroyComponent(MonoBehavour * component)
 {
+	if (component == NULL) {
+		ShowWarnMessage("正在试图删除不存在的组件！");
+		return;
+	}
 	if (componentsPointer == component) {
 		PopComponent();
 		return;
 	}
 	MonoBehavour *p = componentsPointer;
-	while (p->next != component);
+	while (p != NULL && p->next != component) p = p->next;
+	if (p == NULL) {
+		ShowWarnMessage("正在试图删除不存在的组件！");
+		return;
+	}
 	p->next = component->next;
 	delete component;
 }

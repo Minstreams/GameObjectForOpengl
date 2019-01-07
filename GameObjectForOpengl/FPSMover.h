@@ -20,5 +20,4 @@ public:
 			Input::SetFPSmode(!Input::FPSmode);
 		}
 	}
-
 };

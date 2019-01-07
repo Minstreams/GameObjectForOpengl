@@ -44,6 +44,14 @@ public:
 		Models::List()->model1.draw(Shaders::List()->model4);
 	}
 };
+class Earth :public GameObject {
+public:
+	Earth(const char* name, const Vector3& pos, const Quaternion& rot, const Vector3& scale)
+		: GameObject(name, pos, rot, scale) {}
+	void Render() override {
+		Models::List()->earth.draw(Shaders::List()->model4);
+	}
+};
 
 class Ground :public GameObject {
 private:

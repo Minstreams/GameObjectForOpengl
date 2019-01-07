@@ -133,6 +133,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="DebugModule.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="Input.cpp" />
     <ClCompile Include="Lighting.cpp" />
@@ -154,8 +155,10 @@
     <ClCompile Include="Vector3.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="CamVelocityRecorder.h" />
     <ClInclude Include="CarController.h" />
     <ClInclude Include="Components.h" />
+    <ClInclude Include="DebugModule.h" />
     <ClInclude Include="FPSMover.h" />
     <ClInclude Include="FPSRigidBodyMover.h" />
     <ClInclude Include="GameObject.h" />
@@ -177,6 +180,7 @@
     <ClInclude Include="Physics.h" />
     <ClInclude Include="PressLToShowPosition.h" />
     <ClInclude Include="Quaternion.h" />
+    <ClInclude Include="RainComponent.h" />
     <ClInclude Include="RigidBody.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="Shader.h" />
