@@ -1,10 +1,9 @@
 #pragma once
 //球形碰撞箱
-class SphereCollider : public MonoBehavour {
+class SphereCollider : public MonoBehaviour {
 public:
 	const Vector3 offset;
 	double radius;
-	Vector3 position;	//世界坐标
 	double boundness;	//弹性系数
 	SphereCollider(double r);
 	SphereCollider(double r, const Vector3& offset);
@@ -13,5 +12,6 @@ public:
 	Vector3 GetPosition();
 	Vector3 GetNextPosition();
 private:
+	Vector3 position;	//世界坐标
 	void Awake() override;
 };

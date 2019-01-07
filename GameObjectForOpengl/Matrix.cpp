@@ -2,7 +2,7 @@
 #include <iostream>
 #include <GL\glew.h>
 #include <math.h>
-#include "TransformIndex.h"
+#include "MathIndex.h"
 
 /**
  * TODO: 待优化：去掉最后一列的无用计算

@@ -1,7 +1,7 @@
-#include "OpenglIndex.h"
 #include <fstream>
-#include "Shader.h"
-#include "Lighting.h"
+#include <iostream>
+
+#include "GraphicStructure.h"
 
 Shader::Shader(const char* vertexPath, const char* fragPath) :programId(0)
 {

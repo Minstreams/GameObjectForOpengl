@@ -1,7 +1,7 @@
-#include "OpenglIndex.h"
-#include "TransformIndex.h"
-#include "ModelIndex.h"
-
+//Í¼ÐÎ¿ò¼Ü
+#include "GraphicStructure.h"
+#include "Input.h"
+//×ÊÔ´¿â
 #include "Shaders.h"
 #include "Models.h"
 #include "Textures.h"

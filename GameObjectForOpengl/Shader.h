@@ -32,3 +32,4 @@ private:
 	*/
 	bool loadShaderSource(const char* filePath, std::string& source);
 };
+

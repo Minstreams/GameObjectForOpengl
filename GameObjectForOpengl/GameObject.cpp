@@ -1,5 +1,4 @@
-#include "DebugModule.h"
-#include "UnityIndex.h"
+#include "GraphicStructure.h"
 
 GameObject::GameObject(const char * name, const Vector3 & position, const Quaternion & rotation, const Vector3 & scale)
 	:Name(name), parent(NULL), child(NULL), next(NULL), componentsPointer(NULL),
@@ -38,7 +37,7 @@ GameObject* GameObject::AddChild(GameObject *child) {
 }
 
 //添加组件
-MonoBehavour* GameObject::AddComponent(MonoBehavour* component) {
+MonoBehaviour* GameObject::AddComponent(MonoBehaviour* component) {
 	component->next = componentsPointer;
 	componentsPointer = component;
 	component->gameObject = this;
@@ -46,7 +45,7 @@ MonoBehavour* GameObject::AddComponent(MonoBehavour* component) {
 	component->Init();
 	return component;
 }
-void GameObject::DestroyComponent(MonoBehavour * component)
+void GameObject::DestroyComponent(MonoBehaviour * component)
 {
 	if (component == NULL) {
 		ShowWarnMessage("正在试图删除不存在的组件！");
@@ -56,7 +55,7 @@ void GameObject::DestroyComponent(MonoBehavour * component)
 		PopComponent();
 		return;
 	}
-	MonoBehavour *p = componentsPointer;
+	MonoBehaviour *p = componentsPointer;
 	while (p != NULL && p->next != component) p = p->next;
 	if (p == NULL) {
 		ShowWarnMessage("正在试图删除不存在的组件！");
@@ -68,7 +67,7 @@ void GameObject::DestroyComponent(MonoBehavour * component)
 //删除第一个组件
 void GameObject::PopComponent() {
 	if (componentsPointer != NULL) {
-		MonoBehavour* pointer = componentsPointer->next;
+		MonoBehaviour* pointer = componentsPointer->next;
 		delete componentsPointer;
 		componentsPointer = pointer;
 	}

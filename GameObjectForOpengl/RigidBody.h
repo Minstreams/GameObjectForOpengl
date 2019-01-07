@@ -1,6 +1,6 @@
 #pragma once
 /*刚体，必须加在关联的碰撞箱前面*/
-class RigidBody :public MonoBehavour {
+class RigidBody :public MonoBehaviour {
 public:
 	Vector3 velocity = Vector3::zero;
 

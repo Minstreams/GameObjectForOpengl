@@ -12,7 +12,7 @@ public:
 	Transform transform;
 	RigidBody *rigidBody;
 
-	MonoBehavour* componentsPointer;
+	MonoBehaviour* componentsPointer;
 
 	//构造函数
 	GameObject(const char* name, const Vector3& position, const Quaternion& rotation, const Vector3& scale);
@@ -25,9 +25,9 @@ public:
 	GameObject* AddChild(GameObject *child);
 
 	//添加组件
-	MonoBehavour* AddComponent(MonoBehavour* component);
+	MonoBehaviour* AddComponent(MonoBehaviour* component);
 	//删除组件
-	void DestroyComponent(MonoBehavour* component);
+	void DestroyComponent(MonoBehaviour* component);
 	//删除第一个组件
 	void PopComponent();
 private:

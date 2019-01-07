@@ -26,9 +26,8 @@
 //};
 //int LightComponent::flag = 0;
 
-#include "Lighting.h"
 //×ÔÖÆLighting
-class LightComponent : public MonoBehavour {
+class LightComponent : public MonoBehaviour {
 public:
 	int id;
 	Vector3 color;	//ÑÕÉ«

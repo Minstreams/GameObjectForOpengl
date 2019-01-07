@@ -1,4 +1,5 @@
-#include"UnityIndex.h"
+#include "GraphicStructure.h"
+
 SphereCollider::SphereCollider(double r) :SphereCollider(r, Vector3::zero, 0)
 {
 

@@ -1,6 +1,15 @@
-﻿#include"OpenglIndex.h"
+﻿#include "GraphicStructure.h"
+#include "Input.h"
 
 #define SIMPLE_KEY_NUM 256
+
+void KeyboardDown(unsigned char key, int x, int y);
+void KeyboardUp(unsigned char key, int x, int y);
+void SpecialKeyboardDown(int key, int x, int y);
+void SpecialKeyboardUp(int key, int x, int y);
+void Mouse(int button, int state, int x, int y);
+void MouseMove(int x, int y);
+
 
 bool Input::FPSmode = false;
 void Input::SetFPSmode(bool b) {
@@ -30,7 +39,6 @@ int Input::centerX = 960;
 int Input::centerY = 540;
 int Input::lastMouseX = centerX;
 int Input::lastMouseY = centerY;
-bool Input::isMouseDown = false;
 double Input::hAxis = 0;
 double Input::vAxis = 0;
 const double Input::axisAcceleratingRate = 3.5;
@@ -50,6 +58,15 @@ bool Input::GetKeyUp(unsigned char key) {
 		return true;
 	}
 	return false;
+}
+bool Input::GetMouseButton(unsigned char mouseIndex) {
+	return GetKey(mouseIndex + KeyCode::Mouse0);
+}
+bool Input::GetMouseButtonDown(unsigned char mouseIndex) {
+	return GetKeyDown(mouseIndex + KeyCode::Mouse0);
+}
+bool Input::GetMouseButtonUp(unsigned char mouseIndex) {
+	return GetKeyUp(mouseIndex + KeyCode::Mouse0);
 }
 int Input::GetMouseX() {
 	int out = mouseXPos - lastMouseX;
@@ -169,7 +186,7 @@ void KeyboardUp(unsigned char key, int x, int y)
 }
 void SpecialKeyboardDown(int key, int x, int y) {
 	//	printf_s("\n%d \tSpcPressed", key);
-	int keyCode = 0;
+	unsigned char keyCode = 0;
 	switch (key) {
 	case GLUT_KEY_UP:
 		keyCode = KeyCode::Up;
@@ -205,7 +222,7 @@ void SpecialKeyboardDown(int key, int x, int y) {
 	SetDown(keyCode);
 }
 void SpecialKeyboardUp(int key, int x, int y) {
-	int keyCode = 0;
+	unsigned char keyCode = 0;
 	switch (key) {
 	case GLUT_KEY_UP:
 		keyCode = KeyCode::Up;
@@ -242,12 +259,25 @@ void SpecialKeyboardUp(int key, int x, int y) {
 }
 //鼠标回调函数
 void Mouse(int button, int state, int x, int y) {
+	unsigned char keycode = 0;
+	switch (button)
+	{
+	case GLUT_LEFT_BUTTON:
+		keycode = KeyCode::Mouse0;
+		break;
+	case GLUT_RIGHT_BUTTON:
+		keycode = KeyCode::Mouse1;
+		break;
+	case GLUT_MIDDLE_BUTTON:
+		keycode = KeyCode::Mouse2;
+		break;
+	}
+
 	if (state == GLUT_DOWN) {
-		Input::isMouseDown = true;
-		//Input::SetFPSmode(!Input::FPSmode);
+		SetDown(keycode);
 	}
 	if (state == GLUT_UP) {
-		Input::isMouseDown = false;
+		SetUp(keycode);
 	}
 	//if (state == GLUT_UP)Input::isMouseDown = false;
 	/*其中button的值可能是GLUT_LEFT_BUTTON,GLUT_MIDDLE_BUTTON,GLUT_RIGHT_BUTTON表示哪个按钮导致了事件发生

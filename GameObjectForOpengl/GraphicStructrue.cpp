@@ -1,6 +1,9 @@
+#include <windows.h>
+#include <iostream>
 #include <time.h>
-#include "OpenglIndex.h"
-#include "Lighting.h"
+
+#include "GraphicStructure.h"
+#include "Input.h"
 
 GameObject* currentGameObjectPointer = NULL;
 
@@ -202,3 +205,19 @@ void SetGameMode(bool b) {
 	}
 }
 
+
+
+
+GameObject* AddGameObject(GameObject* g) {
+	mainScene.AddGameObject(g);
+	return currentGameObjectPointer;
+}
+GameObject * AddChild(GameObject * child)
+{
+	currentGameObjectPointer->AddChild(child);
+	return currentGameObjectPointer;
+}
+MonoBehaviour * AddComponent(MonoBehaviour * component)
+{
+	return currentGameObjectPointer->AddComponent(component);
+}

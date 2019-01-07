@@ -1,5 +1,5 @@
 #include <math.h>
-#include "TransformIndex.h"
+#include "MathIndex.h"
 
 Quaternion::Quaternion() :x(0), y(0), z(0), w(1) {
 }
@@ -19,7 +19,7 @@ Vector3 Quaternion::EulerAngle() const {
 double Quaternion::magnitude() {
 	return sqrt(x*x + y*y + z*z + w*w);
 }
-double Quaternion::sqrtMagnitude()
+double Quaternion::sqrMagnitude()
 {
 	return x*x + y*y + z*z + w*w;
 }
@@ -124,15 +124,18 @@ Quaternion Quaternion::LookAtRotation(Vector3 forward, Vector3 up) {
 	Matrix m = Matrix::VectorAsRow(right, up, -forward);
 	return m.GetRotation();
 }
-Quaternion Quaternion::FromToRotation(const Vector3& fromTo) {
-	Vector3 forward = fromTo.normalized();
-	Vector3 right = Vector3::Cross(forward, Vector3::up).normalized();
-	Vector3 up = Vector3::Cross(right, forward);
-	Matrix m = Matrix::VectorAsRow(right, up, -forward);
+Quaternion Quaternion::LookAtRotation(const Vector3& forward) {
+	Vector3 forwardN = forward.normalized();
+	Vector3 right = Vector3::Cross(forwardN, Vector3::up).normalized();
+	Vector3 up = Vector3::Cross(right, forwardN);
+	Matrix m = Matrix::VectorAsRow(right, up, -forwardN);
 	return m.GetRotation();
 }
 Quaternion Quaternion::FromToRotation(const Vector3& from, const Vector3& to) {
-	return FromToRotation(to - from);
+	Vector3 fromN = from.normalized();
+	Vector3 toN = to.normalized();
+	Vector3 axis = Vector3::Cross(from, to);
+	return Quaternion(axis.x, axis.y, axis.z, Vector3::Dot(from, to));
 }
 //点积
 double Quaternion::Dot(const Quaternion&lhs, const Quaternion&rhs) {
@@ -144,11 +147,11 @@ double Quaternion::Angle(const Quaternion&lhs, const Quaternion&rhs) {
 	return out;
 }
 //线性插值
-Quaternion Quaternion::Lerp(const Quaternion&a, const Quaternion&b, double t) {
-	return Quaternion((1 - t) * a.x + t * b.x,
-		(1 - t) * a.y + t * b.y,
-		(1 - t) * a.z + t * b.z,
-		(1 - t) * a.w + t * b.w).Normalize();
+Quaternion Quaternion::Lerp(const Quaternion&lhs, const Quaternion&rhs, double t) {
+	return Quaternion((1 - t) * lhs.x + t * rhs.x,
+		(1 - t) * lhs.y + t * rhs.y,
+		(1 - t) * lhs.z + t * rhs.z,
+		(1 - t) * lhs.w + t * rhs.w).Normalize();
 }
 //球形插值
 Quaternion Quaternion::Slerp(const Quaternion &lhs, const Quaternion &rhs, double t)
@@ -215,7 +218,6 @@ void Quaternion::operator=(const Quaternion &rhs) {
 const Quaternion Quaternion::operator~() const {
 	return Quaternion(-x, -y, -z, w);
 }
-//相加
 const Quaternion Quaternion::operator+(const Quaternion&rhs) const {
 	return Quaternion(
 		x + rhs.x,

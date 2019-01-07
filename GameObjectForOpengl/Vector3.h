@@ -18,7 +18,7 @@ public:
 	//模
 	double magnitude() const;
 	//模的平方
-	double sqrtMagnitude()const;
+	double sqrMagnitude()const;
 	//归一化
 	Vector3& Normalize();
 	//归一化后，只读

@@ -1,6 +1,6 @@
 #pragma once
 
-class CamVelocityRecorder : public MonoBehavour {
+class CamVelocityRecorder : public MonoBehaviour {
 private:
 	Vector3 lastPos;
 public:

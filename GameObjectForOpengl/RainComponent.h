@@ -1,32 +1,32 @@
 #pragma once
-class RainComponent : public MonoBehavour {
+class RainComponent : public MonoBehaviour {
 private:
 	Transform *target;
 	Vector3 color;
-	float range;
-	float startSpeed;
-	float gravity;
-	float height;
-	float groundHeight;
-	float lineLengthPerVelocity;
-	float dropsInterval;
-	float circleRadius;
-	float circleDyingSpeed;
-	float timer = 0;
+	double range;
+	double startSpeed;
+	double gravity;
+	double height;
+	double groundHeight;
+	double lineLengthPerVelocity;
+	double dropsInterval;
+	double circleRadius;
+	double circleDyingSpeed;
+	double timer = 0;
 
 	class RainDrop {
 	public:
-		float height;
-		float vy;
-		float x;
-		float z;
+		double height;
+		double vy;
+		double x;
+		double z;
 		RainDrop* previous;
 		RainDrop* next;
 
-		RainDrop(float height,
-			float vy,
-			float x,
-			float z,
+		RainDrop(double height,
+			double vy,
+			double x,
+			double z,
 			RainDrop* previous,
 			RainDrop* next) :
 			height(height),
@@ -38,15 +38,15 @@ private:
 	};
 	class RainDropCircle {
 	public:
-		float x;
-		float z;
-		float life = 1;
+		double x;
+		double z;
+		double life = 1;
 		RainDropCircle* previous;
 		RainDropCircle* next;
 
 		RainDropCircle(
-			float x,
-			float z,
+			double x,
+			double z,
 			RainDropCircle* previous,
 			RainDropCircle* next) :
 			x(x),
@@ -58,9 +58,9 @@ private:
 	RainDrop * drops = NULL;
 	RainDropCircle * circles = NULL;
 
-	Vector3 getRandRange(float range) {
-		float randAngle = (float)rand();
-		float out = (2 * ((float)rand() / RAND_MAX) - 1);
+	Vector3 getRandRange(double range) {
+		double randAngle = (double)rand();
+		double out = (2 * ((double)rand() / RAND_MAX) - 1);
 		//out = out > 0 ? out*out : -out*out;
 		out *= range;
 		return  Vector3(out * sin(randAngle), 0, out*cos(randAngle));
@@ -68,7 +68,7 @@ private:
 
 public:
 	RainComponent(
-		Transform *target, const Vector3 & color, float range, float startSpeed, float gravity, float height, float groundHeight, float lineLengthPerVelocity, float dropsPerSecond, float circleRadius, float circleLife)
+		Transform *target, const Vector3 & color, double range, double startSpeed, double gravity, double height, double groundHeight, double lineLengthPerVelocity, double dropsPerSecond, double circleRadius, double circleLife)
 		:target(target), color(color), range(range), startSpeed(startSpeed), gravity(gravity), height(height), groundHeight(groundHeight), lineLengthPerVelocity(lineLengthPerVelocity), dropsInterval(1.0f / dropsPerSecond), circleRadius(circleRadius), circleDyingSpeed(1.0f / circleLife) {}
 	void Update() override {
 		Vector3 tPos = target->GetPosition();
@@ -125,8 +125,8 @@ public:
 		glColor3d(color.x, color.y, color.z);
 		for (RainDrop* rp = drops; rp != NULL;rp = rp->next)
 		{
-			glVertex3f(rp->x, rp->height, rp->z);
-			glVertex3f(rp->x - CamVelocityRecorder::currentVelocity.x*lineLengthPerVelocity, rp->height - rp->vy*lineLengthPerVelocity - CamVelocityRecorder::currentVelocity.y*lineLengthPerVelocity, rp->z - CamVelocityRecorder::currentVelocity.z*lineLengthPerVelocity);
+			glVertex3d(rp->x, rp->height, rp->z);
+			glVertex3d(rp->x - CamVelocityRecorder::currentVelocity.x*lineLengthPerVelocity, rp->height - rp->vy*lineLengthPerVelocity - CamVelocityRecorder::currentVelocity.y*lineLengthPerVelocity, rp->z - CamVelocityRecorder::currentVelocity.z*lineLengthPerVelocity);
 		}
 		glEnd();
 
@@ -138,16 +138,16 @@ public:
 		Shader::useNone();
 	}
 
-	void DrawCircle(float x, float z, float radius) {
+	void DrawCircle(double x, double z, double radius) {
 		glBegin(GL_LINE_LOOP);
-		glVertex3f(x + radius, groundHeight, z);
-		glVertex3f(x + radius * 0.707f, groundHeight, z + radius * 0.707f);
-		glVertex3f(x, groundHeight, z + radius);
-		glVertex3f(x - radius * 0.707f, groundHeight, z + radius * 0.707f);
-		glVertex3f(x - radius, groundHeight, z);
-		glVertex3f(x - radius * 0.707f, groundHeight, z - radius * 0.707f);
-		glVertex3f(x, groundHeight, z - radius);
-		glVertex3f(x + radius * 0.707f, groundHeight, z - radius * 0.707f);
+		glVertex3d(x + radius, groundHeight, z);
+		glVertex3d(x + radius * 0.707f, groundHeight, z + radius * 0.707f);
+		glVertex3d(x, groundHeight, z + radius);
+		glVertex3d(x - radius * 0.707f, groundHeight, z + radius * 0.707f);
+		glVertex3d(x - radius, groundHeight, z);
+		glVertex3d(x - radius * 0.707f, groundHeight, z - radius * 0.707f);
+		glVertex3d(x, groundHeight, z - radius);
+		glVertex3d(x + radius * 0.707f, groundHeight, z - radius * 0.707f);
 		glEnd();
 	}
 };

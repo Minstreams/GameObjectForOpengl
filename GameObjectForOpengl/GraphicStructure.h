@@ -1,14 +1,8 @@
 #pragma once
-#include <windows.h>
-#include <iostream>
-#include <GL\glew.h>
-#include <GL\glut.h>
-#include "DebugModule.h"
+#include "OpenglHeader.h"
+//底层库
+#include "ModelIndex.h"
 #include "UnityIndex.h"
-#include "Input.h"
-#include "Texture.h"
-#include "Shader.h"
-#include "SkyBox.h"
 #define SHADOW_TEX_CNT 8	//shadowmap的存储位置
 
 
@@ -37,3 +31,11 @@ extern int screenHeight;
 #define SHADOWMAP_WIDTH 8192
 #define SHADOWMAP_HEIGHT 8192
 
+extern double deltaTime;
+extern Scene mainScene;
+
+//以下是简化设置场景步骤 而加的方法
+extern GameObject* currentGameObjectPointer;
+extern GameObject* AddGameObject(GameObject* g);
+extern GameObject* AddChild(GameObject *child);
+extern MonoBehaviour* AddComponent(MonoBehaviour* component);

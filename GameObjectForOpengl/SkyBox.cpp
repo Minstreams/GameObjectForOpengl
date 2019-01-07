@@ -14,7 +14,9 @@
 */
 //========================================================
 
-#include "OpenglIndex.h"
+#include "OpenglHeader.h"
+#include "ModelIndex.h"
+#include "SkyBox.h"
 
 
 CSkyBox::CSkyBox() :length(1400.0f), width(1400.0f), height(1400.0f), yRot(0.01f)

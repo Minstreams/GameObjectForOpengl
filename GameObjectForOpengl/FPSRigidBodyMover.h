@@ -1,6 +1,6 @@
 #pragma once
 //综合组件，控制rigidbody
-class FPSRigidBodyMover : public MonoBehavour {
+class FPSRigidBodyMover : public MonoBehaviour {
 private:
 	RigidBody *rid = NULL;
 	double maxSpeed;

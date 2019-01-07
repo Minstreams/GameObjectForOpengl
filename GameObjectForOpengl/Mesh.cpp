@@ -2,7 +2,6 @@
 #include <sstream>
 #include <vector>
 #include <GL\glew.h>
-#include "TransformIndex.h"
 #include "ModelIndex.h"
 
 

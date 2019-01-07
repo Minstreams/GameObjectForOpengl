@@ -1,5 +1,5 @@
 #pragma once
-class CarController : public MonoBehavour {
+class CarController : public MonoBehaviour {
 private:
 	RigidBody *rid = NULL;
 	const double maxSpeed;
@@ -38,9 +38,9 @@ public:
 
 		rid->SetVelocity(vec * maxSpeed);
 
-		speed = rid->velocity.sqrtMagnitude();
+		speed = rid->velocity.sqrMagnitude();
 
-		if (vec.sqrtMagnitude() > 0.1)
+		if (vec.sqrMagnitude() > 0.1)
 			forwardRot = Quaternion::LookAtRotation(vec, Vector3::up);
 
 		double t = sqrt(speed) / maxSpeed;

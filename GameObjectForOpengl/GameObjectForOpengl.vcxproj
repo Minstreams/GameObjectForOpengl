@@ -141,8 +141,8 @@
     <ClCompile Include="Matrix.cpp" />
     <ClCompile Include="Mesh.cpp" />
     <ClCompile Include="Model.cpp" />
-    <ClCompile Include="MonoBehavour.cpp" />
-    <ClCompile Include="OpenglIndex.cpp" />
+    <ClCompile Include="MonoBehaviour.cpp" />
+    <ClCompile Include="GraphicStructrue.cpp" />
     <ClCompile Include="Physics.cpp" />
     <ClCompile Include="Quaternion.cpp" />
     <ClCompile Include="RigidBody.cpp" />
@@ -151,7 +151,7 @@
     <ClCompile Include="SkyBox.cpp" />
     <ClCompile Include="SphereCollider.cpp" />
     <ClCompile Include="Texture.cpp" />
-    <ClCompile Include="transform.cpp" />
+    <ClCompile Include="Transform.cpp" />
     <ClCompile Include="Vector3.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -172,10 +172,11 @@
     <ClInclude Include="Model.h" />
     <ClInclude Include="ModelIndex.h" />
     <ClInclude Include="Models.h" />
-    <ClInclude Include="MonoBehavour.h" />
+    <ClInclude Include="MonoBehaviour.h" />
     <ClInclude Include="MouseRotater.h" />
     <ClInclude Include="mover.h" />
-    <ClInclude Include="OpenglIndex.h" />
+    <ClInclude Include="OpenglHeader.h" />
+    <ClInclude Include="GraphicStructure.h" />
     <ClInclude Include="AutoRotate.h" />
     <ClInclude Include="Physics.h" />
     <ClInclude Include="PressLToShowPosition.h" />
@@ -190,8 +191,8 @@
     <ClInclude Include="Texture.h" />
     <ClInclude Include="Textures.h" />
     <ClInclude Include="Tracker.h" />
-    <ClInclude Include="transform.h" />
-    <ClInclude Include="TransformIndex.h" />
+    <ClInclude Include="Transform.h" />
+    <ClInclude Include="MathIndex.h" />
     <ClInclude Include="UnityIndex.h" />
     <ClInclude Include="Vector3.h" />
   </ItemGroup>

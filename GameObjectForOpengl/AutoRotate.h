@@ -1,5 +1,5 @@
 #pragma once
-class AutoRotate : public MonoBehavour {
+class AutoRotate : public MonoBehaviour {
 public:
 	AutoRotate(Vector3 rot) {
 		rotation = rot;

@@ -1,5 +1,5 @@
 #pragma once
-class Gravity : public MonoBehavour {
+class Gravity : public MonoBehaviour {
 public:
 	double gravity;
 	RigidBody *rid = NULL;

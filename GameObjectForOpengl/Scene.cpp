@@ -1,6 +1,4 @@
-#include <GL\glew.h>
-#include"UnityIndex.h"
-#include"OpenglIndex.h"
+#include"GraphicStructure.h"
 
 Scene::Scene() :root(NULL), camera("MainCamera") {
 
@@ -94,7 +92,7 @@ void Scene::FixedUpdate() {
 }
 void Scene::Awake(GameObject* g) {
 	if (g == NULL)return;
-	MonoBehavour *p = g->componentsPointer;
+	MonoBehaviour *p = g->componentsPointer;
 	while (p != NULL) {
 		p->Awake();
 		p = p->next;
@@ -104,7 +102,7 @@ void Scene::Awake(GameObject* g) {
 }
 void Scene::Start(GameObject* g) {
 	if (g == NULL)return;
-	MonoBehavour *p = g->componentsPointer;
+	MonoBehaviour *p = g->componentsPointer;
 	while (p != NULL) {
 		p->Start();
 		p = p->next;
@@ -114,7 +112,7 @@ void Scene::Start(GameObject* g) {
 }
 void Scene::Update(GameObject* g) {
 	if (g == NULL)return;
-	MonoBehavour *p = g->componentsPointer;
+	MonoBehaviour *p = g->componentsPointer;
 	while (p != NULL) {
 		p->Update();
 		p = p->next;
@@ -125,7 +123,7 @@ void Scene::Update(GameObject* g) {
 void Scene::FixedUpdate(GameObject* g) {
 	physicEngine.Contract();
 	if (g == NULL)return;
-	MonoBehavour *p = g->componentsPointer;
+	MonoBehaviour *p = g->componentsPointer;
 	while (p != NULL) {
 		p->FixedUpdate();
 		p = p->next;
@@ -140,7 +138,7 @@ void Scene::RenderGameObjects(GameObject* g) {
 	glScaled(g->transform.localScale.x, g->transform.localScale.y, g->transform.localScale.z);
 	currentGameObjectPointer = g;
 	g->Render();
-	MonoBehavour *p = g->componentsPointer;
+	MonoBehaviour *p = g->componentsPointer;
 	while (p != NULL) {
 		p->Render();
 		p = p->next;
@@ -150,16 +148,3 @@ void Scene::RenderGameObjects(GameObject* g) {
 	RenderGameObjects(g->next);
 }
 
-GameObject* AddGameObject(GameObject* g) {
-	mainScene.AddGameObject(g);
-	return currentGameObjectPointer;
-}
-GameObject * AddChild(GameObject * child)
-{
-	currentGameObjectPointer->AddChild(child);
-	return currentGameObjectPointer;
-}
-MonoBehavour * AddComponent(MonoBehavour * component)
-{
-	return currentGameObjectPointer->AddComponent(component);
-}

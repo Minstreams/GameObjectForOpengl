@@ -1,6 +1,5 @@
 #pragma once
 #include <assimp\material.h>
-#include "Vector3.h"
 
 struct vec2 {
 	vec2() :vec2(0, 0)

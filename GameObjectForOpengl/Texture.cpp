@@ -1,4 +1,5 @@
-#include "OpenglIndex.h"
+#include "OpenglHeader.h"
+#include <iostream>
 #include <fstream>
 #include "Texture.h"
 

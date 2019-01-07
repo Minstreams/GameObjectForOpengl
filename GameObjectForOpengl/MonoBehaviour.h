@@ -4,14 +4,14 @@ enum Space {
 	Self
 };
 //组件父类
-class MonoBehavour {
+class MonoBehaviour {
 public:
 	char* name;
-	MonoBehavour *next;
+	MonoBehaviour *next;
 	GameObject *gameObject;
 	Transform *transform;
-	MonoBehavour();
-	virtual ~MonoBehavour();
+	MonoBehaviour();
+	virtual ~MonoBehaviour();
 	//每一帧被调用
 	virtual void Update();
 	//于Update后被调用，用于物理计算/TODO:改成定时调用

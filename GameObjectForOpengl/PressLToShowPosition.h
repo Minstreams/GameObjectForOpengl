@@ -1,5 +1,5 @@
 #pragma once
-class PressLToShowPosition : public MonoBehavour {
+class PressLToShowPosition : public MonoBehaviour {
 public:
 	void Update()override {
 		if (Input::GetKey('l')) {

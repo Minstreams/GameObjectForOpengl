@@ -1,5 +1,5 @@
 #pragma once
-class mover : public MonoBehavour {
+class mover : public MonoBehaviour {
 public:
 	void Update() override {
 		if (Input::GetKey('J')) {

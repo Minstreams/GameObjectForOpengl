@@ -62,7 +62,7 @@ Vector3& Vector3::operator/=(double rhs) {
 double Vector3::magnitude() const {
 	return sqrt(x*x + y*y + z*z);
 }
-double Vector3::sqrtMagnitude()const {
+double Vector3::sqrMagnitude()const {
 	return x*x + y*y + z*z;
 }
 Vector3& Vector3::Normalize() {

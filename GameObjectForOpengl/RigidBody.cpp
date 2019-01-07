@@ -1,4 +1,4 @@
-#include"UnityIndex.h"
+#include"GraphicStructure.h"
 
 void RigidBody::AddSphereCollider(SphereCollider * pointer)
 {

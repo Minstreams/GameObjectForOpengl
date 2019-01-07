@@ -3,7 +3,7 @@
 /// <summary>
 /// Æ½»¬×·×Ùtransform
 /// </summary>
-class Tracker : public MonoBehavour {
+class Tracker : public MonoBehaviour {
 public:
 	Transform *target;
 	double smoothness;

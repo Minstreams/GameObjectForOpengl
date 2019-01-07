@@ -2,6 +2,21 @@
 
 //变换组件
 class Transform {
+private:
+	//世界旋转四元数
+	Quaternion worldRotation;
+	bool worldRotationNeedFlush;
+	//本地变换矩阵
+	Matrix localMatrix;
+	//本地变换矩阵是否需要刷新
+	bool localNeedFlush;
+	//世界变换矩阵
+	Matrix worldMatrix;
+	//刷新矩阵
+	void Flush(bool ifRotate = false);
+	//向下更新世界矩阵
+	void FlushDown(bool asRoot, bool ifRotate);
+
 public:
 	//本地坐标
 	Vector3 localPosition;
@@ -9,22 +24,11 @@ public:
 	Quaternion rotation;
 	//本地缩放向量
 	Vector3 localScale;
-	//世界旋转四元数
-	Quaternion worldRotation;
-	bool worldRotationNeedFlush;
 
 	//欧拉角
 	const Vector3 eulerAngle()const;
 	//连接的游戏物体
 	GameObject* gameObject;
-	//本地变换矩阵
-	Matrix localMatrix;
-	//本地变换矩阵是否需要刷新
-	bool localNeedFlush;
-	//世界变换矩阵
-	Matrix worldMatrix;
-	//世界变换矩阵是否需要刷新
-	bool worldNeedFlush;
 
 	Transform(GameObject* g);
 	Transform(GameObject* g, const Vector3& pos, const Quaternion& rot);
@@ -48,6 +52,8 @@ public:
 	Matrix& GetLocalMatrix();
 	//获取并刷新世界变换矩阵
 	Matrix& GetWorldMatrix();
+	//世界变换矩阵是否需要刷新
+	bool worldNeedFlush;
 	//获取父世界变换矩阵
 	Matrix GetParentWorldMatrix();
 
@@ -55,10 +61,6 @@ public:
 	Quaternion GetParentWorldRotation();
 	//获取世界坐标
 	Vector3 GetPosition();
-	//刷新矩阵
-	void Flush(bool ifRotate = false);
-	//向下更新世界矩阵
-	void FlushDown(bool asRoot, bool ifRotate);
 	const Vector3 forward();
 	const Vector3 right();
 	const Vector3 up();

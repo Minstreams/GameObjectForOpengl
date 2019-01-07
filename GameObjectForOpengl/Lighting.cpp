@@ -1,5 +1,4 @@
-#include "OpenglIndex.h"
-#include "Lighting.h"
+#include "GraphicStructure.h"
 
 int LightData::num = 0;
 float LightData::positions[3 * LIGHT_MAX_NUM] = {};	//π‚‘¥Œª÷√

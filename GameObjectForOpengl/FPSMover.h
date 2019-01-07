@@ -1,6 +1,6 @@
 #pragma once
 //上下左右和空格ctrl控制transform
-class FPSMover : public MonoBehavour {
+class FPSMover : public MonoBehaviour {
 public:
 	void Update() override {
 		double h = Input::GetAxisHorizontal();

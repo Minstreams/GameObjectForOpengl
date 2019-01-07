@@ -3,7 +3,6 @@
 #include <vector>
 #include <assimp/Importer.hpp>
 #include <assimp/postprocess.h>
-#include "TransformIndex.h"
 
 #include "ModelIndex.h"
 
