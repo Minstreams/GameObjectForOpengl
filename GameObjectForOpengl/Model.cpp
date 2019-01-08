@@ -46,7 +46,9 @@ bool Model::loadModel(const std::string& filePath)
 }
 Model::Model(const std::string & filePath)
 {
-	loadModel(filePath);
+	std::string path = std::string("data/Models/");
+	path += filePath + "/" + filePath + ".obj";
+	loadModel(path);
 }
 Model::~Model()
 {

@@ -197,17 +197,8 @@
     <ClInclude Include="Vector3.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Basic400.frag" />
-    <None Include="Basic400.vert" />
-    <None Include="Model400.frag" />
-    <None Include="Model400.vert" />
+    <None Include="ClassDiagram.cd" />
     <None Include="packages.config" />
-    <None Include="ShadowMap.frag" />
-    <None Include="ShadowMap.vert" />
-    <None Include="Texture400.frag" />
-    <None Include="Texture400.vert" />
-    <None Include="Unit400.frag" />
-    <None Include="Unit400.vert" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

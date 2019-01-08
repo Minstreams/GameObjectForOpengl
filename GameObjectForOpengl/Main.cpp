@@ -76,8 +76,6 @@ void SetScene() {
 
 	AddChild(new CarModel("Model", Vector3(-4, 0, 0), Quaternion::identity, Vector3(0.003, 0.003, 0.003)));
 
-	car->AddChild(new Point("lPoint", 0.5, Vector3(0, 0, 10), Quaternion::identity));
-	AddComponent(new LightComponent(Vector3(0.9, 0.6, 0.1), 1.5, 40));
 
 	car->AddChild(new GameObject("CamFocusPoint", Vector3(0, 4, 0), Quaternion::identity));
 	AddComponent(new MouseRotater(0.3f, 0.3f));

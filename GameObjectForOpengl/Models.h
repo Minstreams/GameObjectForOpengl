@@ -10,9 +10,9 @@ public:
 		return list;
 	}
 	//以下是表列
-	const Model model1 = Model("data/Models/nanosuit/nanosuit.obj");
-	const Model model2 = Model("data/Models/mazda 3/mazda 3.obj");
-	const Model earth = Model("data/Models/earth/earth.obj");
+	const Model model1 = Model("nanosuit");
+	const Model model2 = Model("mazda 3");
+	const Model earth = Model("earth");
 };
 
 Models* Models::list = NULL;

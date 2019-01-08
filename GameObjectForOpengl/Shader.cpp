@@ -6,8 +6,11 @@
 Shader::Shader(const char* vertexPath, const char* fragPath) :programId(0)
 {
 	std::vector<ShaderFile> fileVec;
-	fileVec.push_back(ShaderFile(GL_VERTEX_SHADER, vertexPath));
-	fileVec.push_back(ShaderFile(GL_FRAGMENT_SHADER, fragPath));
+	std::string rPath = std::string("data/Shaders/");
+	std::string vPath = rPath + vertexPath;
+	std::string fPath = rPath + fragPath;
+	fileVec.push_back(ShaderFile(GL_VERTEX_SHADER, vPath.c_str()));
+	fileVec.push_back(ShaderFile(GL_FRAGMENT_SHADER, fPath.c_str()));
 	loadFromFile(fileVec);
 	printf_s("Shader loaded :%s , %s\n", vertexPath, fragPath);
 }

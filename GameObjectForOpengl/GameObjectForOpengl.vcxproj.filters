@@ -215,35 +215,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
-    <None Include="Model400.vert">
-      <Filter>资源文件</Filter>
-    </None>
-    <None Include="Model400.frag">
-      <Filter>资源文件</Filter>
-    </None>
-    <None Include="Basic400.vert">
-      <Filter>资源文件</Filter>
-    </None>
-    <None Include="Basic400.frag">
-      <Filter>资源文件</Filter>
-    </None>
-    <None Include="Texture400.vert">
-      <Filter>资源文件</Filter>
-    </None>
-    <None Include="Texture400.frag">
-      <Filter>资源文件</Filter>
-    </None>
-    <None Include="Unit400.vert">
-      <Filter>资源文件</Filter>
-    </None>
-    <None Include="Unit400.frag">
-      <Filter>资源文件</Filter>
-    </None>
-    <None Include="ShadowMap.vert">
-      <Filter>资源文件</Filter>
-    </None>
-    <None Include="ShadowMap.frag">
-      <Filter>资源文件</Filter>
-    </None>
+    <None Include="ClassDiagram.cd" />
   </ItemGroup>
 </Project>
