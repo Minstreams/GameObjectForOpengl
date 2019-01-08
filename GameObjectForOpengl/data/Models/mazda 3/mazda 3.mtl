@@ -9,10 +9,10 @@ Ke 0 0 0
 d 1
 Ns 19.99999809265137
 illum 2
-map_Kd mat7_c.jpg
-map_Ks mat7_r.jpg
-bump mat7_n.jpg
-map_bump mat7_n.jpg
+map_Kd mat7_c.png
+map_Ks mat7_r.png
+bump mat7_n.png
+map_bump mat7_n.png
 
 newmtl Glass Simple
 Kd 0.800000011920929 0.800000011920929 0.800000011920929
@@ -22,10 +22,10 @@ Ke 0 0 0
 d 1
 Ns 19.99999809265137
 illum 2
-map_Kd mat0_c.jpg
-map_Ks mat0_r.jpg
-bump mat0_n.jpg
-map_bump mat0_n.jpg
+map_Kd mat0_c.png
+map_Ks mat0_r.png
+bump mat0_n.png
+map_bump mat0_n.png
 
 newmtl lambert1SG 
 Kd 0.800000011920929 0.800000011920929 0.800000011920929
@@ -35,10 +35,10 @@ Ke 0 0 0
 d 1
 Ns 19.99999809265137
 illum 2
-map_Kd mat8_c.jpg
-map_Ks mat0_r.jpg
-bump mat0_n.jpg
-map_bump mat0_n.jpg
+map_Kd mat8_c.png
+map_Ks mat0_r.png
+bump mat0_n.png
+map_bump mat0_n.png
 
 newmtl NewMat01
 Kd 0.800000011920929 0.800000011920929 0.800000011920929
@@ -48,10 +48,10 @@ Ke 0 0 0
 d 1
 Ns 19.99999809265137
 illum 2
-map_Kd mat1_c.jpg
-map_Ks mat1_r.jpg
-bump mat1_n.jpg
-map_bump mat1_n.jpg
+map_Kd mat1_c.png
+map_Ks mat1_r.png
+bump mat1_n.png
+map_bump mat1_n.png
 
 newmtl inside
 Kd 0.800000011920929 0.800000011920929 0.800000011920929
@@ -61,8 +61,8 @@ Ke 0 0 0
 d 1
 Ns 19.99999809265137
 illum 2
-map_Kd mat4_c.jpg
-map_Ks mat0_c.jpg
-bump mat0_n.jpg
-map_bump mat0_n.jpg
+map_Kd mat4_c.png
+map_Ks mat0_c.png
+bump mat0_n.png
+map_bump mat0_n.png
 
