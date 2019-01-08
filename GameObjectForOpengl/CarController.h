@@ -34,9 +34,9 @@ public:
 
 		Vector3 right = mainScene.camera.transform.rotation * Vector3::right;
 		Vector3 forward = Vector3::Cross(Vector3::up, right);
-		Vector3 vec = right * h + forward * v;
+		Vector3 vec = right.normalized() * h + forward.normalized() * v;
 
-		rid->SetVelocity(vec * maxSpeed);
+		rid->SetVelocity(model->forward() * vec.magnitude() * maxSpeed);
 
 		speed = rid->velocity.sqrMagnitude();
 
@@ -47,7 +47,7 @@ public:
 		model->SetRotation(Quaternion::Slerp(
 			model->rotation,
 			forwardRot,
-			0.05 * min(t, 0.6)
+			0.02 * min(t, 0.6)
 		));
 	}
 

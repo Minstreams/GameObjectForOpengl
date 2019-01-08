@@ -74,7 +74,7 @@ void SetScene() {
 	AddChild(new GameObject("ModelParent", Vector3::zero, Quaternion::identity));
 	car->AddComponent(new CarController(50, &currentGameObjectPointer->transform));
 
-	AddChild(new CarModel("Model", Vector3(-4, 0, 0), Quaternion::identity, Vector3(0.003, 0.003, 0.003)));
+	AddChild(new CarModel("Model", Vector3(0, 0, 0), Quaternion::EulerY(-90), Vector3::one * 2));
 
 
 	car->AddChild(new GameObject("CamFocusPoint", Vector3(0, 4, 0), Quaternion::identity));
@@ -136,7 +136,7 @@ int main(int argc, char* argv[])
 	¡°@Rr¡±
 	¡°:Bpp¡±
 	¡°Bpp : @Rr¡±*/
-	SetGameMode(true);
+	//SetGameMode(true);
 	Initial();
 	glutMainLoop();
 

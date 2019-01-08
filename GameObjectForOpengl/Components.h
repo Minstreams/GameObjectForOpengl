@@ -1,5 +1,5 @@
 #pragma once
-#define min(a,b) a<b?a:b
+#define min(a,b) (a<b?a:b)
 
 #include "AutoRotate.h"
 #include "MouseRotater.h"
