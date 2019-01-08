@@ -136,7 +136,7 @@ int main(int argc, char* argv[])
 	¡°@Rr¡±
 	¡°:Bpp¡±
 	¡°Bpp : @Rr¡±*/
-	//SetGameMode(true);
+	SetGameMode(true);
 	Initial();
 	glutMainLoop();
 
